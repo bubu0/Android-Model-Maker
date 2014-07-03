@@ -1,0 +1,3546 @@
+{
+   "appliances":[
+      "/v1/appliances/112/",
+      "/v1/appliances/109/"
+   ],
+   "binaries":[
+      {
+         "appliance":"/v1/appliances/109/",
+         "checksum":"515915909e1778d969b3d618b5e3d3b5",
+         "created":"2014-06-04T10:46:49.936725",
+         "created_by":"mortekiller",
+         "modified":"2014-06-04T10:47:11.649568",
+         "modified_by":"mortekiller",
+         "state":"published",
+         "url":"http://cookeo.dev.apipro.groupe-seb.com/binaries/109/fr_FR_saumon-gingembre-et-feves_3.bin",
+         "version":"14.3"
+      }
+   ],
+   "created":"2014-06-01T22:32:54.046831",
+   "created_by":"/v1/users/42/",
+   "id":107859,
+   "lang":"fr",
+   "market":"/v1/markets/20/",
+   "medias":[
+      "/v1/medias/43479/"
+   ],
+   "modified":"2014-06-12T08:56:48.598405",
+   "modified_by":"/v1/users/114226/",
+   "name":"Saumon gingembre et fÃ¨ves",
+   "origins":[
+
+   ],
+   "packs":[
+
+   ],
+   "rates":{
+      "count":0,
+      "rate":null
+   },
+   "resource_uri":"/v1/recipes/107859/",
+   "short_name":"SAUMON GINGEMBRE ET FEVES",
+   "source_id":"19.0",
+   "source_uri":"file://cookeo_connect_import_V5.xlsx",
+   "state":"published",
+   "tags":[
+      "express"
+   ],
+   "terms":[
+      "/v1/terms/1770/"
+   ],
+   "variants":[
+      {
+         "cooking_time":3,
+         "extra_data":{
+
+         },
+         "id":8457,
+         "nutritions":[
+
+         ],
+         "preparation_time":10,
+         "resource_uri":"/v1/variants/8457/",
+         "simple_steps":[
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"PrÃ©parer les ingrÃ©dients",
+               "destination":"application",
+               "id":77191,
+               "order":1,
+               "resource_uri":"/v1/simple_steps/77191/",
+               "simple":true,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Ciseler vos Ã©chalottes",
+               "destination":"application",
+               "id":77192,
+               "order":2,
+               "resource_uri":"/v1/simple_steps/77192/",
+               "simple":true,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Couper votre gingembre en filaments",
+               "destination":"application",
+               "id":77193,
+               "order":3,
+               "resource_uri":"/v1/simple_steps/77193/",
+               "simple":true,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"application",
+               "id":77194,
+               "order":4,
+               "resource_uri":"/v1/simple_steps/77194/",
+               "simple":true,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"application",
+               "id":77195,
+               "order":5,
+               "resource_uri":"/v1/simple_steps/77195/",
+               "simple":true,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"application",
+               "id":77196,
+               "order":6,
+               "resource_uri":"/v1/simple_steps/77196/",
+               "simple":true,
+               "variant":"/v1/variants/8457/"
+            }
+         ],
+         "steps":[
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77197/"
+                     ],
+                     "created":"2014-06-11T18:39:21.119932",
+                     "created_by":"/v1/users/42/",
+                     "id":52076,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.119976",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52076/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"PrÃ©parer tous les ingrÃ©dients",
+               "destination":"application",
+               "id":77197,
+               "medias":[
+                  "/v1/medias/43487/"
+               ],
+               "order":1,
+               "resource_uri":"/v1/steps/77197/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77198/"
+                     ],
+                     "created":"2014-06-11T18:39:21.147320",
+                     "created_by":"/v1/users/42/",
+                     "id":52077,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.147360",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52077/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ciseler vos Ã©chalottes",
+               "destination":"application",
+               "id":77198,
+               "medias":[
+                  "/v1/medias/43481/"
+               ],
+               "order":2,
+               "resource_uri":"/v1/steps/77198/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77199/"
+                     ],
+                     "created":"2014-06-11T18:39:21.190548",
+                     "created_by":"/v1/users/42/",
+                     "id":52078,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.190589",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52078/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Couper votre gingembre en filaments",
+               "destination":"application",
+               "id":77199,
+               "medias":[
+                  "/v1/medias/43482/"
+               ],
+               "order":3,
+               "resource_uri":"/v1/steps/77199/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77200/"
+                     ],
+                     "created":"2014-06-11T18:39:21.346919",
+                     "created_by":"/v1/users/42/",
+                     "id":52079,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.346960",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52079/"
+                  }
+               ],
+               "assigned_ingredients":[
+                  {
+                     "desc_fr":"PavÃ© de saumon",
+                     "id":99093,
+                     "order":1,
+                     "quantity_value":6,
+                     "resource_uri":"/v1/assigned_ingredients/99093/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"Gingembre frais, Ã©pluchÃ© et finement taillÃ© en filaments",
+                     "id":99094,
+                     "order":2,
+                     "quantity_value":1.5,
+                     "resource_uri":"/v1/assigned_ingredients/99094/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"Citron vert",
+                     "id":99095,
+                     "order":3,
+                     "quantity_value":1,
+                     "resource_uri":"/v1/assigned_ingredients/99095/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"FÃ¨ves surgelÃ©es pelÃ©es",
+                     "id":99096,
+                     "order":4,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":375,
+                     "resource_uri":"/v1/assigned_ingredients/99096/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"Haricots verts taillÃ©s en morceaux",
+                     "id":99097,
+                     "order":5,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":375,
+                     "resource_uri":"/v1/assigned_ingredients/99097/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"Echalotes ciselÃ©es",
+                     "id":99098,
+                     "order":6,
+                     "quantity_value":3,
+                     "resource_uri":"/v1/assigned_ingredients/99098/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"Sel et poivre",
+                     "id":99099,
+                     "order":7,
+                     "resource_uri":"/v1/assigned_ingredients/99099/",
+                     "step":"/v1/steps/77200/"
+                  },
+                  {
+                     "desc_fr":"Eau",
+                     "id":99100,
+                     "order":8,
+                     "quantity_unit":"/v1/units/14/",
+                     "quantity_value":15,
+                     "resource_uri":"/v1/assigned_ingredients/99100/",
+                     "step":"/v1/steps/77200/"
+                  }
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Verser l'huile dans la cuve.",
+               "destination":"appliance",
+               "id":77200,
+               "medias":[
+
+               ],
+               "order":4,
+               "resource_uri":"/v1/steps/77200/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77201/"
+                     ],
+                     "created":"2014-06-11T18:39:21.495207",
+                     "created_by":"/v1/users/42/",
+                     "id":52080,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.495301",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52080/"
+                  }
+               ],
+               "assigned_ingredients":[
+                  {
+                     "desc_fr":"6 PavÃ© saumon",
+                     "id":99101,
+                     "order":1,
+                     "quantity_value":6,
+                     "resource_uri":"/v1/assigned_ingredients/99101/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"1.5 Gingembre frais, Ã©pluchÃ© et finement taillÃ© en filaments",
+                     "id":99102,
+                     "order":2,
+                     "quantity_value":1.5,
+                     "resource_uri":"/v1/assigned_ingredients/99102/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"1 Citron vert",
+                     "id":99103,
+                     "order":3,
+                     "quantity_value":1,
+                     "resource_uri":"/v1/assigned_ingredients/99103/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"375 g de FÃ¨ves surgelÃ©es pelÃ©es",
+                     "id":99104,
+                     "order":4,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":375,
+                     "resource_uri":"/v1/assigned_ingredients/99104/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"375 g de Haricots verts taillÃ©s en morceaux",
+                     "id":99105,
+                     "order":5,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":375,
+                     "resource_uri":"/v1/assigned_ingredients/99105/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"3 Echalotes ciselÃ©es",
+                     "id":99106,
+                     "order":6,
+                     "quantity_value":3,
+                     "resource_uri":"/v1/assigned_ingredients/99106/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"Sel et poivre",
+                     "id":99107,
+                     "order":7,
+                     "resource_uri":"/v1/assigned_ingredients/99107/",
+                     "step":"/v1/steps/77201/"
+                  },
+                  {
+                     "desc_fr":"15 cl d'Eau",
+                     "id":99108,
+                     "order":8,
+                     "quantity_unit":"/v1/units/14/",
+                     "quantity_value":15,
+                     "resource_uri":"/v1/assigned_ingredients/99108/",
+                     "step":"/v1/steps/77201/"
+                  }
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Verser l'huile dans la cuve.",
+               "destination":"application",
+               "id":77201,
+               "medias":[
+                  "/v1/medias/43483/"
+               ],
+               "order":4,
+               "resource_uri":"/v1/steps/77201/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"browning",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77202/"
+                     ],
+                     "created":"2014-06-11T18:39:21.522182",
+                     "created_by":"/v1/users/42/",
+                     "id":52081,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.522220",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52081/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"appliance",
+               "id":77202,
+               "medias":[
+
+               ],
+               "order":5,
+               "resource_uri":"/v1/steps/77202/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"browning",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77203/"
+                     ],
+                     "created":"2014-06-11T18:39:21.553415",
+                     "created_by":"/v1/users/42/",
+                     "id":52082,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.553460",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52082/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"application",
+               "id":77203,
+               "medias":[
+                  "/v1/medias/43484/"
+               ],
+               "order":5,
+               "resource_uri":"/v1/steps/77203/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77204/"
+                     ],
+                     "created":"2014-06-11T18:39:21.577213",
+                     "created_by":"/v1/users/42/",
+                     "id":52083,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.577254",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52083/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"appliance",
+               "id":77204,
+               "medias":[
+
+               ],
+               "order":6,
+               "resource_uri":"/v1/steps/77204/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77205/"
+                     ],
+                     "created":"2014-06-11T18:39:21.611142",
+                     "created_by":"/v1/users/42/",
+                     "id":52084,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.611187",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52084/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"application",
+               "id":77205,
+               "medias":[
+                  "/v1/medias/43485/"
+               ],
+               "order":6,
+               "resource_uri":"/v1/steps/77205/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"cooking_high_pressure",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77207/"
+                     ],
+                     "created":"2014-06-11T18:39:21.669072",
+                     "created_by":"/v1/users/42/",
+                     "id":52086,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.669112",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+                        {
+                           "action":"/v1/actions/52086/",
+                           "created":"2014-06-11T18:39:21.682552",
+                           "created_by":"/v1/users/42/",
+                           "id":13726,
+                           "modified":"2014-06-11T18:39:21.682592",
+                           "modified_by":"/v1/users/42/",
+                           "resource_uri":"/v1/action_parameters/13726/",
+                           "type":"duration",
+                           "unit":"/v1/units/53/",
+                           "value":3
+                        }
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52086/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Cliquer surr OK pour dÃ©marrer la cuisson",
+               "destination":"application",
+               "id":77207,
+               "medias":[
+                  "/v1/medias/43486/"
+               ],
+               "order":7,
+               "resource_uri":"/v1/steps/77207/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"cooking_high_pressure",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77206/"
+                     ],
+                     "created":"2014-06-11T18:39:21.636132",
+                     "created_by":"/v1/users/42/",
+                     "id":52085,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.636173",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+                        {
+                           "action":"/v1/actions/52085/",
+                           "created":"2014-06-11T18:39:21.649609",
+                           "created_by":"/v1/users/42/",
+                           "id":13725,
+                           "modified":"2014-06-11T18:39:21.649652",
+                           "modified_by":"/v1/users/42/",
+                           "resource_uri":"/v1/action_parameters/13725/",
+                           "type":"duration",
+                           "unit":"/v1/units/53/",
+                           "value":3
+                        }
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52085/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "destination":"appliance",
+               "id":77206,
+               "medias":[
+
+               ],
+               "order":7,
+               "resource_uri":"/v1/steps/77206/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"keep_warm",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77208/"
+                     ],
+                     "created":"2014-06-11T18:39:21.697828",
+                     "created_by":"/v1/users/42/",
+                     "id":52087,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.697870",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52087/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"appliance",
+               "id":77208,
+               "medias":[
+
+               ],
+               "order":8,
+               "resource_uri":"/v1/steps/77208/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"keep_warm",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77209/"
+                     ],
+                     "created":"2014-06-11T18:39:21.726389",
+                     "created_by":"/v1/users/42/",
+                     "id":52088,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:21.726433",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52088/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"application",
+               "id":77209,
+               "medias":[
+                  "/v1/medias/43479/"
+               ],
+               "order":8,
+               "resource_uri":"/v1/steps/77209/",
+               "simple":false,
+               "variant":"/v1/variants/8457/"
+            }
+         ],
+         "total_time":13,
+         "yield_value":"6"
+      },
+      {
+         "cooking_time":3,
+         "extra_data":{
+
+         },
+         "id":8456,
+         "nutritions":[
+
+         ],
+         "preparation_time":10,
+         "resource_uri":"/v1/variants/8456/",
+         "simple_steps":[
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"PrÃ©parer les ingrÃ©dients",
+               "destination":"application",
+               "id":77172,
+               "order":1,
+               "resource_uri":"/v1/simple_steps/77172/",
+               "simple":true,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Ciseler vos Ã©chalottes",
+               "destination":"application",
+               "id":77173,
+               "order":2,
+               "resource_uri":"/v1/simple_steps/77173/",
+               "simple":true,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Couper votre gingembre en filaments",
+               "destination":"application",
+               "id":77174,
+               "order":3,
+               "resource_uri":"/v1/simple_steps/77174/",
+               "simple":true,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"application",
+               "id":77175,
+               "order":4,
+               "resource_uri":"/v1/simple_steps/77175/",
+               "simple":true,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"application",
+               "id":77176,
+               "order":5,
+               "resource_uri":"/v1/simple_steps/77176/",
+               "simple":true,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"application",
+               "id":77177,
+               "order":6,
+               "resource_uri":"/v1/simple_steps/77177/",
+               "simple":true,
+               "variant":"/v1/variants/8456/"
+            }
+         ],
+         "steps":[
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77178/"
+                     ],
+                     "created":"2014-06-11T18:39:20.477759",
+                     "created_by":"/v1/users/42/",
+                     "id":52063,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.477801",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52063/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"PrÃ©parer tous les ingrÃ©dients",
+               "destination":"application",
+               "id":77178,
+               "medias":[
+                  "/v1/medias/43487/"
+               ],
+               "order":1,
+               "resource_uri":"/v1/steps/77178/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77179/"
+                     ],
+                     "created":"2014-06-11T18:39:20.511240",
+                     "created_by":"/v1/users/42/",
+                     "id":52064,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.511286",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52064/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ciseler vos Ã©chalottes",
+               "destination":"application",
+               "id":77179,
+               "medias":[
+                  "/v1/medias/43481/"
+               ],
+               "order":2,
+               "resource_uri":"/v1/steps/77179/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77180/"
+                     ],
+                     "created":"2014-06-11T18:39:20.547680",
+                     "created_by":"/v1/users/42/",
+                     "id":52065,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.547725",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52065/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Couper votre gingembre en filaments",
+               "destination":"application",
+               "id":77180,
+               "medias":[
+                  "/v1/medias/43482/"
+               ],
+               "order":3,
+               "resource_uri":"/v1/steps/77180/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77181/"
+                     ],
+                     "created":"2014-06-11T18:39:20.669037",
+                     "created_by":"/v1/users/42/",
+                     "id":52066,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.669076",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52066/"
+                  }
+               ],
+               "assigned_ingredients":[
+                  {
+                     "desc_fr":"PavÃ© de saumon",
+                     "id":99077,
+                     "order":1,
+                     "quantity_value":4,
+                     "resource_uri":"/v1/assigned_ingredients/99077/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"Gingembre frais, Ã©pluchÃ© et finement taillÃ© en filaments",
+                     "id":99078,
+                     "order":2,
+                     "quantity_value":1,
+                     "resource_uri":"/v1/assigned_ingredients/99078/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"Citron vert",
+                     "id":99079,
+                     "order":3,
+                     "quantity_value":0.5,
+                     "resource_uri":"/v1/assigned_ingredients/99079/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"FÃ¨ves surgelÃ©es pelÃ©es",
+                     "id":99080,
+                     "order":4,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":250,
+                     "resource_uri":"/v1/assigned_ingredients/99080/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"Haricots verts taillÃ©s en morceaux",
+                     "id":99081,
+                     "order":5,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":250,
+                     "resource_uri":"/v1/assigned_ingredients/99081/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"Echalotes ciselÃ©es",
+                     "id":99082,
+                     "order":6,
+                     "quantity_value":2,
+                     "resource_uri":"/v1/assigned_ingredients/99082/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"Sel et poivre",
+                     "id":99083,
+                     "order":7,
+                     "resource_uri":"/v1/assigned_ingredients/99083/",
+                     "step":"/v1/steps/77181/"
+                  },
+                  {
+                     "desc_fr":"Eau",
+                     "id":99084,
+                     "order":8,
+                     "quantity_unit":"/v1/units/14/",
+                     "quantity_value":12,
+                     "resource_uri":"/v1/assigned_ingredients/99084/",
+                     "step":"/v1/steps/77181/"
+                  }
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Verser l'huile dans la cuve.",
+               "destination":"appliance",
+               "id":77181,
+               "medias":[
+
+               ],
+               "order":4,
+               "resource_uri":"/v1/steps/77181/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77182/"
+                     ],
+                     "created":"2014-06-11T18:39:20.775057",
+                     "created_by":"/v1/users/42/",
+                     "id":52067,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.775099",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52067/"
+                  }
+               ],
+               "assigned_ingredients":[
+                  {
+                     "desc_fr":"4 PavÃ© saumon",
+                     "id":99085,
+                     "order":1,
+                     "quantity_value":4,
+                     "resource_uri":"/v1/assigned_ingredients/99085/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"1 Gingembre frais, Ã©pluchÃ© et finement taillÃ© en filaments",
+                     "id":99086,
+                     "order":2,
+                     "quantity_value":1,
+                     "resource_uri":"/v1/assigned_ingredients/99086/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"1/2 Citron vert",
+                     "id":99087,
+                     "order":3,
+                     "quantity_value":0.5,
+                     "resource_uri":"/v1/assigned_ingredients/99087/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"250 g de FÃ¨ves surgelÃ©es pelÃ©es",
+                     "id":99088,
+                     "order":4,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":250,
+                     "resource_uri":"/v1/assigned_ingredients/99088/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"250 g de Haricots verts taillÃ©s en morceaux",
+                     "id":99089,
+                     "order":5,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":250,
+                     "resource_uri":"/v1/assigned_ingredients/99089/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"2 Echalotes ciselÃ©es",
+                     "id":99090,
+                     "order":6,
+                     "quantity_value":2,
+                     "resource_uri":"/v1/assigned_ingredients/99090/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"Sel et poivre",
+                     "id":99091,
+                     "order":7,
+                     "resource_uri":"/v1/assigned_ingredients/99091/",
+                     "step":"/v1/steps/77182/"
+                  },
+                  {
+                     "desc_fr":"12 cl d'Eau",
+                     "id":99092,
+                     "order":8,
+                     "quantity_unit":"/v1/units/14/",
+                     "quantity_value":12,
+                     "resource_uri":"/v1/assigned_ingredients/99092/",
+                     "step":"/v1/steps/77182/"
+                  }
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Verser l'huile dans la cuve.",
+               "destination":"application",
+               "id":77182,
+               "medias":[
+                  "/v1/medias/43483/"
+               ],
+               "order":4,
+               "resource_uri":"/v1/steps/77182/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"browning",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77183/"
+                     ],
+                     "created":"2014-06-11T18:39:20.799098",
+                     "created_by":"/v1/users/42/",
+                     "id":52068,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.799139",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52068/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"appliance",
+               "id":77183,
+               "medias":[
+
+               ],
+               "order":5,
+               "resource_uri":"/v1/steps/77183/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"browning",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77184/"
+                     ],
+                     "created":"2014-06-11T18:39:20.827807",
+                     "created_by":"/v1/users/42/",
+                     "id":52069,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.827848",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52069/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"application",
+               "id":77184,
+               "medias":[
+                  "/v1/medias/43484/"
+               ],
+               "order":5,
+               "resource_uri":"/v1/steps/77184/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77185/"
+                     ],
+                     "created":"2014-06-11T18:39:20.851822",
+                     "created_by":"/v1/users/42/",
+                     "id":52070,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.851863",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52070/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"appliance",
+               "id":77185,
+               "medias":[
+
+               ],
+               "order":6,
+               "resource_uri":"/v1/steps/77185/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77186/"
+                     ],
+                     "created":"2014-06-11T18:39:20.881461",
+                     "created_by":"/v1/users/42/",
+                     "id":52071,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.881506",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52071/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"application",
+               "id":77186,
+               "medias":[
+                  "/v1/medias/43485/"
+               ],
+               "order":6,
+               "resource_uri":"/v1/steps/77186/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"cooking_high_pressure",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77188/"
+                     ],
+                     "created":"2014-06-11T18:39:20.937788",
+                     "created_by":"/v1/users/42/",
+                     "id":52073,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.937827",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+                        {
+                           "action":"/v1/actions/52073/",
+                           "created":"2014-06-11T18:39:20.951021",
+                           "created_by":"/v1/users/42/",
+                           "id":13724,
+                           "modified":"2014-06-11T18:39:20.951062",
+                           "modified_by":"/v1/users/42/",
+                           "resource_uri":"/v1/action_parameters/13724/",
+                           "type":"duration",
+                           "unit":"/v1/units/53/",
+                           "value":3
+                        }
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52073/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Cliquer surr OK pour dÃ©marrer la cuisson",
+               "destination":"application",
+               "id":77188,
+               "medias":[
+                  "/v1/medias/43486/"
+               ],
+               "order":7,
+               "resource_uri":"/v1/steps/77188/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"cooking_high_pressure",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77187/"
+                     ],
+                     "created":"2014-06-11T18:39:20.904822",
+                     "created_by":"/v1/users/42/",
+                     "id":52072,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.904861",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+                        {
+                           "action":"/v1/actions/52072/",
+                           "created":"2014-06-11T18:39:20.918110",
+                           "created_by":"/v1/users/42/",
+                           "id":13723,
+                           "modified":"2014-06-11T18:39:20.918150",
+                           "modified_by":"/v1/users/42/",
+                           "resource_uri":"/v1/action_parameters/13723/",
+                           "type":"duration",
+                           "unit":"/v1/units/53/",
+                           "value":3
+                        }
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52072/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "destination":"appliance",
+               "id":77187,
+               "medias":[
+
+               ],
+               "order":7,
+               "resource_uri":"/v1/steps/77187/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"keep_warm",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77189/"
+                     ],
+                     "created":"2014-06-11T18:39:20.966083",
+                     "created_by":"/v1/users/42/",
+                     "id":52074,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.966122",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52074/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"appliance",
+               "id":77189,
+               "medias":[
+
+               ],
+               "order":8,
+               "resource_uri":"/v1/steps/77189/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"keep_warm",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77190/"
+                     ],
+                     "created":"2014-06-11T18:39:20.993577",
+                     "created_by":"/v1/users/42/",
+                     "id":52075,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.993615",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52075/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"application",
+               "id":77190,
+               "medias":[
+                  "/v1/medias/43479/"
+               ],
+               "order":8,
+               "resource_uri":"/v1/steps/77190/",
+               "simple":false,
+               "variant":"/v1/variants/8456/"
+            }
+         ],
+         "total_time":13,
+         "yield_value":"4"
+      },
+      {
+         "cooking_time":3,
+         "extra_data":{
+
+         },
+         "id":8455,
+         "nutritions":[
+
+         ],
+         "preparation_time":10,
+         "resource_uri":"/v1/variants/8455/",
+         "simple_steps":[
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"PrÃ©parer les ingrÃ©dients",
+               "destination":"application",
+               "id":77153,
+               "order":1,
+               "resource_uri":"/v1/simple_steps/77153/",
+               "simple":true,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Ciseler vos Ã©chalottes",
+               "destination":"application",
+               "id":77154,
+               "order":2,
+               "resource_uri":"/v1/simple_steps/77154/",
+               "simple":true,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Couper votre gingembre en filaments",
+               "destination":"application",
+               "id":77155,
+               "order":3,
+               "resource_uri":"/v1/simple_steps/77155/",
+               "simple":true,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"application",
+               "id":77156,
+               "order":4,
+               "resource_uri":"/v1/simple_steps/77156/",
+               "simple":true,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"application",
+               "id":77157,
+               "order":5,
+               "resource_uri":"/v1/simple_steps/77157/",
+               "simple":true,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "assigned_ingredients":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"application",
+               "id":77158,
+               "order":6,
+               "resource_uri":"/v1/simple_steps/77158/",
+               "simple":true,
+               "variant":"/v1/variants/8455/"
+            }
+         ],
+         "steps":[
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77159/"
+                     ],
+                     "created":"2014-06-11T18:39:19.211813",
+                     "created_by":"/v1/users/42/",
+                     "id":52050,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.211859",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52050/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"PrÃ©parer tous les ingrÃ©dients",
+               "destination":"application",
+               "id":77159,
+               "medias":[
+                  "/v1/medias/43480/"
+               ],
+               "order":1,
+               "resource_uri":"/v1/steps/77159/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77160/"
+                     ],
+                     "created":"2014-06-11T18:39:19.359781",
+                     "created_by":"/v1/users/42/",
+                     "id":52051,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.359824",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52051/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ciseler vos Ã©chalottes",
+               "destination":"application",
+               "id":77160,
+               "medias":[
+                  "/v1/medias/43481/"
+               ],
+               "order":2,
+               "resource_uri":"/v1/steps/77160/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"preparation",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77161/"
+                     ],
+                     "created":"2014-06-11T18:39:19.566955",
+                     "created_by":"/v1/users/42/",
+                     "id":52052,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.567000",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52052/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Couper votre gingembre en filaments",
+               "destination":"application",
+               "id":77161,
+               "medias":[
+                  "/v1/medias/43482/"
+               ],
+               "order":3,
+               "resource_uri":"/v1/steps/77161/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77162/"
+                     ],
+                     "created":"2014-06-11T18:39:19.703948",
+                     "created_by":"/v1/users/42/",
+                     "id":52053,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.703991",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52053/"
+                  }
+               ],
+               "assigned_ingredients":[
+                  {
+                     "desc_fr":"PavÃ© de saumon",
+                     "id":99061,
+                     "order":1,
+                     "quantity_value":2,
+                     "resource_uri":"/v1/assigned_ingredients/99061/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"Gingembre frais, Ã©pluchÃ© et finement taillÃ© en filaments",
+                     "id":99062,
+                     "order":2,
+                     "quantity_value":0.5,
+                     "resource_uri":"/v1/assigned_ingredients/99062/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"Citron vert",
+                     "id":99063,
+                     "order":3,
+                     "quantity_value":0.25,
+                     "resource_uri":"/v1/assigned_ingredients/99063/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"FÃ¨ves surgelÃ©es pelÃ©es",
+                     "id":99064,
+                     "order":4,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":125,
+                     "resource_uri":"/v1/assigned_ingredients/99064/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"Haricots verts taillÃ©s en morceaux",
+                     "id":99065,
+                     "order":5,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":125,
+                     "resource_uri":"/v1/assigned_ingredients/99065/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"Echalotes ciselÃ©es",
+                     "id":99066,
+                     "order":6,
+                     "quantity_value":1,
+                     "resource_uri":"/v1/assigned_ingredients/99066/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"Sel et poivre",
+                     "id":99067,
+                     "order":7,
+                     "resource_uri":"/v1/assigned_ingredients/99067/",
+                     "step":"/v1/steps/77162/"
+                  },
+                  {
+                     "desc_fr":"Eau",
+                     "id":99068,
+                     "order":8,
+                     "quantity_unit":"/v1/units/14/",
+                     "quantity_value":10,
+                     "resource_uri":"/v1/assigned_ingredients/99068/",
+                     "step":"/v1/steps/77162/"
+                  }
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Verser l'huile dans la cuve.",
+               "destination":"appliance",
+               "id":77162,
+               "medias":[
+
+               ],
+               "order":4,
+               "resource_uri":"/v1/steps/77162/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77163/"
+                     ],
+                     "created":"2014-06-11T18:39:19.856033",
+                     "created_by":"/v1/users/42/",
+                     "id":52054,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.856072",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52054/"
+                  }
+               ],
+               "assigned_ingredients":[
+                  {
+                     "desc_fr":"2 PavÃ© saumon",
+                     "id":99069,
+                     "order":1,
+                     "quantity_value":2,
+                     "resource_uri":"/v1/assigned_ingredients/99069/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"1/2 Gingembre frais, Ã©pluchÃ© et finement taillÃ© en filaments",
+                     "id":99070,
+                     "order":2,
+                     "quantity_value":0.5,
+                     "resource_uri":"/v1/assigned_ingredients/99070/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"1/4 Citron vert",
+                     "id":99071,
+                     "order":3,
+                     "quantity_value":0.25,
+                     "resource_uri":"/v1/assigned_ingredients/99071/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"125 g de FÃ¨ves surgelÃ©es pelÃ©es",
+                     "id":99072,
+                     "order":4,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":125,
+                     "resource_uri":"/v1/assigned_ingredients/99072/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"125 g de Haricots verts taillÃ©s en morceaux",
+                     "id":99073,
+                     "order":5,
+                     "quantity_unit":"/v1/units/27/",
+                     "quantity_value":125,
+                     "resource_uri":"/v1/assigned_ingredients/99073/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"1 Echalotes ciselÃ©es",
+                     "id":99074,
+                     "order":6,
+                     "quantity_value":1,
+                     "resource_uri":"/v1/assigned_ingredients/99074/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"Sel et poivre",
+                     "id":99075,
+                     "order":7,
+                     "resource_uri":"/v1/assigned_ingredients/99075/",
+                     "step":"/v1/steps/77163/"
+                  },
+                  {
+                     "desc_fr":"10 cl d'Eau",
+                     "id":99076,
+                     "order":8,
+                     "quantity_unit":"/v1/units/14/",
+                     "quantity_value":10,
+                     "resource_uri":"/v1/assigned_ingredients/99076/",
+                     "step":"/v1/steps/77163/"
+                  }
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Verser l'huile dans la cuve.",
+               "destination":"application",
+               "id":77163,
+               "medias":[
+                  "/v1/medias/43483/"
+               ],
+               "order":4,
+               "resource_uri":"/v1/steps/77163/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"browning",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77164/"
+                     ],
+                     "created":"2014-06-11T18:39:19.879557",
+                     "created_by":"/v1/users/42/",
+                     "id":52055,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.879601",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52055/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"appliance",
+               "id":77164,
+               "medias":[
+
+               ],
+               "order":5,
+               "resource_uri":"/v1/steps/77164/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"browning",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77165/"
+                     ],
+                     "created":"2014-06-11T18:39:19.976216",
+                     "created_by":"/v1/users/42/",
+                     "id":52056,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:19.976260",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52056/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Ajouter Ã©chalotes, gingembre et sucre. CaramÃ©liser lÃ©gÃ¨rement. Ajouter les fÃ¨ves, les haricots et un peu de zeste de citron vert.",
+               "destination":"application",
+               "id":77165,
+               "medias":[
+                  "/v1/medias/43484/"
+               ],
+               "order":5,
+               "resource_uri":"/v1/steps/77165/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77166/"
+                     ],
+                     "created":"2014-06-11T18:39:20.002020",
+                     "created_by":"/v1/users/42/",
+                     "id":52057,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.002061",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52057/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"appliance",
+               "id":77166,
+               "medias":[
+
+               ],
+               "order":6,
+               "resource_uri":"/v1/steps/77166/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"add_ingredient",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77167/"
+                     ],
+                     "created":"2014-06-11T18:39:20.059637",
+                     "created_by":"/v1/users/42/",
+                     "id":52058,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.059681",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52058/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Assaisonner. MÃ©langer. Poser le poisson sur les lÃ©gumes. Ajouter l'eau.",
+               "destination":"application",
+               "id":77167,
+               "medias":[
+                  "/v1/medias/43485/"
+               ],
+               "order":6,
+               "resource_uri":"/v1/steps/77167/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"cooking_high_pressure",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77169/"
+                     ],
+                     "created":"2014-06-11T18:39:20.179245",
+                     "created_by":"/v1/users/42/",
+                     "id":52060,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.179292",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+                        {
+                           "action":"/v1/actions/52060/",
+                           "created":"2014-06-11T18:39:20.193087",
+                           "created_by":"/v1/users/42/",
+                           "id":13722,
+                           "modified":"2014-06-11T18:39:20.193131",
+                           "modified_by":"/v1/users/42/",
+                           "resource_uri":"/v1/action_parameters/13722/",
+                           "type":"duration",
+                           "unit":"/v1/units/53/",
+                           "value":3
+                        }
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52060/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Cliquer surr OK pour dÃ©marrer la cuisson",
+               "destination":"application",
+               "id":77169,
+               "medias":[
+                  "/v1/medias/43486/"
+               ],
+               "order":7,
+               "resource_uri":"/v1/steps/77169/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"cooking_high_pressure",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77168/"
+                     ],
+                     "created":"2014-06-11T18:39:20.084240",
+                     "created_by":"/v1/users/42/",
+                     "id":52059,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.084279",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+                        {
+                           "action":"/v1/actions/52059/",
+                           "created":"2014-06-11T18:39:20.097732",
+                           "created_by":"/v1/users/42/",
+                           "id":13721,
+                           "modified":"2014-06-11T18:39:20.097772",
+                           "modified_by":"/v1/users/42/",
+                           "resource_uri":"/v1/action_parameters/13721/",
+                           "type":"duration",
+                           "unit":"/v1/units/53/",
+                           "value":3
+                        }
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52059/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "destination":"appliance",
+               "id":77168,
+               "medias":[
+
+               ],
+               "order":7,
+               "resource_uri":"/v1/steps/77168/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"keep_warm",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77170/"
+                     ],
+                     "created":"2014-06-11T18:39:20.209188",
+                     "created_by":"/v1/users/42/",
+                     "id":52061,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.209231",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52061/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"appliance",
+               "id":77170,
+               "medias":[
+
+               ],
+               "order":8,
+               "resource_uri":"/v1/steps/77170/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            },
+            {
+               "actions":[
+                  {
+                     "action_display":"keep_warm",
+                     "action_type":{
+                        "appliance_groups":[
+                           "/v1/appliance_groups/13/"
+                        ],
+                        "available_transitions":[
+                           "retract"
+                        ],
+                        "created":"2014-01-14T16:07:24.646552",
+                        "created_by":{
+                           "id":42,
+                           "resource_uri":"/v1/users/42/",
+                           "username":"admin"
+                        },
+                        "extra_data":{
+
+                        },
+                        "id":101817,
+                        "is_useraction":false,
+                        "lang":"fr",
+                        "market":"/v1/markets/20/",
+                        "medias":[
+
+                        ],
+                        "modified":"2014-01-14T16:07:39.248764",
+                        "modified_by":"/v1/users/42/",
+                        "name":"Cookeo Connect 4,5l",
+                        "resource_uri":"/v1/action_types/101817/",
+                        "state":"published",
+                        "terms":[
+
+                        ]
+                     },
+                     "cooking_steps":[
+                        "/v1/steps/77171/"
+                     ],
+                     "created":"2014-06-11T18:39:20.238684",
+                     "created_by":"/v1/users/42/",
+                     "id":52062,
+                     "is_default":false,
+                     "modified":"2014-06-11T18:39:20.238729",
+                     "modified_by":"/v1/users/42/",
+                     "parameters":[
+
+                     ],
+                     "program_steps":[
+
+                     ],
+                     "resource_uri":"/v1/actions/52062/"
+                  }
+               ],
+               "assigned_ingredients":[
+
+               ],
+               "assigned_kitchen_wares":[
+
+               ],
+               "desc_fr":"Parfumer au jus de citron. Servir !",
+               "destination":"application",
+               "id":77171,
+               "medias":[
+                  "/v1/medias/43479/"
+               ],
+               "order":8,
+               "resource_uri":"/v1/steps/77171/",
+               "simple":false,
+               "variant":"/v1/variants/8455/"
+            }
+         ],
+         "total_time":13,
+         "yield_value":"2"
+      }
+   ],
+   "version":"29.36"
+}

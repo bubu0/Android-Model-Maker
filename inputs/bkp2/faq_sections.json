@@ -1,0 +1,27 @@
+{
+available_transitions: [
+"retract"
+],
+created: "1970-01-01T00:00:00",
+created_by: {
+id: 42,
+resource_uri: "/v1/users/42/",
+username: "admin"
+},
+faqs: [
+"/v1/faqs/2321/",
+"/v1/faqs/2322/",
+"/v1/faqs/2323/"
+],
+id: 100033,
+lang: "fr",
+market: "/v1/markets/20/",
+medias: [ ],
+modified: "2014-06-04T10:19:00.709311",
+modified_by: "/v1/users/114226/",
+order: 1,
+part: "/v1/faq_parts/100014/",
+resource_uri: "/v1/faq_sections/100033/",
+state: "published",
+title: "1ière Utilisation"
+}

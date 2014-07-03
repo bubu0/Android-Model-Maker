@@ -1,0 +1,26 @@
+{
+content_type: "/v1/action_types/",
+created: "2012-09-05T18:07:41",
+created_by: {
+id: 42,
+resource_uri: "/v1/users/42/",
+username: "admin"
+},
+id: 100003,
+modified: "2013-02-06T12:29:30.409392",
+modified_by: "/v1/users/42/",
+name_bg: null,
+name_de: "cooking_mode_category",
+name_en: "Action type category",
+name_es: null,
+name_fr: "Catégorie de type d'action",
+name_it: null,
+name_ja: null,
+name_nl: null,
+name_pt: null,
+name_ro: null,
+name_ru: null,
+name_uk: null,
+resource_uri: "/v1/taxonomies/100003/",
+type: "cooking_mode_category"
+}

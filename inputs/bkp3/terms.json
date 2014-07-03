@@ -1,0 +1,29 @@
+{
+created: "2014-04-04T13:38:28.140201",
+created_by: {
+id: 42,
+resource_uri: "/v1/users/42/",
+username: "admin"
+},
+domain_medias: [ ],
+enabled: true,
+id: 1814,
+medias: [ ],
+modified: "2014-06-02T07:47:10.454801",
+modified_by: "/v1/users/42/",
+name_bg: "",
+name_de: "",
+name_en: "Ffish",
+name_es: "",
+name_fr: "Poisson",
+name_it: "",
+name_ja: "",
+name_nl: "",
+name_pt: "",
+name_ro: "",
+name_ru: "",
+name_uk: "",
+order: 1,
+resource_uri: "/v1/terms/1814/",
+taxonomy: "/v1/taxonomies/100007/"
+}

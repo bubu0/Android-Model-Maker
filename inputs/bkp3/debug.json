@@ -1,0 +1,16 @@
+{
+type_envoi: [
+{
+name: "commande",
+octet: 0,
+value: "00"
+}
+],
+mid_trames: [
+{
+name: "Demande de l'Ã©tat du Cookeo",
+trame: "00020065",
+need_custom_info: 0
+}
+]
+}

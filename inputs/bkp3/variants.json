@@ -1,0 +1,14 @@
+{
+   extra_data: { },
+   id: 9168,
+   nutritions: [ ],
+   preparation_time: 5,
+   cooking_time: 5,
+   total_time: 5,
+   rest_time: 5,
+   resource_uri: "/v1/variants/9168/",
+   total_time: 5,
+   yield_unit: "tttt",
+   yield_value: "6",
+   recipe_id: 5
+}

@@ -1,0 +1,33 @@
+{
+	author: "",
+	available_transitions: [
+	"retract"
+	],
+	body: "<p>Cookeo voit rouge</p>",
+	created: "2014-05-21T12:14:26.724163",
+	created_by: {
+	id: 133722,
+	resource_uri: "/v1/users/133722/",
+	username: "bmortier"
+	},
+	end_date: null,
+	extra_data: {
+	body_home: "",
+	title_home: ""
+	},
+	id: 4891,
+	lang: "fr",
+	link: "",
+	market: "/v1/markets/20/",
+	medias: [],
+	modified: "2014-06-02T23:31:03.197994",
+	modified_by: "/v1/users/114226/",
+	order: 1,
+	publication_date: "2014-05-20T00:00:00",
+	resource: "",
+	resource_uri: "/v1/news/4891/",
+	start_date: "2014-05-20T00:00:00",
+	state: "published",
+	title: "Cookeo voit rouge",
+	type: ""
+}

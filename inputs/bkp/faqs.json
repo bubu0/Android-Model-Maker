@@ -1,0 +1,23 @@
+{
+available_transitions: [
+"retract"
+],
+body: "<div> <p><a href="http://monautocuiseur.api.groupeseb.com/videos/16665.mp4"><img src="http://monautocuiseur.api.groupeseb.com/thumbs/262x180/16665_1.jpg" alt="" width="262" height="180"></a></p> <p>Parce qu’il n’est pas toujours facile de savoir quand la cuisson commence, Seb a développé le minuteur intelligent… Comment s’en servir ?</p> <ol><li>Démarrez la cuisson avec votre source de chaleur à pleine puissance</li> <li>Pour allumer le minuteur appuyez sur les touches + ou –</li> <li>Programmez le temps de cuisson</li> <li>Dès que la température de cuisson est atteinte votre minuteur sonne, la cuisson commence</li> <li>Pensez à réduire votre source de chaleur</li> <li>Au 2ème bip, c’est prêt la cuisson est terminée, décompressez, en tournant le sélecteur vers la position: (logo)</li> <li>Une fois la décompression terminée, ouvrez votre autocuiseur</li> <li>Dégustez!</li> </ol><p>=&gt; Utilisation valable pour tous les autocuiseurs SEB avec minuteur.</p> <p> <br>=&gt; ATTENTION ne passez jamais le minuteur sous l’eau ou au lave-vaisselle</p> </div>",
+created: "2014-04-04T10:10:27.503378",
+created_by: {
+id: 42,
+resource_uri: "/v1/users/42/",
+username: "admin"
+},
+id: 2315,
+lang: "fr",
+market: "/v1/markets/20/",
+medias: [ ],
+modified: "2014-04-09T09:33:34",
+modified_by: "/v1/users/42/",
+order: 1,
+resource_uri: "/v1/faqs/2315/",
+section: "/v1/faq_sections/100035/",
+state: "published",
+title: "Code Erreur 1"
+}
