@@ -80,6 +80,36 @@ public class Utils {
 	public static boolean isKindOf(Pattern pat, String str) {
 		return str.matches(pat.pattern());
 	}
+	
+	public static String convertSqlTypeToJava(String type) {
+		if (type.equalsIgnoreCase("TEXT")) {
+			type = "String";
+		} else if (type.startsWith("VARCHAR")) {
+			type = "String";
+		} else if (type.startsWith("INTEGER")) {
+			type = "Integer";
+			// } else if (type.startsWith("INTEGER")) {
+			// type = "Long";
+		} else if (type.startsWith("FLOAT")) {
+			type = "Float";
+		} else if (type.startsWith("REAL")) {
+			type = "Float";
+			// } else if (type.startsWith("REAL")) {
+			// type = "Double";
+		} else if (type.startsWith("BOOL")) {
+			type = "Boolean";
+		} else if (type.startsWith("DATE")) {
+			type = "Date";
+		} else if (type.startsWith("BLOB")) {
+			type = "byte[]";
+			// } else if (type.startsWith("INTEGER")) {
+			// type = "enum";
+		} else if (type.startsWith("TIMESTAMP")) {
+			type = "Date";
+		}
+
+		return type;
+	}
 
 	public static String stringTypeResolver(String s) {
 		System.out.println("stringTypeResolver = " + s);
@@ -159,8 +189,12 @@ public class Utils {
 
 	public static String extractFromQuote(String str) {
 		String s = str;
-		if(str.startsWith("\"")) {
+		if(str.startsWith("\"") && str.endsWith("\"")) {
 			s = str.substring(1, str.length() - 1);
+		} else if (str.startsWith("\"")) {
+			s = str.substring(1, str.length());
+		} else if (str.endsWith("\"")) {
+			s = str.substring(0, str.length()-1);
 		}
 		return s;
 	}

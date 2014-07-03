@@ -77,36 +77,37 @@ public class Main {
 		}
 
 		ArrayList<String> generated = new ArrayList<String>();
-		System.out.println("######## GENERATED PARSERS ########");
-		for (Table t : tables) {
-			if (t != null && t.getFields().size() > 0) {
-				generated.addAll(generateJavaParser(t));
-			}
-		}
-
-		if (generated.size() > 0) {
-			String[] data = generated.toArray(new String[generated.size()]);
-			writeFile("JsonParsers.java", data);
-			generated.clear();
-		}
-
-		System.out.println("######## GENERATED JSON ########");
-		for (Table t : tables) {
-			if (t != null) {
-				generated = generateTableJson(t);
-				if (generated != null) {
-					// for (String string : generated) {
-					// System.out.println(string);
-					// }
-					if (generated.size() > 0) {
-						String[] data = generated.toArray(new String[generated.size()]);
-						writeFile(t.getOriginalName() + ".json", data);
-						generated.clear();
-					}
-				}
-			}
-		}
-
+		
+//		System.out.println("######## GENERATED PARSERS ########");
+//		for (Table t : tables) {
+//			if (t != null && t.getFields().size() > 0) {
+//				generated.addAll(generateJavaParser(t));
+//			}
+//		}
+//
+//		if (generated.size() > 0) {
+//			String[] data = generated.toArray(new String[generated.size()]);
+//			writeFile("JsonParsers.java", data);
+//			generated.clear();
+//		}
+//
+//		System.out.println("######## GENERATED JSON ########");
+//		for (Table t : tables) {
+//			if (t != null) {
+//				generated = generateTableJson(t);
+//				if (generated != null) {
+//					// for (String string : generated) {
+//					// System.out.println(string);
+//					// }
+//					if (generated.size() > 0) {
+//						String[] data = generated.toArray(new String[generated.size()]);
+//						writeFile(t.getOriginalName() + ".json", data);
+//						generated.clear();
+//					}
+//				}
+//			}
+//		}
+//
 		System.out.println("######## GENERATED JAVA BEANS ########");
 		for (Table t : tables) {
 			if (t != null) {
@@ -129,40 +130,10 @@ public class Main {
 		for (Table t : tables) {
 			System.out.println(t.getName() + " contains " + t.getFields().size());
 		}
-		System.out.println("TABLES DETAILS");
-		for (Table t : tables) {
-			System.out.println(t.toString());
-		}
-	}
-
-	public static String convertSqlTypeToJava(String type) {
-		if (type.equalsIgnoreCase("TEXT")) {
-			type = "String";
-		} else if (type.startsWith("VARCHAR")) {
-			type = "String";
-		} else if (type.startsWith("INTEGER")) {
-			type = "Integer";
-			// } else if (type.startsWith("INTEGER")) {
-			// type = "Long";
-		} else if (type.startsWith("FLOAT")) {
-			type = "Float";
-		} else if (type.startsWith("REAL")) {
-			type = "Float";
-			// } else if (type.startsWith("REAL")) {
-			// type = "Double";
-		} else if (type.startsWith("BOOL")) {
-			type = "Boolean";
-		} else if (type.startsWith("DATE")) {
-			type = "Date";
-		} else if (type.startsWith("BLOB")) {
-			type = "byte[]";
-			// } else if (type.startsWith("INTEGER")) {
-			// type = "enum";
-		} else if (type.startsWith("TIMESTAMP")) {
-			type = "Date";
-		}
-
-		return type;
+//		System.out.println("TABLES DETAILS");
+//		for (Table t : tables) {
+//			System.out.println(t.toString());
+//		}
 	}
 
 	public static void writeFile(String name, String[] lines) {
@@ -236,27 +207,31 @@ public class Main {
 	}
 
 	/**
-	 * @param key
-	 *            String : fieldname
-	 * @param obj
+	 * createField
+	 * @param fieldName
+	 *            String : field name
+	 * @param value
 	 *            Object : content value used to determined its type
-	 * @param inkey
+	 * @param table
 	 *            String : field's table
 	 * @return created field
 	 */
-	public static Field createField(String key, Object obj, String inkey, String constraint) {
+	public static Field createField(String fieldName, String table, String type, String constraint, Object value) {
 		Field field;
-		String type = Utils.javaTypeResolver(obj);
 
-		if (type != null && (type.equalsIgnoreCase(Utils.URI) || type.equalsIgnoreCase(Utils.JUNCTION))
-				&& Utils.isTagAllowed(key)) {
+		if (type == null) {
+			type = Utils.INT;
+		}
+
+		if ((type.equalsIgnoreCase(Utils.URI) || type.equalsIgnoreCase(Utils.JUNCTION))
+				&& Utils.isTagAllowed(fieldName)) {
 			if (constraint == null) {
-				constraint = Utils.extractTableFromUri((String) obj);
+				constraint = Utils.extractTableFromUri((String) value);
 			}
 			// System.out.println("createField key = " + key + " & obj = " + obj
 			// + " inkey = " + inkey + " constraint = "
 			// + constraint);
-			Table junc = createJunctionTable(inkey, constraint);
+			Table junc = createJunctionTable(table, constraint);
 			if (junc != null) {
 				tables.add(junc);
 				junctionTables.add(junc);
@@ -265,19 +240,21 @@ public class Main {
 			if (type.equalsIgnoreCase(Utils.JUNCTION)) {
 				Table t = getTableWithName(constraint);
 				if (t != null) {
-					System.out.println("CALLER added + " + inkey + "FkId");
-					t.getFields().add(new Field(inkey + "FkId", inkey + "FkId", Utils.CALLER, inkey));
+					System.out.println("CALLER added + " + table + "FkId");
+					t.getFields().add(new Field(table + "FkId", table + "FkId", Utils.CALLER, table));
 				}
 			}
 		}
 
-		if (type == null) {
-			type = Utils.INT;
-		}
+//		if (constraint != null && constraint.equalsIgnoreCase(Utils.ARRAY) && Utils.isTagAllowed(key)) {
+//			Table arrayTb = createArrayTable(inkey, constraint, type);
+//			System.out.println("&&&& ARRAY = " + obj.toString());
+//			tables.add(arrayTb);
+//		}
 
-		field = new Field(key, Utils.getNamePascalCase(key), type, constraint);
+		field = new Field(fieldName, Utils.getNamePascalCase(fieldName), type, constraint);
 
-		Table t = getTableWithName(inkey);
+		Table t = getTableWithName(table);
 		ArrayList<Field> fs = t.getFields();
 		if (fs == null) {
 			fs = new ArrayList<Field>();
@@ -286,6 +263,30 @@ public class Main {
 		t.setFields(fs);
 
 		return field;
+	}
+
+	/**
+	 * Create table containing array of primitive value.
+	 * 
+	 * @param tableName
+	 *            String : table name
+	 * @param fieldName
+	 *            String : name of the field containing the value
+	 * @param type
+	 *            String : type of the array
+	 * @return
+	 */
+	public static Table createArrayTable(String tableName, String fieldName, String type) {
+		if (!tableAlreadyExists(fieldName)) {
+			ArrayList<Field> fs = new ArrayList<Field>();
+			Field f1 = new Field(tableName + "_id", Utils.getNamePascalCase(tableName) + "Id", Utils.INT, tableName);
+			Field f2 = new Field(fieldName, Utils.getNamePascalCase(fieldName), type, null);
+			fs.add(f1);
+			fs.add(f2);
+			Table arrayTable = new Table(fieldName, Utils.getNameCamelCase(fieldName), JUNCTION_TABLE, fs);
+			return arrayTable;
+		}
+		return null;
 	}
 
 	/**
@@ -318,7 +319,8 @@ public class Main {
 			aObj = obj.get(key);
 
 			if (exObjName != null && !exObjAlreadySet) {
-				createField(exObjName + "FkId", Utils.JUNCTION, currentObjName, exObjName);
+//				createField(exObjName + "FkId", Utils.JUNCTION, currentObjName, exObjName);
+				createField(exObjName + "FkId", currentObjName, Utils.JUNCTION, exObjName, aObj);
 				exObjAlreadySet = true;
 			}
 
@@ -335,12 +337,16 @@ public class Main {
 					if (bObj instanceof JSONObject) {
 						parseJsonObject((JSONObject) bObj, key, currentObjName);
 					} else {
-						createField(key, aObj, currentObjName, null);
+						System.out.println("++++ parseJsonObject/ARRAY key = " + key + " aObj = " + aObj + " currentObjName " + currentObjName);
+//						createField(key, bObj, currentObjName, null);
+						createField(key, currentObjName, null, null, bObj);
 					}
 				}
 
 			} else {
-				createField(key, aObj, currentObjName, null);
+//				createField(key, aObj, currentObjName, null);
+				String type = Utils.javaTypeResolver(aObj);
+				createField(key, currentObjName, type, null, aObj);
 			}
 		}
 	}
@@ -500,7 +506,7 @@ public class Main {
 							+ f.getOrignalName() + "\"));";
 				} else {
 					if (type.equalsIgnoreCase(Utils.BOOL)) {
-						type = "Boolean";
+						type = Utils.DB_BOOL;
 					}
 
 					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(joInside.get" + type + "(\""
@@ -604,7 +610,7 @@ public class Main {
 		}
 
 		line2 += ") {";
-		line2 += "\n" + Utils.tabGen(1) + "super();";
+		line2 += "\n" + Utils.tabGen(2) + "super();";
 
 		// constructors
 		line = "\n" + Utils.tabGen(1) + "public " + table.getName() + "() {";
