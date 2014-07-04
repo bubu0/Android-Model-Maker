@@ -5,6 +5,7 @@
    ],
    "binaries":[
       {
+         "id":123456,
          "appliance":"/v1/appliances/109/",
          "checksum":"515915909e1778d969b3d618b5e3d3b5",
          "created":"2014-06-04T10:46:49.936725",
@@ -28,10 +29,10 @@
    "modified_by":"/v1/users/114226/",
    "name":"Saumon gingembre et fÃ¨ves",
    "origins":[
-
+      "/v1/users/43479/"
    ],
    "packs":[
-
+      "/v1/packs/43479/"
    ],
    "rates":{
       "count":1,

@@ -223,6 +223,9 @@ public class Utils {
 	}
 	
 	public static boolean isTagAllowed(String tag) {
+		if(tag == null)
+			return false;
+		
 		for (int i = 0; i < exceptionKeys.length; i++) {
 			if(tag.equalsIgnoreCase(exceptionKeys[i])) {
 				return false;

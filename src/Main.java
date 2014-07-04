@@ -11,27 +11,46 @@ public class Main {
 
 	final static String directoryPath = "inputs";
 
-	final static String PARSER_STYLE_START = Utils.tabGen(1)
+	final static String PARSER_STYLE_START_ARRAY = Utils.tabGen(1)
 			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONArray joArray, Context ctxt) { \n"
 			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
 			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
 			+ "for (int i = 0; i < joArray.length(); i++) { \n" + Utils.tabGen(4)
 			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
-	final static String PARSER_STYLE_START_ID = Utils.tabGen(1)
+
+	final static String PARSER_STYLE_START_OBJECT = Utils.tabGen(1)
+			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject joArray, Context ctxt) { \n"
+			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
+			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
+			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
+
+	final static String PARSER_STYLE_START_ID_ARRAY = Utils.tabGen(1)
 			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONArray joArray, Context ctxt, int extId) { \n"
 			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
 			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
 			+ "for (int i = 0; i < joArray.length(); i++) { \n" + Utils.tabGen(4)
 			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
-	final static String PARSER_STYLE_END = Utils.tabGen(4) + "list.add(val);\n" + Utils.tabGen(3) + "} \n"
+
+	final static String PARSER_STYLE_START_ID_OBJECT = Utils.tabGen(1)
+			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject joObject, Context ctxt, int extId) { \n"
+			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
+			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
+			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
+
+	final static String PARSER_STYLE_END_ARRAY = Utils.tabGen(4) + "list.add(val);\n" + Utils.tabGen(3) + "} \n"
 			+ Utils.tabGen(2) + "} catch (JSONException e) {\n" + Utils.tabGen(3) + "e.printStackTrace();\n"
 			+ Utils.tabGen(2) + "} \n" + Utils.tabGen(2) + "return list;\n}";
+
+	final static String PARSER_STYLE_END_OBJECT = Utils.tabGen(3) + "list.add(val);\n" + Utils.tabGen(2)
+			+ "} catch (JSONException e) {\n" + Utils.tabGen(3) + "e.printStackTrace();\n" + Utils.tabGen(2) + "} \n"
+			+ Utils.tabGen(2) + "return list;\n}";
 
 	final static String PARSER_STYLE_START_BASIC = Utils.tabGen(1)
 			+ "public static ArrayList<xax> parseJson(JSONArray joArray, Context ctxt) { \n" + Utils.tabGen(2)
 			+ "ArrayList<xax> list = new ArrayList<xax>(); \n" + Utils.tabGen(2) + "try { \n" + Utils.tabGen(3)
 			+ "xax val; \n" + Utils.tabGen(3) + "for (int i = 0; i < joArray.length(); i++) {\n" + Utils.tabGen(4)
 			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xax();";
+
 	final static String PARSER_STYLE_END_BASIC = Utils.tabGen(3)
 			+ "list.add(val);\n	} \n	} catch (JSONException e) {\n		e.printStackTrace();\n	} \n	return list;\n}";
 
@@ -52,8 +71,6 @@ public class Main {
 	public static ArrayList<Field> currentTableFields;
 	public static ArrayList<Field> primaryKeys;
 
-	public static String currentObj = "obj";
-	public static int deepness = 0;
 	public static ArrayList<String> tempTree = new ArrayList<String>();
 
 	public static void main(String[] args) {
@@ -64,76 +81,71 @@ public class Main {
 
 		File file = new File(directoryPath);
 		for (File f : loadFiles(file)) {
-			// try {
 			System.out.println("######## " + f.getName() + " FOUND ########");
 			System.out.println("NEW PARSING");
 
-			currentObj = f.getName().replace(".json", "");
-			if (!tableAlreadyExists((String) f.getName())) {
-				Table t = new Table(currentObj, Utils.getNameCamelCase(currentObj), "origin", null);
-				tables.add(t);
-			}
 			expParserFile(f);
 		}
 
 		ArrayList<String> generated = new ArrayList<String>();
-		
-//		System.out.println("######## GENERATED PARSERS ########");
-//		for (Table t : tables) {
-//			if (t != null && t.getFields().size() > 0) {
-//				generated.addAll(generateJavaParser(t));
-//			}
-//		}
-//
-//		if (generated.size() > 0) {
-//			String[] data = generated.toArray(new String[generated.size()]);
-//			writeFile("JsonParsers.java", data);
-//			generated.clear();
-//		}
-//
-//		System.out.println("######## GENERATED JSON ########");
-//		for (Table t : tables) {
-//			if (t != null) {
-//				generated = generateTableJson(t);
-//				if (generated != null) {
-//					// for (String string : generated) {
-//					// System.out.println(string);
-//					// }
-//					if (generated.size() > 0) {
-//						String[] data = generated.toArray(new String[generated.size()]);
-//						writeFile(t.getOriginalName() + ".json", data);
-//						generated.clear();
-//					}
-//				}
-//			}
-//		}
-//
-		System.out.println("######## GENERATED JAVA BEANS ########");
+
+		System.out.println("######## GENERATED PARSERS ########");
+		for (Table t : tables) {
+			if (t != null && t.getFields() != null && t.getFields().size() > 0) {
+				generated.addAll(generateJavaParser(t));
+			}
+		}
+
+		if (generated.size() > 0) {
+			String[] data = generated.toArray(new String[generated.size()]);
+			writeFile("JsonParsers.java", data);
+			generated.clear();
+		}
+
+		System.out.println("######## GENERATED JSON ########");
 		for (Table t : tables) {
 			if (t != null) {
-				generated = generateJavaBean(t);
+				generated = generateJsonSchema(t);
 				if (generated != null) {
-					for (String string : generated) {
-						System.out.println(string);
+					if (generated.size() > 0) {
+						String[] data = generated.toArray(new String[generated.size()]);
+						writeFile(t.getOriginalName() + ".json", data);
+						generated.clear();
 					}
-				}
-				if (generated != null && generated.size() > 0) {
-					String[] data = generated.toArray(new String[generated.size()]);
-					writeFile(t.getName() + ".class", data);
-					generated.clear();
 				}
 			}
 		}
 
-		System.out.println("END");
+		// System.out.println("######## GENERATED JAVA BEANS ########");
+		// for (Table t : tables) {
+		// if (t != null) {
+		// generated = generateJavaBean(t);
+		// if (generated != null) {
+		// for (String string : generated) {
+		// System.out.println(string);
+		// }
+		// }
+		// if (generated != null && generated.size() > 0) {
+		// String[] data = generated.toArray(new String[generated.size()]);
+		// writeFile(t.getName() + ".class", data);
+		// generated.clear();
+		// }
+		// }
+		// }
+
+		System.out.println("######## END ######## ");
 		System.out.println("TOTAL tables = " + tables.size());
 		for (Table t : tables) {
-			System.out.println(t.getName() + " contains " + t.getFields().size());
+			if (t.getFields() != null) {
+				System.out.println(t.getName() + " contains " + t.getFields().size());
+			} else {
+				System.out.println(t.getName() + " contains nothing...");
+			}
 		}
-//		System.out.println("TABLES DETAILS");
-//		for (Table t : tables) {
-//			System.out.println(t.toString());
-//		}
+		System.out.println("######## TABLES DETAILS ########");
+		for (Table t : tables) {
+			System.out.println(t.toString());
+		}
 	}
 
 	public static void writeFile(String name, String[] lines) {
@@ -187,10 +199,11 @@ public class Main {
 		try {
 			Object obj = parser.parse(new FileReader(file));
 			JSONObject jsonObject = null;
+			boolean isInArray = false;
 			if (obj instanceof JSONArray) {
 				JSONArray jsonArray = (JSONArray) obj;
 				jsonObject = (JSONObject) jsonArray.get(0);
-
+				isInArray = true;
 			} else if (obj instanceof JSONObject) {
 				jsonObject = (JSONObject) obj;
 			} else {
@@ -199,7 +212,9 @@ public class Main {
 
 			tables = new ArrayList<Table>();
 			currentTableFields = new ArrayList<Field>();
-			parseJsonObject(jsonObject, currentObj, null);
+			final String rootObject = file.getName().replace(".json", "");
+//			parseJsonObject(jsonObject, rootObject, null, isInArray);
+			parseJsonObject(jsonObject, rootObject, null, true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -208,6 +223,7 @@ public class Main {
 
 	/**
 	 * createField
+	 * 
 	 * @param fieldName
 	 *            String : field name
 	 * @param value
@@ -219,6 +235,10 @@ public class Main {
 	public static Field createField(String fieldName, String table, String type, String constraint, Object value) {
 		Field field;
 
+		if (fieldName == null || table == null) {
+			return null;
+		}
+
 		if (type == null) {
 			type = Utils.INT;
 		}
@@ -228,9 +248,6 @@ public class Main {
 			if (constraint == null) {
 				constraint = Utils.extractTableFromUri((String) value);
 			}
-			// System.out.println("createField key = " + key + " & obj = " + obj
-			// + " inkey = " + inkey + " constraint = "
-			// + constraint);
 			Table junc = createJunctionTable(table, constraint);
 			if (junc != null) {
 				tables.add(junc);
@@ -238,7 +255,7 @@ public class Main {
 			}
 
 			if (type.equalsIgnoreCase(Utils.JUNCTION)) {
-				Table t = getTableWithName(constraint);
+				Table t = findTableWithName(constraint);
 				if (t != null) {
 					System.out.println("CALLER added + " + table + "FkId");
 					t.getFields().add(new Field(table + "FkId", table + "FkId", Utils.CALLER, table));
@@ -246,21 +263,25 @@ public class Main {
 			}
 		}
 
-//		if (constraint != null && constraint.equalsIgnoreCase(Utils.ARRAY) && Utils.isTagAllowed(key)) {
-//			Table arrayTb = createArrayTable(inkey, constraint, type);
-//			System.out.println("&&&& ARRAY = " + obj.toString());
-//			tables.add(arrayTb);
-//		}
+		if (type.equalsIgnoreCase(Utils.ARRAY)) {
+			String arrayType = Utils.javaTypeResolver(value);
+			Table arrayTb = createArrayTable(table, fieldName, arrayType);
+			if (arrayTb != null) {
+				tables.add(arrayTb);
+			}
+		}
 
 		field = new Field(fieldName, Utils.getNamePascalCase(fieldName), type, constraint);
 
-		Table t = getTableWithName(table);
-		ArrayList<Field> fs = t.getFields();
-		if (fs == null) {
-			fs = new ArrayList<Field>();
+		Table t = findTableWithName(table);
+		if (t != null) {
+			ArrayList<Field> fs = t.getFields();
+			if (fs == null) {
+				fs = new ArrayList<Field>();
+			}
+			fs.add(field);
+			t.setFields(fs);
 		}
-		fs.add(field);
-		t.setFields(fs);
 
 		return field;
 	}
@@ -268,22 +289,22 @@ public class Main {
 	/**
 	 * Create table containing array of primitive value.
 	 * 
-	 * @param tableName
+	 * @param foreign
+	 *            String : linked table name
+	 * @param table
 	 *            String : table name
-	 * @param fieldName
-	 *            String : name of the field containing the value
 	 * @param type
 	 *            String : type of the array
-	 * @return
+	 * @return created table
 	 */
-	public static Table createArrayTable(String tableName, String fieldName, String type) {
-		if (!tableAlreadyExists(fieldName)) {
+	public static Table createArrayTable(String foreign, String table, String type) {
+		if (!tableAlreadyExists(table)) {
 			ArrayList<Field> fs = new ArrayList<Field>();
-			Field f1 = new Field(tableName + "_id", Utils.getNamePascalCase(tableName) + "Id", Utils.INT, tableName);
-			Field f2 = new Field(fieldName, Utils.getNamePascalCase(fieldName), type, null);
+			Field f1 = new Field(foreign + "_id", Utils.getNamePascalCase(foreign) + "Id", Utils.INT, foreign);
+			Field f2 = new Field(table, Utils.getNamePascalCase(table), type, null);
 			fs.add(f1);
 			fs.add(f2);
-			Table arrayTable = new Table(fieldName, Utils.getNameCamelCase(fieldName), JUNCTION_TABLE, fs);
+			Table arrayTable = new Table(table, Utils.getNameCamelCase(table), JUNCTION_TABLE, fs, false);
 			return arrayTable;
 		}
 		return null;
@@ -300,15 +321,15 @@ public class Main {
 	 *            String : the name of the object containing obj, ex : "recipes"
 	 *            contains "variants"
 	 */
-	public static void parseJsonObject(JSONObject obj, String currentObjName, String exObjName) {
+	public static void parseJsonObject(JSONObject obj, String currentObjName, String exObjName, boolean isInArray) {
 
 		Table currentTable;
 		String key;
 		Object aObj;
 		boolean exObjAlreadySet = false;
 
-		if (!tableAlreadyExists(currentObjName)) {
-			currentTable = new Table(currentObjName, Utils.getNameCamelCase(currentObjName), null, null);
+		if (currentObjName != null && !currentObjName.isEmpty() && !tableAlreadyExists(currentObjName)) {
+			currentTable = new Table(currentObjName, Utils.getNameCamelCase(currentObjName), null, null, isInArray);
 			tables.add(currentTable);
 		}
 
@@ -319,14 +340,14 @@ public class Main {
 			aObj = obj.get(key);
 
 			if (exObjName != null && !exObjAlreadySet) {
-//				createField(exObjName + "FkId", Utils.JUNCTION, currentObjName, exObjName);
 				createField(exObjName + "FkId", currentObjName, Utils.JUNCTION, exObjName, aObj);
 				exObjAlreadySet = true;
 			}
 
 			if (aObj instanceof JSONObject) {
 				System.out.println("IN " + currentObjName + " # OBJ : " + key);
-				parseJsonObject((JSONObject) aObj, key, currentObjName);
+				parseJsonObject((JSONObject) aObj, key, currentObjName, false);
+
 			} else if (aObj instanceof JSONArray) {
 
 				JSONArray array = (JSONArray) aObj;
@@ -335,16 +356,15 @@ public class Main {
 					Object bObj = array.get(0);
 
 					if (bObj instanceof JSONObject) {
-						parseJsonObject((JSONObject) bObj, key, currentObjName);
+						parseJsonObject((JSONObject) bObj, key, currentObjName, false);
 					} else {
-						System.out.println("++++ parseJsonObject/ARRAY key = " + key + " aObj = " + aObj + " currentObjName " + currentObjName);
-//						createField(key, bObj, currentObjName, null);
-						createField(key, currentObjName, null, null, bObj);
+						System.out.println("++++ parseJsonObject/ARRAY key = " + key + " aObj = " + aObj
+								+ " currentObjName " + currentObjName);
+						createField(key, currentObjName, Utils.ARRAY, null, bObj);
 					}
 				}
 
 			} else {
-//				createField(key, aObj, currentObjName, null);
 				String type = Utils.javaTypeResolver(aObj);
 				createField(key, currentObjName, type, null, aObj);
 			}
@@ -359,12 +379,19 @@ public class Main {
 			Field f2 = new Field(extTable + "_id", Utils.getNamePascalCase(extTable) + "Id", Utils.INT, tName);
 			fs.add(f1);
 			fs.add(f2);
-			Table juncTable = new Table(tName, Utils.getNameCamelCase(tName), JUNCTION_TABLE, fs);
+			Table juncTable = new Table(tName, Utils.getNameCamelCase(tName), JUNCTION_TABLE, fs, false);
 			return juncTable;
 		}
 		return null;
 	}
 
+	/**
+	 * Create java parsing methods to be used with
+	 * android-contentprovider-generator project
+	 * 
+	 * @param table
+	 * @return
+	 */
 	public static ArrayList<String> generateJavaParser(Table table) {
 		if (table == null || table.getFields().size() == 0) {
 			return null;
@@ -373,14 +400,22 @@ public class Main {
 		// reference the same table, ex : "Actions" contains "CreatedBy" &
 		// "ModifiedBy" which both ref to the table "Users"
 		int externalRefCtr = 0;
-		boolean arrayInited = false;
-		boolean objectInited = false;
+		boolean arrayInitiated = false;
+		boolean objectInitiated = false;
+		boolean jsonArrayInitiated = false;
+
+		boolean isInArray = table.isInArray();
 		ArrayList<String> javaOutput = new ArrayList<String>();
 		if (table.getConstraint() != null && table.getConstraint().equalsIgnoreCase(JUNCTION_TABLE)) {
 			return javaOutput;
 		}
 		final int nbOfTab = 4;
-		String line = PARSER_STYLE_START.replaceAll("xax", table.getName());
+		String line;
+		if (isInArray) {
+			line = PARSER_STYLE_START_ARRAY.replaceAll("xax", table.getName());
+		} else {
+			line = PARSER_STYLE_START_OBJECT.replaceAll("xax", table.getName());
+		}
 		String endLine = "";
 		javaOutput.add(line);
 		line = "";
@@ -398,8 +433,6 @@ public class Main {
 								+ "\");\n";
 						line += Utils.tabGen(nbOfTab) + "val.putIdDb(id);";
 
-						// BUG somehow add a String at a given index duplicates
-						// the preceding String so I'm erasing it.
 						if (javaOutput.size() > 1) {
 							// javaOutput.remove(1);
 							javaOutput.add(1, line);
@@ -417,34 +450,77 @@ public class Main {
 
 					// Filling junction tables;
 					String jTableName = Utils.createJunctionTableName(table.getName(), f.getConstraint());
-					final String jValName = Utils.getNamePascalCase(f.getConstraint()) + "cv" + externalRefCtr;
+					final String jValName = Utils.getNamePascalCase(f.getConstraint()) + "Cv" + externalRefCtr;
 					externalRefCtr++;
-					for (Table t : tables) {
-						if (t.getOriginalName().equalsIgnoreCase(jTableName)) {
-							jTableName = Utils.getNameCamelCase(jTableName);
-							line = "\n" + Utils.tabGen(nbOfTab) + "int " + f.getName() + "Id = "
-									+ "Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\"));";
-							line += "\n" + Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(" + f.getName() + "Id"
-									+ ");";
-							line += "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
-									+ jTableName + "ContentValues();";
-							// line += "\n		" + jValName + ".putIdDbNull();";
-							line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
-									+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
-							line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
-									+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(" + f.getName() + "Id"
-									+ ");";
-							line += "\n" + Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + jTableName
-									+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
-							javaOutput.add(line);
-							line = null;
-						}
+					Table t = findTableWithName(jTableName);
+					if (t != null) {
+						jTableName = Utils.getNameCamelCase(jTableName);
+						line = "\n" + Utils.tabGen(nbOfTab) + "int " + f.getName() + "Id = "
+								+ "Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\"));";
+						line += "\n" + Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(" + f.getName() + "Id" + ");";
+						line += "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
+								+ jTableName + "ContentValues();";
+						// line += "\n		" + jValName + ".putIdDbNull();";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(" + f.getName() + "Id"
+								+ ");";
+						line += "\n" + Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + jTableName
+								+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
+						javaOutput.add(line);
+						line = null;
 					}
 
 				} else if (type.equalsIgnoreCase(Utils.URI) && f.getConstraint() == null) {
 
 					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName
 							+ "(Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\")));";
+
+				} else if (type.equalsIgnoreCase(Utils.ARRAY) && f.getConstraint() == null) {
+
+					// Handling array of primitive types
+					String jTableName = Utils.getNameCamelCase(f.getName());
+					final String jValName = Utils.getNamePascalCase(jTableName) + "Cv" + externalRefCtr;
+					externalRefCtr++;
+					Table t = findTableWithName(jTableName);
+					if (t != null) {
+						line = Utils.tabGen(nbOfTab) + "val.put" + fieldName
+								+ "(Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\")));";
+
+						if (!jsonArrayInitiated) {
+							line = Utils.tabGen(nbOfTab) + "JSONArray jArray = joInside.getJSONArray(\""
+									+ f.getOrignalName() + "\");";
+							jsonArrayInitiated = true;
+						} else {
+							line = Utils.tabGen(nbOfTab) + "jArray = joInside.getJSONArray(\"" + f.getOrignalName()
+									+ "\");";
+						}
+
+						line += "\n" + Utils.tabGen(nbOfTab)
+								+ "for(int j = 0, count = jArray.length(); j< count; j++) {";
+
+						// resolving the enum type
+						type = t.getFields().get(1).getType();
+						line += "\n" + Utils.tabGen(nbOfTab + 1);
+						if (type.equalsIgnoreCase(Utils.INT)) {
+							line += "int v = jArray.getInt(j);";
+						} else if (type.equalsIgnoreCase(Utils.URI)) {
+							line += "int v = Utils.extractIdFromUri(jArray.getString(j));";
+						} else { // String by default
+							line += "String v = jArray.getString(j);";
+						}
+
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + jTableName + "ContentValues " + jValName + " = new "
+								+ jTableName + "ContentValues();";
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(v);";
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + "ctxt.getContentResolver().insert(" + jTableName
+								+ "Columns.CONTENT_URI, " + jValName + ".values());";
+						line += "\n" + Utils.tabGen(nbOfTab) + "}\n";
+					}
 
 				} else if (type.equalsIgnoreCase(Utils.JUNCTION)) {
 
@@ -455,44 +531,52 @@ public class Main {
 					System.out.println("JsonParser JUNCTION field : " + f.getName() + " & jTableName = " + jTableName
 							+ " & jValName = " + jValName);
 					externalRefCtr++;
-					for (Table t : tables) {
-						if (t.getOriginalName().equalsIgnoreCase(jTableName)) {
-							line = PARSER_STYLE_START_ID.replaceAll("xax", table.getName());
-							javaOutput.set(0, line);
-							jTableName = Utils.getNameCamelCase(jTableName);
-							line = "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
-									+ jTableName + "ContentValues();";
-							// line += "\n		" + jValName + ".putIdDbNull();";
-							line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
-									+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
-							line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
-									+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(extId);";
-							line += "\n" + Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + jTableName
-									+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
-						}
+					Table t = findTableWithName(jTableName);
+					if (t != null) {
+						line = PARSER_STYLE_START_ID_ARRAY.replaceAll("xax", table.getName());
+						javaOutput.set(0, line);
+						jTableName = Utils.getNameCamelCase(jTableName);
+						line = "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
+								+ jTableName + "ContentValues();";
+						// line += "\n		" + jValName + ".putIdDbNull();";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(extId);";
+						line += "\n" + Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + jTableName
+								+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
 					}
 				} else if (type.equalsIgnoreCase(Utils.OBJECT)) {
-					if (!arrayInited) {
+					if (!objectInitiated) {
 						line = Utils.tabGen(nbOfTab) + "JSONObject insideObj = joInside.getJSONObject(\""
 								+ f.getOrignalName() + "\");";
-						arrayInited = true;
+						objectInitiated = true;
 					} else {
 						line = Utils.tabGen(nbOfTab) + "insideObj = joInside.getJSONObject(\"" + f.getOrignalName()
 								+ "\");";
 					}
 				} else if (type.equalsIgnoreCase(Utils.CALLER)) {
 					String distTableName = f.getConstraint();
-					endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson" + Utils.getNameCamelCase(distTableName)
-							+ "(joInside.getJSONArray(\"" + distTableName + "\"), ctxt, id);";
+					if (isInArray) {
+						endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson" + Utils.getNameCamelCase(distTableName)
+								+ "(joInside.getJSONArray(\"" + distTableName + "\"), ctxt, id);";
+					} else {
+						Table distTable = findTableWithName(distTableName);
+						if (distTable != null) {
+							endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson"
+									+ Utils.getNameCamelCase(distTableName) + "(joInside.getJSONObject(\""
+									+ distTableName + "\"), ctxt, id);";
+						}
+					}
 				} else if (type.equalsIgnoreCase(Utils.ARRAY)) {
-					if (!objectInited) {
+					if (!arrayInitiated) {
 						line = Utils.tabGen(nbOfTab) + "JSONArray insideArray = joInside.getJSONArray(\""
 								+ f.getOrignalName() + "\");";
 						javaOutput.add(line);
 						line = Utils.tabGen(nbOfTab) + "ArrayList<String> ls = new ArrayList<String>();\n"
 								+ Utils.tabGen(nbOfTab) + "for (int j = 0; j < insideArray.length(); j++) {\n"
 								+ Utils.tabGen(3) + "ls.add(insideArray.getString(j));\n" + Utils.tabGen(nbOfTab) + "}";
-						objectInited = true;
+						arrayInitiated = true;
 					} else {
 						line = Utils.tabGen(nbOfTab) + "insideArray = joInside.getJSONArray(\"" + f.getOrignalName()
 								+ "\");";
@@ -526,14 +610,27 @@ public class Main {
 			endLine = "";
 		}
 		javaOutput.add(line);
-		javaOutput.add(PARSER_STYLE_END + "\n");
+		if (isInArray) {
+			javaOutput.add(PARSER_STYLE_END_ARRAY + "\n");
+		} else {
+			javaOutput.add(PARSER_STYLE_END_OBJECT + "\n");
+		}
 		return javaOutput;
 	}
 
-	public static ArrayList<String> generateTableJson(Table table) {
-		if (table == null || table.getFields().size() == 0)
+	/**
+	 * Create json files which could be used with
+	 * android-contentprovider-generator
+	 * 
+	 * @param table
+	 * @return list of String ready to be written in a file
+	 */
+	public static ArrayList<String> generateJsonSchema(Table table) {
+		if (table == null || table.getFields() == null || table.getFields().size() == 0) {
+			System.out.println("generateJsonSchema : table not generated = " + table);
 			return null;
-
+		}
+		// TODO handle constraints such as UNIQUE & delete cascade
 		ArrayList<String> javaOutput = new ArrayList<String>();
 		String line;
 		// javaOutput.add(table.getName());
@@ -545,8 +642,9 @@ public class Main {
 			if (type.equalsIgnoreCase(Utils.URI)) {
 				type = Utils.DB_INT;
 			}
+			// TODO create an array of unused type for this case
 			if (f.getName() != null && f.getType() != Utils.OBJECT && f.getType() != Utils.JUNCTION
-					&& f.getType() != Utils.CALLER) {
+					&& f.getType() != Utils.CALLER && f.getType() != Utils.ARRAY) {
 				javaOutput.add(Utils.tabGen(2) + "{");
 				line = Utils.tabGen(3) + "\"name\": \"" + Utils.checkForbiddenName(f.getOrignalName()) + "\",";
 				javaOutput.add(line);
@@ -565,6 +663,12 @@ public class Main {
 		return javaOutput;
 	}
 
+	/**
+	 * Generate Java beans with getters & setters as well as a json parser
+	 * 
+	 * @param table
+	 * @return
+	 */
 	public static ArrayList<String> generateJavaBean(Table table) {
 		if (table == null || table.getFields().size() == 0)
 			return null;
@@ -629,7 +733,7 @@ public class Main {
 			}
 		}
 
-		line2 += "\n" + Utils.tabGen(1) + "}";
+		line2 += "\n" + Utils.tabGen(1) + "}\n";
 		javaOutput.add(line2);
 
 		// getters & setters
@@ -644,22 +748,25 @@ public class Main {
 							fieldType = Utils.INT;
 						}
 
-						if (fieldType != Utils.ARRAY) {
-							line = Utils.tabGen(1) + "public " + fieldType + " get" + fieldNameMethod + "() {\n";
-						} else {
-							line = Utils.tabGen(1) + "public ArrayList<Integer> get" + fieldNameMethod + "() {\n";
-						}
-						line += Utils.tabGen(2) + "return this." + fieldName + ";\n	}";
+						// if (fieldType != Utils.ARRAY) {
+						line = Utils.tabGen(1) + "public " + fieldType + " get" + fieldNameMethod + "() {\n";
+						// } else {
+						// line = Utils.tabGen(1) +
+						// "public ArrayList<Integer> get" + fieldNameMethod +
+						// "() {\n";
+						// }
+						line += Utils.tabGen(2) + "return this." + fieldName + ";\n	}\n";
 
-						if (fieldType != Utils.ARRAY) {
-							line = "\n" + Utils.tabGen(1) + "public void set" + fieldNameMethod + "(" + fieldType + " "
-									+ fieldName + ") {\n";
-						} else {
-							line = "\n" + Utils.tabGen(1) + "public void set" + fieldNameMethod
-									+ "(ArrayList<Integer> " + fieldName + ") {\n";
-						}
-						line += Utils.tabGen(2) + "this." + fieldName + " = " + fieldName + ";\n" + Utils.tabGen(2)
-								+ "}";
+						// if (fieldType != Utils.ARRAY) {
+						line += "\n" + Utils.tabGen(1) + "public void set" + fieldNameMethod + "(" + fieldType + " "
+								+ fieldName + ") {\n";
+						// } else {
+						// line = "\n" + Utils.tabGen(1) + "public void set" +
+						// fieldNameMethod
+						// + "(ArrayList<Integer> " + fieldName + ") {\n";
+						// }
+						line += Utils.tabGen(2) + "this." + fieldName + " = " + fieldName + ";\n" + Utils.tabGen(1)
+								+ "}\n";
 						javaOutput.add(line);
 					}
 				}
@@ -680,18 +787,22 @@ public class Main {
 	}
 
 	public static boolean tableAlreadyExists(String tableName) {
-		for (Table t : tables) {
-			if (t.getName().equalsIgnoreCase(tableName) || t.getOriginalName().equalsIgnoreCase(tableName)) {
-				return true;
+		if (tables.size() > 0 && tableName != null) {
+			for (Table t : tables) {
+				if (t.getName().equalsIgnoreCase(tableName) || t.getOriginalName().equalsIgnoreCase(tableName)) {
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 
-	public static Table getTableWithName(String tableName) {
-		for (Table t : tables) {
-			if (t.getName().equalsIgnoreCase(tableName) || t.getOriginalName().equalsIgnoreCase(tableName)) {
-				return t;
+	public static Table findTableWithName(String tableName) {
+		if (tables.size() > 0 && tableName != null) {
+			for (Table t : tables) {
+				if (t.getName().equalsIgnoreCase(tableName) || t.getOriginalName().equalsIgnoreCase(tableName)) {
+					return t;
+				}
 			}
 		}
 		return null;
