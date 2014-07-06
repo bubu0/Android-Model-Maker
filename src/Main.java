@@ -9,50 +9,40 @@ import model.Table;
 
 public class Main {
 
-	final static String directoryPath = "inputs";
+	final static String inputDirectoryPath = "inputs";
+	final static String outputDirectoryPath = "export/";
 
 	final static String PARSER_STYLE_START_ARRAY = Utils.tabGen(1)
-			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONArray joArray, Context ctxt) { \n"
+			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONArray joInput, Context ctxt) { \n"
 			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
 			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
-			+ "for (int i = 0; i < joArray.length(); i++) { \n" + Utils.tabGen(4)
-			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
+			+ "for (int i = 0; i < joInput.length(); i++) { \n" + Utils.tabGen(4)
+			+ "JSONObject joInside = joInput.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
 
 	final static String PARSER_STYLE_START_OBJECT = Utils.tabGen(1)
-			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject joArray, Context ctxt) { \n"
+			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject joInside, Context ctxt) { \n"
 			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
-			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
-			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
+			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val = new xaxContentValues();";
 
 	final static String PARSER_STYLE_START_ID_ARRAY = Utils.tabGen(1)
-			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONArray joArray, Context ctxt, int extId) { \n"
+			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONArray joInput, Context ctxt, int extId) { \n"
 			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
 			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
-			+ "for (int i = 0; i < joArray.length(); i++) { \n" + Utils.tabGen(4)
-			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
+			+ "for (int i = 0; i < joInput.length(); i++) { \n" + Utils.tabGen(4)
+			+ "JSONObject joInside = joInput.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
 
 	final static String PARSER_STYLE_START_ID_OBJECT = Utils.tabGen(1)
-			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject joObject, Context ctxt, int extId) { \n"
+			+ "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject joInside, Context ctxt, int extId) { \n"
 			+ Utils.tabGen(2) + "ArrayList<xaxContentValues> list = new ArrayList<xaxContentValues>(); \n"
-			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val; \n" + Utils.tabGen(3)
-			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xaxContentValues();";
+			+ Utils.tabGen(2) + "try { \n" + Utils.tabGen(3) + "xaxContentValues val = new xaxContentValues();";
 
 	final static String PARSER_STYLE_END_ARRAY = Utils.tabGen(4) + "list.add(val);\n" + Utils.tabGen(3) + "} \n"
 			+ Utils.tabGen(2) + "} catch (JSONException e) {\n" + Utils.tabGen(3) + "e.printStackTrace();\n"
-			+ Utils.tabGen(2) + "} \n" + Utils.tabGen(2) + "return list;\n}";
+			+ Utils.tabGen(2) + "} \n" + Utils.tabGen(2) + "return list;\n" + Utils.tabGen(1) + "}";
 
 	final static String PARSER_STYLE_END_OBJECT = Utils.tabGen(3) + "list.add(val);\n" + Utils.tabGen(2)
 			+ "} catch (JSONException e) {\n" + Utils.tabGen(3) + "e.printStackTrace();\n" + Utils.tabGen(2) + "} \n"
-			+ Utils.tabGen(2) + "return list;\n}";
-
-	final static String PARSER_STYLE_START_BASIC = Utils.tabGen(1)
-			+ "public static ArrayList<xax> parseJson(JSONArray joArray, Context ctxt) { \n" + Utils.tabGen(2)
-			+ "ArrayList<xax> list = new ArrayList<xax>(); \n" + Utils.tabGen(2) + "try { \n" + Utils.tabGen(3)
-			+ "xax val; \n" + Utils.tabGen(3) + "for (int i = 0; i < joArray.length(); i++) {\n" + Utils.tabGen(4)
-			+ "JSONObject joInside = joArray.getJSONObject(i);\n" + Utils.tabGen(4) + "val = new xax();";
-
-	final static String PARSER_STYLE_END_BASIC = Utils.tabGen(3)
-			+ "list.add(val);\n	} \n	} catch (JSONException e) {\n		e.printStackTrace();\n	} \n	return list;\n}";
+			+ Utils.tabGen(2) + "return list;\n" + Utils.tabGen(1) + "}";
 
 	final static String EXTRACT_URI_METHOD = Utils.tabGen(1)
 			+ "public static Pattern pattern = Pattern.compile(\"\\d+\");\n" + Utils.tabGen(1)
@@ -71,7 +61,9 @@ public class Main {
 	public static ArrayList<Field> currentTableFields;
 	public static ArrayList<Field> primaryKeys;
 
-	public static ArrayList<String> tempTree = new ArrayList<String>();
+	// used to create the method that will call simple parsers one by one to
+	// sync the entire file
+	public static ArrayList<String> syncMethod = new ArrayList<String>();
 
 	public static void main(String[] args) {
 		System.out.println("START");
@@ -79,11 +71,11 @@ public class Main {
 		tables = new ArrayList<Table>();
 		junctionTables = new ArrayList<Table>();
 
-		File file = new File(directoryPath);
+		File file = new File(inputDirectoryPath);
 		for (File f : loadFiles(file)) {
 			System.out.println("######## " + f.getName() + " FOUND ########");
 			System.out.println("NEW PARSING");
-
+			syncMethod.clear();
 			expParserFile(f);
 		}
 
@@ -97,6 +89,7 @@ public class Main {
 		}
 
 		if (generated.size() > 0) {
+			// generated.addAll(syncMethod);
 			String[] data = generated.toArray(new String[generated.size()]);
 			writeFile("JsonParsers.java", data);
 			generated.clear();
@@ -116,33 +109,26 @@ public class Main {
 			}
 		}
 
-		// System.out.println("######## GENERATED JAVA BEANS ########");
-		// for (Table t : tables) {
-		// if (t != null) {
-		// generated = generateJavaBean(t);
-		// if (generated != null) {
-		// for (String string : generated) {
-		// System.out.println(string);
-		// }
-		// }
-		// if (generated != null && generated.size() > 0) {
-		// String[] data = generated.toArray(new String[generated.size()]);
-		// writeFile(t.getName() + ".class", data);
-		// generated.clear();
-		// }
-		// }
-		// }
-
-		System.out.println("######## END ######## ");
-		System.out.println("TOTAL tables = " + tables.size());
+		System.out.println("######## GENERATED JAVA BEANS ########");
 		for (Table t : tables) {
-			if (t.getFields() != null) {
-				System.out.println(t.getName() + " contains " + t.getFields().size());
-			} else {
-				System.out.println(t.getName() + " contains nothing...");
+			if (t != null) {
+				generated = generateJavaBean(t);
+				if (generated != null) {
+					for (String string : generated) {
+						System.out.println(string);
+					}
+				}
+				if (generated != null && generated.size() > 0) {
+					String[] data = generated.toArray(new String[generated.size()]);
+					writeFile(t.getName() + ".class", data);
+					generated.clear();
+				}
 			}
 		}
+
+		System.out.println("######## END ######## ");
 		System.out.println("######## TABLES DETAILS ########");
+		System.out.println("TOTAL tables = " + tables.size());
 		for (Table t : tables) {
 			System.out.println(t.toString());
 		}
@@ -155,7 +141,8 @@ public class Main {
 			// String timeLog = new
 			// SimpleDateFormat("ddMMyyyy_HHmmss").format(Calendar.getInstance().getTime());
 			// File logFile = new File("export/" + name + "_" + timeLog);
-			File logFile = new File("export/" + name);
+			new File(outputDirectoryPath).mkdirs();
+			File logFile = new File(outputDirectoryPath + name);
 
 			// This will output the full path where the file will be written
 			// to...
@@ -213,7 +200,7 @@ public class Main {
 			tables = new ArrayList<Table>();
 			currentTableFields = new ArrayList<Field>();
 			final String rootObject = file.getName().replace(".json", "");
-//			parseJsonObject(jsonObject, rootObject, null, isInArray);
+			// parseJsonObject(jsonObject, rootObject, null, isInArray);
 			parseJsonObject(jsonObject, rootObject, null, true);
 
 		} catch (Exception e) {
@@ -356,7 +343,7 @@ public class Main {
 					Object bObj = array.get(0);
 
 					if (bObj instanceof JSONObject) {
-						parseJsonObject((JSONObject) bObj, key, currentObjName, false);
+						parseJsonObject((JSONObject) bObj, key, currentObjName, true);
 					} else {
 						System.out.println("++++ parseJsonObject/ARRAY key = " + key + " aObj = " + aObj
 								+ " currentObjName " + currentObjName);
@@ -533,7 +520,11 @@ public class Main {
 					externalRefCtr++;
 					Table t = findTableWithName(jTableName);
 					if (t != null) {
-						line = PARSER_STYLE_START_ID_ARRAY.replaceAll("xax", table.getName());
+						if (isInArray) {
+							line = PARSER_STYLE_START_ID_ARRAY.replaceAll("xax", table.getName());
+						} else {
+							line = PARSER_STYLE_START_ID_OBJECT.replaceAll("xax", table.getName());
+						}
 						javaOutput.set(0, line);
 						jTableName = Utils.getNameCamelCase(jTableName);
 						line = "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
@@ -557,11 +548,11 @@ public class Main {
 					}
 				} else if (type.equalsIgnoreCase(Utils.CALLER)) {
 					String distTableName = f.getConstraint();
-					if (isInArray) {
+					Table distTable = findTableWithName(distTableName);
+					if (distTable.isInArray()) {
 						endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson" + Utils.getNameCamelCase(distTableName)
 								+ "(joInside.getJSONArray(\"" + distTableName + "\"), ctxt, id);";
 					} else {
-						Table distTable = findTableWithName(distTableName);
 						if (distTable != null) {
 							endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson"
 									+ Utils.getNameCamelCase(distTableName) + "(joInside.getJSONObject(\""
@@ -670,7 +661,7 @@ public class Main {
 	 * @return
 	 */
 	public static ArrayList<String> generateJavaBean(Table table) {
-		if (table == null || table.getFields().size() == 0)
+		if (table == null || table.getFields() == null || table.getFields().size() == 0)
 			return null;
 
 		ArrayList<String> javaOutput = new ArrayList<String>();
@@ -699,7 +690,7 @@ public class Main {
 						if (fieldType != Utils.ARRAY) {
 							line = Utils.tabGen(1) + "private " + fieldType + " " + fieldName + ";";
 						} else {
-							line = Utils.tabGen(1) + "private ArrayList<Integer>" + fieldName + ";";
+							line = Utils.tabGen(1) + "private ArrayList<Integer> " + fieldName + ";";
 						}
 						javaOutput.add(line);
 						// if(!fieldName.equalsIgnoreCase("id")) {
@@ -748,23 +739,10 @@ public class Main {
 							fieldType = Utils.INT;
 						}
 
-						// if (fieldType != Utils.ARRAY) {
 						line = Utils.tabGen(1) + "public " + fieldType + " get" + fieldNameMethod + "() {\n";
-						// } else {
-						// line = Utils.tabGen(1) +
-						// "public ArrayList<Integer> get" + fieldNameMethod +
-						// "() {\n";
-						// }
 						line += Utils.tabGen(2) + "return this." + fieldName + ";\n	}\n";
-
-						// if (fieldType != Utils.ARRAY) {
 						line += "\n" + Utils.tabGen(1) + "public void set" + fieldNameMethod + "(" + fieldType + " "
 								+ fieldName + ") {\n";
-						// } else {
-						// line = "\n" + Utils.tabGen(1) + "public void set" +
-						// fieldNameMethod
-						// + "(ArrayList<Integer> " + fieldName + ") {\n";
-						// }
 						line += Utils.tabGen(2) + "this." + fieldName + " = " + fieldName + ";\n" + Utils.tabGen(1)
 								+ "}\n";
 						javaOutput.add(line);
@@ -772,7 +750,7 @@ public class Main {
 				}
 			}
 		}
-		javaOutput.addAll(generateJavaParser(table));
+		javaOutput.addAll(generateSimpleJavaParser(table));
 		javaOutput.add("}");
 		return javaOutput;
 	}
@@ -806,5 +784,241 @@ public class Main {
 			}
 		}
 		return null;
+	}
+
+	// TODO 1 - refactoring : maybe add a boolean param to generateJavaParser to
+	// handle this case
+	// TODO 2 - generate a sync method that will call those in a specified way
+
+	/**
+	 * Create java parsing methods to be used with
+	 * android-contentprovider-generator project Generated methods will only
+	 * take a JSONObject as parameter (not a JSONArray) & they won't make use of
+	 * the CALLER type
+	 * 
+	 * @param table
+	 * @return
+	 */
+	public static ArrayList<String> generateSimpleJavaParser(Table table) {
+		if (table == null || table.getFields().size() == 0) {
+			return null;
+		}
+		// used to avoid duplicate var name when two different attributes
+		// reference the same table, ex : "Actions" contains "CreatedBy" &
+		// "ModifiedBy" which both ref to the table "Users"
+		int externalRefCtr = 0;
+		boolean arrayInitiated = false;
+		boolean objectInitiated = false;
+		boolean jsonArrayInitiated = false;
+
+		boolean isInArray = table.isInArray();
+		ArrayList<String> javaOutput = new ArrayList<String>();
+		if (table.getConstraint() != null && table.getConstraint().equalsIgnoreCase(JUNCTION_TABLE)) {
+			return javaOutput;
+		}
+		final int nbOfTab = 4;
+		String line;
+		line = PARSER_STYLE_START_OBJECT.replaceAll("xax", table.getName());
+
+		String endLine = "";
+		javaOutput.add(line);
+		line = "";
+		for (Field f : table.getFields()) {
+			String fieldName = f.getName();
+			if (fieldName != null) {
+				String type = f.getType();
+				fieldName = Utils.getNameCamelCase(Utils.checkForbiddenName(fieldName));
+				if (type == null || type.equalsIgnoreCase("null")) {
+					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName + "Null();";
+				} else if (type.equalsIgnoreCase(Utils.INT)) {
+					type = "Int";
+					if (f.getName().equalsIgnoreCase("id")) {
+						line = Utils.tabGen(nbOfTab) + "int id = " + "joInside.get" + type + "(\"" + f.getOrignalName()
+								+ "\");\n";
+						line += Utils.tabGen(nbOfTab) + "val.putIdDb(id);";
+
+						if (javaOutput.size() > 1) {
+							// javaOutput.remove(1);
+							javaOutput.add(1, line);
+							line = null;
+						}
+					} else {
+						line = Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(joInside.get" + type + "(\""
+								+ f.getOrignalName() + "\"));";
+					}
+				} else if (type.equalsIgnoreCase(Utils.DATE)) {
+					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(Utils.convertToDate(joInside.getString(\""
+							+ f.getOrignalName() + "\"), Utils.formats[6]));";
+					// In case of an URI, we are linked to another table
+				} else if (type.equalsIgnoreCase(Utils.URI) && f.getConstraint() != null) {
+
+					// Filling junction tables;
+					String jTableName = Utils.createJunctionTableName(table.getName(), f.getConstraint());
+					final String jValName = Utils.getNamePascalCase(f.getConstraint()) + "Cv" + externalRefCtr;
+					externalRefCtr++;
+					Table t = findTableWithName(jTableName);
+					if (t != null) {
+						jTableName = Utils.getNameCamelCase(jTableName);
+						line = "\n" + Utils.tabGen(nbOfTab) + "int " + f.getName() + "Id = "
+								+ "Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\"));";
+						line += "\n" + Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(" + f.getName() + "Id" + ");";
+						line += "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
+								+ jTableName + "ContentValues();";
+						// line += "\n		" + jValName + ".putIdDbNull();";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(" + f.getName() + "Id"
+								+ ");";
+						line += "\n" + Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + jTableName
+								+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
+						javaOutput.add(line);
+						line = null;
+					}
+
+				} else if (type.equalsIgnoreCase(Utils.URI) && f.getConstraint() == null) {
+
+					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName
+							+ "(Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\")));";
+
+				} else if (type.equalsIgnoreCase(Utils.ARRAY) && f.getConstraint() == null) {
+
+					// Handling array of primitive types
+					String jTableName = Utils.getNameCamelCase(f.getName());
+					final String jValName = Utils.getNamePascalCase(jTableName) + "Cv" + externalRefCtr;
+					externalRefCtr++;
+					Table t = findTableWithName(jTableName);
+					if (t != null) {
+						line = Utils.tabGen(nbOfTab) + "val.put" + fieldName
+								+ "(Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\")));";
+
+						if (!jsonArrayInitiated) {
+							line = Utils.tabGen(nbOfTab) + "JSONArray jArray = joInside.getJSONArray(\""
+									+ f.getOrignalName() + "\");";
+							jsonArrayInitiated = true;
+						} else {
+							line = Utils.tabGen(nbOfTab) + "jArray = joInside.getJSONArray(\"" + f.getOrignalName()
+									+ "\");";
+						}
+
+						line += "\n" + Utils.tabGen(nbOfTab)
+								+ "for(int j = 0, count = jArray.length(); j< count; j++) {";
+
+						// resolving the enum type
+						type = t.getFields().get(1).getType();
+						line += "\n" + Utils.tabGen(nbOfTab + 1);
+						if (type.equalsIgnoreCase(Utils.INT)) {
+							line += "int v = jArray.getInt(j);";
+						} else if (type.equalsIgnoreCase(Utils.URI)) {
+							line += "int v = Utils.extractIdFromUri(jArray.getString(j));";
+						} else { // String by default
+							line += "String v = jArray.getString(j);";
+						}
+
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + jTableName + "ContentValues " + jValName + " = new "
+								+ jTableName + "ContentValues();";
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(v);";
+						line += "\n" + Utils.tabGen(nbOfTab + 1) + "ctxt.getContentResolver().insert(" + jTableName
+								+ "Columns.CONTENT_URI, " + jValName + ".values());";
+						line += "\n" + Utils.tabGen(nbOfTab) + "}\n";
+					}
+
+				} else if (type.equalsIgnoreCase(Utils.CALLER)) {
+					String distTableName = f.getConstraint();
+					Table distTable = findTableWithName(distTableName);
+					if (distTable.isInArray()) {
+						syncMethod.add("\n" + Utils.tabGen(nbOfTab) + "parseJson"
+								+ Utils.getNameCamelCase(distTableName) + "(joInside.getJSONArray(\"" + distTableName
+								+ "\"), ctxt, id);");
+					} else {
+						if (distTable != null) {
+							syncMethod.add("\n" + Utils.tabGen(nbOfTab) + "parseJson"
+									+ Utils.getNameCamelCase(distTableName) + "(joInside.getJSONObject(\""
+									+ distTableName + "\"), ctxt, id);");
+						}
+					}
+				} else if (type.equalsIgnoreCase(Utils.JUNCTION)) {
+
+					// Filling junction tables with param from method and NOT
+					// from json;
+					String jTableName = Utils.createJunctionTableName(table.getOriginalName(), f.getConstraint());
+					final String jValName = Utils.getNamePascalCase(f.getConstraint()) + "cv" + externalRefCtr;
+					System.out.println("JsonParser JUNCTION field : " + f.getName() + " & jTableName = " + jTableName
+							+ " & jValName = " + jValName);
+					externalRefCtr++;
+					Table t = findTableWithName(jTableName);
+					if (t != null) {
+
+						line = PARSER_STYLE_START_ID_OBJECT.replaceAll("xax", table.getName());
+
+						javaOutput.set(0, line);
+						jTableName = Utils.getNameCamelCase(jTableName);
+						line = "\n" + Utils.tabGen(nbOfTab) + jTableName + "ContentValues " + jValName + " = new "
+								+ jTableName + "ContentValues();";
+						// line += "\n		" + jValName + ".putIdDbNull();";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
+						line += "\n" + Utils.tabGen(nbOfTab) + jValName + ".put"
+								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(extId);";
+						line += "\n" + Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + jTableName
+								+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
+					}
+				} else if (type.equalsIgnoreCase(Utils.OBJECT)) {
+					if (!objectInitiated) {
+						line = Utils.tabGen(nbOfTab) + "JSONObject insideObj = joInside.getJSONObject(\""
+								+ f.getOrignalName() + "\");";
+						objectInitiated = true;
+					} else {
+						line = Utils.tabGen(nbOfTab) + "insideObj = joInside.getJSONObject(\"" + f.getOrignalName()
+								+ "\");";
+					}
+				} else if (type.equalsIgnoreCase(Utils.ARRAY)) {
+					if (!arrayInitiated) {
+						line = Utils.tabGen(nbOfTab) + "JSONArray insideArray = joInside.getJSONArray(\""
+								+ f.getOrignalName() + "\");";
+						javaOutput.add(line);
+						line = Utils.tabGen(nbOfTab) + "ArrayList<String> ls = new ArrayList<String>();\n"
+								+ Utils.tabGen(nbOfTab) + "for (int j = 0; j < insideArray.length(); j++) {\n"
+								+ Utils.tabGen(3) + "ls.add(insideArray.getString(j));\n" + Utils.tabGen(nbOfTab) + "}";
+						arrayInitiated = true;
+					} else {
+						line = Utils.tabGen(nbOfTab) + "insideArray = joInside.getJSONArray(\"" + f.getOrignalName()
+								+ "\");";
+						javaOutput.add(line);
+						line = Utils.tabGen(nbOfTab) + "ls = new ArrayList<String>();\n" + Utils.tabGen(nbOfTab)
+								+ "for (int j = 0; j < insideArray.length(); j++) {\n" + Utils.tabGen(nbOfTab)
+								+ "ls.add(insideArray.getString(j));\n" + Utils.tabGen(nbOfTab) + "}";
+					}
+				} else if (f.getConstraint() != null) {
+					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(insideObj.get" + type + "(\""
+							+ f.getOrignalName() + "\"));";
+				} else {
+					if (type.equalsIgnoreCase(Utils.BOOL)) {
+						type = Utils.DB_BOOL;
+					}
+
+					line = Utils.tabGen(nbOfTab) + "val.put" + fieldName + "(joInside.get" + type + "(\""
+							+ f.getOrignalName() + "\"));";
+				}
+				if (line != null && !line.isEmpty()) {
+					javaOutput.add(line);
+					line = null;
+				}
+			}
+		}
+		line = Utils.tabGen(nbOfTab) + "ctxt.getContentResolver().insert(" + table.getName()
+				+ "Columns.CONTENT_URI, val.values());";
+
+		if (!endLine.isEmpty()) {
+			javaOutput.add(endLine);
+			endLine = "";
+		}
+		javaOutput.add(line);
+		javaOutput.add(PARSER_STYLE_END_OBJECT + "\n");
+
+		return javaOutput;
 	}
 }
