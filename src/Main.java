@@ -75,10 +75,10 @@ public class Main {
 		for (File f : loadFiles(file)) {
 			System.out.println("######## " + f.getName() + " FOUND ########");
 			System.out.println("NEW PARSING");
+            syncMethod.clear();
+            expParserFile(f);
+        }
 			syncMethod.clear();
-			expParserFile(f);
-		}
-
 		ArrayList<String> generated = new ArrayList<String>();
 
 		System.out.println("######## GENERATED PARSERS ########");
@@ -90,8 +90,9 @@ public class Main {
 
 		if (generated.size() > 0) {
 			// generated.addAll(syncMethod);
-			String[] data = generated.toArray(new String[generated.size()]);
-			writeFile("JsonParsers.java", data);
+//            generated.addAll(syncMethod);
+            String[] data = generated.toArray(new String[generated.size()]);
+            writeFile("JsonParsers.java", data);
 			generated.clear();
 		}
 
@@ -101,9 +102,9 @@ public class Main {
 				generated = generateJsonSchema(t);
 				if (generated != null) {
 					if (generated.size() > 0) {
-						String[] data = generated.toArray(new String[generated.size()]);
-						writeFile(t.getOriginalName() + ".json", data);
-						generated.clear();
+                        String[] data = generated.toArray(new String[generated.size()]);
+                        writeFile(t.getOriginalName() + ".json", data);
+                        generated.clear();
 					}
 				}
 			}
@@ -144,8 +145,8 @@ public class Main {
 			new File(outputDirectoryPath).mkdirs();
 			File logFile = new File(outputDirectoryPath + name);
 
-			// This will output the full path where the file will be written
-			// to...
+            // This will output the full path where the file will be written
+            // to...
 			System.out.println(logFile.getCanonicalPath());
 			writer = new BufferedWriter(new FileWriter(logFile));
 
