@@ -2,3 +2,5 @@
 export/*
 inputs/*
 !.gitignore
+/export
+/inputs

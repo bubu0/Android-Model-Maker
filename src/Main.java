@@ -71,17 +71,18 @@ public class Main {
 		tables = new ArrayList<Table>();
 		junctionTables = new ArrayList<Table>();
 
+		tables = new ArrayList<Table>();
+		currentTableFields = new ArrayList<Field>();
+		ArrayList<String> generated = new ArrayList<String>();
 		File file = new File(inputDirectoryPath);
 		for (File f : loadFiles(file)) {
 			System.out.println("######## " + f.getName() + " FOUND ########");
 			System.out.println("NEW PARSING");
-            syncMethod.clear();
-            expParserFile(f);
-        }
 			syncMethod.clear();
-		ArrayList<String> generated = new ArrayList<String>();
+			expParserFile(f);
+		}
 
-		System.out.println("######## GENERATED PARSERS ########");
+		System.out.println("######## GENERATED PARSER ########");
 		for (Table t : tables) {
 			if (t != null && t.getFields() != null && t.getFields().size() > 0) {
 				generated.addAll(generateJavaParser(t));
@@ -90,21 +91,21 @@ public class Main {
 
 		if (generated.size() > 0) {
 			// generated.addAll(syncMethod);
-//            generated.addAll(syncMethod);
-            String[] data = generated.toArray(new String[generated.size()]);
-            writeFile("JsonParsers.java", data);
+			// generated.addAll(syncMethod);
+			String[] data = generated.toArray(new String[generated.size()]);
+			writeFile("JsonParsers.java", data);
 			generated.clear();
 		}
 
-		System.out.println("######## GENERATED JSON ########");
+		System.out.println("######## GENERATED JSON SCHEMA ########");
 		for (Table t : tables) {
 			if (t != null) {
 				generated = generateJsonSchema(t);
 				if (generated != null) {
 					if (generated.size() > 0) {
-                        String[] data = generated.toArray(new String[generated.size()]);
-                        writeFile(t.getOriginalName() + ".json", data);
-                        generated.clear();
+						String[] data = generated.toArray(new String[generated.size()]);
+						writeFile(t.getOriginalName() + ".json", data);
+						generated.clear();
 					}
 				}
 			}
@@ -133,6 +134,7 @@ public class Main {
 		for (Table t : tables) {
 			System.out.println(t.toString());
 		}
+
 	}
 
 	public static void writeFile(String name, String[] lines) {
@@ -145,8 +147,8 @@ public class Main {
 			new File(outputDirectoryPath).mkdirs();
 			File logFile = new File(outputDirectoryPath + name);
 
-            // This will output the full path where the file will be written
-            // to...
+			// This will output the full path where the file will be written
+			// to...
 			System.out.println(logFile.getCanonicalPath());
 			writer = new BufferedWriter(new FileWriter(logFile));
 
@@ -198,8 +200,6 @@ public class Main {
 				return;
 			}
 
-			tables = new ArrayList<Table>();
-			currentTableFields = new ArrayList<Field>();
 			final String rootObject = file.getName().replace(".json", "");
 			// parseJsonObject(jsonObject, rootObject, null, isInArray);
 			parseJsonObject(jsonObject, rootObject, null, true);
@@ -245,8 +245,15 @@ public class Main {
 			if (type.equalsIgnoreCase(Utils.JUNCTION)) {
 				Table t = findTableWithName(constraint);
 				if (t != null) {
-					System.out.println("CALLER added + " + table + "FkId");
-					t.getFields().add(new Field(table + "FkId", table + "FkId", Utils.CALLER, table));
+					if (t.getFields() != null) {
+						System.out.println("CALLER added + " + table + "FkId");
+						t.getFields().add(new Field(table + "FkId", table + "FkId", Utils.CALLER, table));
+					} else {
+						final Field f = new Field(table + "FkId", table + "FkId", Utils.CALLER, table);
+						ArrayList<Field> af = new ArrayList<Field>();
+						af.add(f);
+						t.setFields(af);
+					}
 				}
 			}
 		}
@@ -629,8 +636,11 @@ public class Main {
 		javaOutput.add("{");
 		javaOutput.add(Utils.tabGen(1) + "\"fields\": [");
 		ArrayList<Field> fields = table.getFields();
+		String type = null;
+		String usableFieldName = null;
+		boolean hasIdConstraint = false;
 		for (Field f : fields) {
-			String type = Utils.convertToDBType(f.getType());
+			type = Utils.convertToDBType(f.getType());
 			if (type.equalsIgnoreCase(Utils.URI)) {
 				type = Utils.DB_INT;
 			}
@@ -638,7 +648,8 @@ public class Main {
 			if (f.getName() != null && f.getType() != Utils.OBJECT && f.getType() != Utils.JUNCTION
 					&& f.getType() != Utils.CALLER && f.getType() != Utils.ARRAY) {
 				javaOutput.add(Utils.tabGen(2) + "{");
-				line = Utils.tabGen(3) + "\"name\": \"" + Utils.checkForbiddenName(f.getOrignalName()) + "\",";
+				usableFieldName = Utils.checkForbiddenName(f.getOrignalName());
+				line = Utils.tabGen(3) + "\"name\": \"" + usableFieldName + "\",";
 				javaOutput.add(line);
 				line = Utils.tabGen(3) + "\"type\": \"" + type + "\"";
 				javaOutput.add(line);
@@ -648,9 +659,38 @@ public class Main {
 				} else {
 					javaOutput.add(Utils.tabGen(2) + "}");
 				}
+				if (usableFieldName.equalsIgnoreCase("id_db")) {
+					hasIdConstraint = true;
+				}
 			}
 		}
-		javaOutput.add(Utils.tabGen(1) + "]");
+
+		javaOutput.add(Utils.tabGen(1) + "],");
+		if (hasIdConstraint
+				|| (table.getConstraint() != null && table.getConstraint().equalsIgnoreCase(JUNCTION_TABLE))) {
+			javaOutput.add(Utils.tabGen(1) + "\"constraints\": [");
+			javaOutput.add(Utils.tabGen(2) + "{");
+			if (hasIdConstraint) {
+				javaOutput.add(Utils.tabGen(3) + "\"name\": \"unique_name\",");
+				line = "\"definition\": \"unique (" + "id_db" + ") on conflict replace\"";
+				javaOutput.add(Utils.tabGen(3) + line);
+			} else {
+				javaOutput.add(Utils.tabGen(3) + "\"name\": \"unique_name\",");
+				line = "\"definition\": \"unique ("
+						+ Utils.checkForbiddenName(table.getFields().get(0).getOrignalName()) + ", "
+						+ Utils.checkForbiddenName(table.getFields().get(1).getOrignalName())
+						+ ") on conflict replace\"";
+				javaOutput.add(Utils.tabGen(3) + line);
+			}
+			javaOutput.add(Utils.tabGen(2) + "},");
+			// javaOutput.add(Utils.tabGen(2) + "{");
+			// javaOutput.add(Utils.tabGen(3) + "\"name\": \"xxx\",");
+			// javaOutput.add(Utils.tabGen(3) +
+			// "\"definition\": \"foreign key (yyy) references company (zzz) on delete cascade\",");
+			// javaOutput.add(Utils.tabGen(2) + "},");
+			javaOutput.add(Utils.tabGen(1) + "],");
+		}
+
 		javaOutput.add("}");
 		return javaOutput;
 	}
