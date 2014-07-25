@@ -15,7 +15,7 @@ public class Utils {
 	public final static String DATE = "Date";
 	public final static String ARRAY = "Array";
 	public final static String OBJECT = "Object";
-	public final static String JUNCTION = "#Junction#"; //used to create field that linked tables implicitly
+	public final static String JUNCTION = "#Junction#"; //used to create field linking tables implicitly
 	public final static String CALLER = "#Caller#"; //used to create a method call to the next parser
 	
 	public final static Pattern patternUri = Pattern.compile("^/.*");
