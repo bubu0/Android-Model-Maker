@@ -110,7 +110,7 @@ public class Main {
 			}
 		}
 
-		System.out.println("######## GENERATED JAVA BEANS ########");
+		/*System.out.println("######## GENERATED JAVA BEANS ########");
 		for (Table t : tables) {
 			if (t != null) {
 				generated = generateJavaBean(t);
@@ -125,7 +125,7 @@ public class Main {
 					generated.clear();
 				}
 			}
-		}
+		}*/
 
 		System.out.println("######## END ######## ");
 		System.out.println("######## TABLES DETAILS ########");
@@ -441,9 +441,10 @@ public class Main {
 				} else if (type.equalsIgnoreCase(Utils.INT)) {
 					type = "Int";
 					if (f.getName().equalsIgnoreCase("id")) {
-						line = Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
+						line = Utils.tabGen(nbOfTab) + "int id = 0;\n";
+						line += Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
 								+ "\") == false) {\n";
-						line += Utils.tabGen(nbOfTab + 1) + "int id = " + "joInside.get" + type + "(\""
+						line += Utils.tabGen(nbOfTab + 1) + "id = " + "joInside.get" + type + "(\""
 								+ f.getOrignalName() + "\");\n";
 						line += Utils.tabGen(nbOfTab + 1) + "val.putIdDb(id);\n";
 						line += Utils.tabGen(nbOfTab) + "}";
@@ -511,14 +512,15 @@ public class Main {
 					Table t = findTableWithName(jTableName);
 					if (t != null) {
 						line = Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
-								+ "\") == false)\n";
+								+ "\") == false) {\n";
 						line += Utils.tabGen(nbOfTab + 1) + "val.put" + fieldName
 								+ "(Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\")));";
 
 						if (!jsonArrayInitiated) {
-							line = Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
+							line = "\n" + Utils.tabGen(nbOfTab) + "JSONArray jArray;\n";
+							line += Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
 									+ "\") == false) {\n";
-							line += Utils.tabGen(nbOfTab + 1) + "JSONArray jArray = joInside.getJSONArray(\""
+							line += Utils.tabGen(nbOfTab + 1) + "jArray = joInside.getJSONArray(\""
 									+ f.getOrignalName() + "\");";
 							jsonArrayInitiated = true;
 						} else {
@@ -534,20 +536,21 @@ public class Main {
 
 						// resolving the enum type
 						type = t.getFields().get(1).getType();
-						line += "\n" + Utils.tabGen(nbOfTab + 1);
+						line += "\n";
 
 						boolean isURI = false;
 						if (f.getConstraint() != null) {
+							line += Utils.tabGen(nbOfTab) + "int v = 0;\n";
 							line += Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
-									+ "\") == false) {\n";
-							line += Utils.tabGen(nbOfTab + 1) + "int v = Utils.extractIdFromUri(jArray.getString(j));";
+									+ "\") == false)\n";
+							line += Utils.tabGen(nbOfTab + 1) + "v = Utils.extractIdFromUri(jArray.getString(j));";
 							isURI = true;
 						} else {
 
 							if (type.equalsIgnoreCase(Utils.INT)) {
-								line += "int v = jArray.getInt(j);";
+								line += Utils.tabGen(nbOfTab + 1) + "int v = jArray.getInt(j);";
 							} else { // String by default
-								line += "String v = jArray.getString(j);";
+								line += Utils.tabGen(nbOfTab + 1) + "String v = jArray.getString(j);";
 							}
 						}
 
@@ -644,11 +647,13 @@ public class Main {
 					String distTableName = f.getConstraint();
 					Table distTable = findTableWithName(distTableName);
 					if (distTable.isInArray()) {
-						endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson" + Utils.getNameCamelCase(distTableName)
+						endLine += "\n" + Utils.tabGen(nbOfTab) + "if(joInside.isNull(\"" + distTableName + "\") == false)";
+						endLine += "\n" + Utils.tabGen(nbOfTab+1) + "parseJson" + Utils.getNameCamelCase(distTableName)
 								+ "(joInside.getJSONArray(\"" + distTableName + "\"), ctxt, id);";
 					} else {
 						if (distTable != null) {
-							endLine += "\n" + Utils.tabGen(nbOfTab) + "parseJson"
+							endLine += "\n" + Utils.tabGen(nbOfTab) + "if(joInside.isNull(\"" + distTableName + "\") == false)";
+							endLine += "\n" + Utils.tabGen(nbOfTab+1) + "parseJson"
 									+ Utils.getNameCamelCase(distTableName) + "(joInside.getJSONObject(\""
 									+ distTableName + "\"), ctxt, id);";
 						}
@@ -862,7 +867,7 @@ public class Main {
 				}
 			}
 		}
-		javaOutput.addAll(generateSimpleJavaParser(table));
+		javaOutput.addAll(generateJavaParser(table));
 		javaOutput.add("}");
 		return javaOutput;
 	}
@@ -922,7 +927,7 @@ public class Main {
 	 * @param table
 	 * @return
 	 */
-	public static ArrayList<String> generateSimpleJavaParser(Table table) {
+	/*public static ArrayList<String> generateSimpleJavaParser(Table table) {
 		if (table == null || table.getFields().size() == 0) {
 			return null;
 		}
@@ -1143,5 +1148,5 @@ public class Main {
 		javaOutput.add(PARSER_STYLE_END_OBJECT + "\n");
 
 		return javaOutput;
-	}
+	}*/
 }
