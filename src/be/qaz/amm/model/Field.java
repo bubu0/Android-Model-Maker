@@ -1,4 +1,4 @@
-package model;
+package be.qaz.amm.model;
 
 /**
  * 
