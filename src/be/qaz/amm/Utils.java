@@ -121,12 +121,17 @@ public class Utils {
 
 	public static String javaTypeResolver(Object o) {
 		String result = null;
-		if (o instanceof Integer) {
+		if (o instanceof Integer || o instanceof Long || o instanceof Double) {
 			result = patternTypes[2];
 		} else if (o instanceof Date) {
 			result = patternTypes[1];
 		} else if (o instanceof String) {
 			String s = (String) o;
+			
+			if(isKindOf(patternDigit, s)) {
+				result = patternTypes[2];
+				return result;
+			}
 
 			if (s.startsWith("[\"")) {
 				s = s.substring(2, s.length() - 3);
@@ -182,7 +187,7 @@ public class Utils {
 		return str;
 	}
 
-	public static Pattern pattern = Pattern.compile("\\d+");
+	public static Pattern patternDigit = Pattern.compile("\\d+");
 
 	public static String extractFromQuote(String str) {
 		String s = str;
@@ -198,7 +203,7 @@ public class Utils {
 
 	public static int extractIdFromUri(String uri) {
 		uri = extractFromQuote(uri);
-		Matcher m = pattern.matcher(uri);
+		Matcher m = patternDigit.matcher(uri);
 
 		if (m.find()) {
 			System.out.println(m.group(0));
