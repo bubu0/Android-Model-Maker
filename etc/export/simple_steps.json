@@ -1,0 +1,48 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "desc_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "order_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "simple", 
+			"type": "Boolean", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "simple_steps",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "variant", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "variants",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "destination", 
+			"type": "String", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

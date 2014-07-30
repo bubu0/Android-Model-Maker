@@ -1,0 +1,53 @@
+{
+
+         "billing_method": "free",
+
+         "binaries": [],
+
+         "campaign": null,
+
+         "campaign_code": null,
+
+         "created": "2014-04-09T15:50:05.602667",
+
+         "created_by": "/v1/users/117679/",
+
+         "currency_code": "EUR",
+
+         "desc": "<p>super pack<\/p>",
+
+         "id": 104873,
+
+         "lang": "fr",
+
+         "long_desc": "",
+
+         "market": "/v1/markets/20/",
+
+         "medias": [],
+
+         "modified": "2014-07-17T11:47:41.720245",
+
+         "modified_by": "/v1/users/107341/",
+
+         "name": "test",
+
+         "price": 0,
+
+         "recipes": [
+
+            "/v1/recipes/107015/"
+
+         ],
+
+         "resource_uri": "/v1/packs/104873/",
+
+         "state": "published",
+
+         "store_available_android": false,
+
+         "store_available_ios": false,
+
+         "store_product_id": ""
+
+      }

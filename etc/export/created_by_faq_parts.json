@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "created_by_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "created_by",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "faq_parts_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "faq_parts",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (created_by_id, faq_parts_id) on conflict replace" 
+		}, 
+	], 
+} 

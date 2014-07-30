@@ -1,0 +1,71 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "created_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "source_uri", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "source_id", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "state", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "short_name", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "lang", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "version", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "market", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "recipes",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

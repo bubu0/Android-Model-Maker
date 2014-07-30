@@ -1,0 +1,12 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "rate", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "count_db", 
+			"type": "Integer", 
+		} 
+	], 
+} 

@@ -1,0 +1,107 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "technical_index", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name_bg", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_de", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ja", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "lang", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_uk", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "name_es", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_nl", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "connectable", 
+			"type": "Boolean", 
+		}, 
+		{ 
+			"name": "name_en", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "reference", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "market", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name_pt", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ru", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "appliances",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "group_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name_it", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ro", 
+			"type": "String", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

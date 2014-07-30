@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "variants_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "variants",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "recipes_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "recipes",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (variants_id, recipes_id) on conflict replace" 
+		}, 
+	], 
+} 

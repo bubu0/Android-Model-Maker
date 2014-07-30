@@ -1,0 +1,95 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "created_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "long_desc", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "store_available_ios", 
+			"type": "Boolean", 
+		}, 
+		{ 
+			"name": "store_product_id", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "campaign_code", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "state", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "store_available_android", 
+			"type": "Boolean", 
+		}, 
+		{ 
+			"name": "lang", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "billing_method", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "price", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "market", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "name", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "packs",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "campaign", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "currency_code", 
+			"type": "String", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

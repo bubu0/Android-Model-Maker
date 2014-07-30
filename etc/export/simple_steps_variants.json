@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "simple_steps_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "simple_steps",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "variants_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "variants",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (simple_steps_id, variants_id) on conflict replace" 
+		}, 
+	], 
+} 

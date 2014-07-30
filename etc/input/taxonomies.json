@@ -1,0 +1,51 @@
+{
+
+         "content_type": "/v1/recipes/",
+
+         "created": "2014-05-26T18:09:57.719034",
+
+         "created_by": {
+
+            "id": 42,
+
+            "resource_uri": "/v1/users/42/",
+
+            "username": "admin"
+
+         },
+
+         "id": 100008,
+
+         "modified": "2014-05-26T18:09:57.719070",
+
+         "modified_by": "/v1/users/42/",
+
+         "name_bg": null,
+
+         "name_de": null,
+
+         "name_en": "Cooking Time",
+
+         "name_es": null,
+
+         "name_fr": "Durée de cuisson",
+
+         "name_it": null,
+
+         "name_ja": null,
+
+         "name_nl": null,
+
+         "name_pt": null,
+
+         "name_ro": null,
+
+         "name_ru": null,
+
+         "name_uk": null,
+
+         "resource_uri": "/v1/taxonomies/100008/",
+
+         "type": "cooking_time"
+
+      }

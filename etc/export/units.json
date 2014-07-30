@@ -1,0 +1,179 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "abbreviation_de", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_es", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_bg", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_de", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ja", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "type", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_en", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_uk", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name_plural_it", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "abbreviation_ja", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_ja", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_bg", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_uk", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_es", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_nl", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_ro", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_pt", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_nl", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_en", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_it", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_nl", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_en", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_es", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_ro", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_ru", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "name_pt", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_pt", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "abbreviation_ru", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ru", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "units",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "name_plural_bg", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_de", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_plural_uk", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_it", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ro", 
+			"type": "String", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

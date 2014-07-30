@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "appliances_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "appliances",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "medias_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "medias",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (appliances_id, medias_id) on conflict replace" 
+		}, 
+	], 
+} 

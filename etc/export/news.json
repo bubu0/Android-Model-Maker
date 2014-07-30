@@ -1,0 +1,92 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "body", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "link", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "state", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "packs",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "type", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "lang", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "author", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "title", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "end_date", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "market", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "order_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "news",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "start_date", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "publication_date", 
+			"type": "Date", 
+		}, 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

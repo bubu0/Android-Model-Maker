@@ -1,0 +1,22 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "username", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+		}, 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

@@ -1,0 +1,23 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "recipes_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "recipes",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "users_id", 
+			"type": "Integer", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (recipes_id, users_id) on conflict replace" 
+		}, 
+	], 
+} 

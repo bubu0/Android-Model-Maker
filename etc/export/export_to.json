@@ -1,0 +1,23 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "appliances_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "appliances",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "export_to", 
+			"type": "String", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (appliances_id, export_to) on conflict replace" 
+		}, 
+	], 
+} 

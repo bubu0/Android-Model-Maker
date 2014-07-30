@@ -1,0 +1,49 @@
+{
+
+         "available_transitions": [
+
+            "retract"
+
+         ],
+
+         "body": "<div>\n<p class=\"MsoNormal\"><strong>La face extérieure de ma cuve présente<span>  <\/span>des marques blanches ou autres.<\/strong><\/p>\n<p class=\"MsoNormal\">Le revêtement de la cuve n’est pas altéré, ces traces peuvent arriver après un passage au lave-vaisselle. Afin de retrouver l’aspect initial, nettoyer à l’aide d’une éponge avec un mélange d’eau chaude et de vinaigreblanc, rincer soigneusement la cuve.<\/p>\n<p class=\"MsoNormal\"> <\/p>\n<p class=\"MsoNormal\"><strong>Après son passage au lave vaisselle, ma cuve est devenu grise à l’extérieur<\/strong><\/p>\n<p class=\"MsoNormal\"><span>La cuve peut être lavée au lave vaisselle car elle ne craint pas d’être immergée. Cependant, certains produits lessiviels contiennent des produits plus ou moins agressifs avec les métaux. Ce résidu gris est la réaction du métal avec le produit. <\/span><\/p>\n<p class=\"MsoNormal\"><span>Nous conseillons des produits lessiviels liquides ou en gel, plus doux.<\/span><\/p>\n<p class=\"MsoNormal\"> <\/p>\n<p class=\"MsoNormal\"><strong>Je n’arrive pas à devisser mon couvercle pour le nettoyer. <\/strong><\/p>\n<p class=\"MsoNormal\"><strong><span>                <\/span><\/strong><span>Vérifier que votre couvercle est en position ouverte.<\/span><\/p>\n<\/div>",
+
+         "created": "2014-06-23T16:31:55.111212",
+
+         "created_by": {
+
+            "id": 114226,
+
+            "resource_uri": "/v1/users/114226/",
+
+            "username": "mortekiller"
+
+         },
+
+         "id": 2327,
+
+         "lang": "fr",
+
+         "market": "/v1/markets/20/",
+
+         "medias": [
+
+            "/v1/medias/45286/"
+
+         ],
+
+         "modified": "2014-07-02T14:42:45.966494",
+
+         "modified_by": "/v1/users/114226/",
+
+         "order": 2,
+
+         "resource_uri": "/v1/faqs/2327/",
+
+         "section": "/v1/faq_sections/100033/",
+
+         "state": "published",
+
+         "title": "Nettoyage"
+
+      }

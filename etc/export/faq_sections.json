@@ -1,0 +1,64 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "state", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "lang", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "title", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "market", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "order_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "faq_sections",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "part", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "faq_parts",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

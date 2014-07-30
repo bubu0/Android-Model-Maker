@@ -1,0 +1,85 @@
+{
+
+         "binaries": [
+
+            "pack"
+
+         ],
+
+         "connectable": false,
+
+         "created": "2014-04-29T08:39:35.315787",
+
+         "created_by": {
+
+            "id": 42,
+
+            "resource_uri": "/v1/users/42/",
+
+            "username": "admin"
+
+         },
+
+         "export_to": [
+
+            "pack"
+
+         ],
+
+         "group": "/v1/appliance_groups/13/",
+
+         "id": 120,
+
+         "lang": "fr",
+
+         "market": "/v1/markets/20/",
+
+         "medias": [
+
+            "/v1/medias/43204/"
+
+         ],
+
+         "modified": "2014-07-22T11:16:34.662846",
+
+         "modified_by": "/v1/users/114226/",
+
+         "name_bg": "test",
+
+         "name_de": "test",
+
+         "name_en": "Cookeo USB",
+
+         "name_es": "test",
+
+         "name_fr": "Cookeo USB",
+
+         "name_it": "test",
+
+         "name_ja": "test",
+
+         "name_nl": "test",
+
+         "name_pt": "test",
+
+         "name_ro": "test",
+
+         "name_ru": "test",
+
+         "name_uk": "test",
+
+         "parameters": [],
+
+         "reference": "Cookeo USB",
+
+         "resource_uri": "/v1/appliances/120/",
+
+         "technical_index": "0",
+
+         "terms": [
+
+            "/v1/terms/1798/"
+
+         ]
+
+      }

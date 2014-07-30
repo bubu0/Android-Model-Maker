@@ -1,0 +1,60 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "text", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "recipes",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "state", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "parent", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "comments",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "pk", 
+			"type": "Integer", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

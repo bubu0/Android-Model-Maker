@@ -1,0 +1,95 @@
+{
+
+         "created": "2014-06-19T15:28:28.254077",
+
+         "created_by": "/v1/users/42/",
+
+         "desc_bg": null,
+
+         "desc_de": null,
+
+         "desc_en": null,
+
+         "desc_es": null,
+
+         "desc_fr": "Casserole",
+
+         "desc_it": null,
+
+         "desc_ja": null,
+
+         "desc_nl": null,
+
+         "desc_pt": null,
+
+         "desc_ro": null,
+
+         "desc_ru": null,
+
+         "desc_uk": null,
+
+         "id": 875,
+
+         "kitchen_ware": {
+
+            "associated_appliance": null,
+
+            "created": "2013-12-10T10:51:38.413499",
+
+            "created_by": {
+
+               "id": 42,
+
+               "resource_uri": "/v1/users/42/",
+
+               "username": "admin"
+
+            },
+
+            "id": 21,
+
+            "modified": "2013-12-10T10:51:38.413518",
+
+            "modified_by": "/v1/users/42/",
+
+            "name_bg": null,
+
+            "name_de": null,
+
+            "name_en": null,
+
+            "name_es": null,
+
+            "name_fr": "Casserole",
+
+            "name_it": null,
+
+            "name_ja": null,
+
+            "name_nl": null,
+
+            "name_pt": null,
+
+            "name_ro": null,
+
+            "name_ru": null,
+
+            "name_uk": null,
+
+            "resource_uri": "/v1/kitchen_wares/21/",
+
+            "substitutions": []
+
+         },
+
+         "modified": "2014-06-19T15:28:28.260474",
+
+         "modified_by": "/v1/users/42/",
+
+         "order": 2,
+
+         "resource_uri": "/v1/assigned_kitchen_wares/875/",
+
+         "step": "/v1/steps/90095/"
+
+      }

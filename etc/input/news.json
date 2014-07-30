@@ -1,0 +1,71 @@
+{
+
+         "author": "World Recipe",
+
+         "available_transitions": [
+
+            "retract"
+
+         ],
+
+         "body": "",
+
+         "created": "2014-05-22T17:45:28.526353",
+
+         "created_by": {
+
+            "id": 114226,
+
+            "resource_uri": "/v1/users/114226/",
+
+            "username": "mortekiller"
+
+         },
+
+         "end_date": null,
+
+         "extra_data": {
+
+            "body_home": "pouet",
+
+            "title_home": "World Recipe"
+
+         },
+
+         "id": 4894,
+
+         "lang": "en",
+
+         "link": "tata.com",
+
+         "market": "/v1/markets/20/",
+
+         "medias": [
+
+            "/v1/medias/43216/",
+
+            "/v1/medias/43217/"
+
+         ],
+
+         "modified": "2014-06-28T13:50:33.097474",
+
+         "modified_by": "/v1/users/114226/",
+
+         "order": 1,
+
+         "publication_date": "2014-05-20T00:00:00",
+
+         "resource": "/v1/packs/104883/",
+
+         "resource_uri": "/v1/news/4894/",
+
+         "start_date": "2014-05-20T00:00:00",
+
+         "state": "published",
+
+         "title": "Pack of the day",
+
+         "type": "pouet"
+
+      }

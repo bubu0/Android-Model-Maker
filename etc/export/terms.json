@@ -1,0 +1,100 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "enabled", 
+			"type": "Boolean", 
+		}, 
+		{ 
+			"name": "name_en", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_bg", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ja", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_de", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_uk", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name_pt", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "order_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "name_ru", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "terms",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "name_es", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_nl", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "taxonomy", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "taxonomies",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "name_it", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "name_ro", 
+			"type": "String", 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

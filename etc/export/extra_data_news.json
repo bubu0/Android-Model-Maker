@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "extra_data_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "extra_data",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "news_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "news",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (extra_data_id, news_id) on conflict replace" 
+		}, 
+	], 
+} 

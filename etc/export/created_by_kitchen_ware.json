@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "created_by_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "created_by",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "kitchen_ware_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "kitchen_ware",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (created_by_id, kitchen_ware_id) on conflict replace" 
+		}, 
+	], 
+} 

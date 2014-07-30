@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "created_by_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "created_by",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "terms_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "terms",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (created_by_id, terms_id) on conflict replace" 
+		}, 
+	], 
+} 

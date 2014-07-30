@@ -1,0 +1,100 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "created_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "desc_nl", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_fr", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_es", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_de", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_it", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_en", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_ro", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "id_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "desc_bg", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "order_db", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "desc_ja", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "modified_by", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "created", 
+			"type": "Date", 
+		}, 
+		{ 
+			"name": "desc_ru", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "resource_uri", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "assigned_kitchen_wares",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "desc_pt", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "desc_uk", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "step", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "steps",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (id_db) on conflict replace" 
+		}, 
+	], 
+} 

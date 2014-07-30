@@ -1,0 +1,39 @@
+ {
+
+         "children": [],
+
+         "created": "2014-06-11T08:06:53",
+
+         "created_by": {
+
+            "id": 42,
+
+            "resource_uri": "/v1/users/42/",
+
+            "username": "admin"
+
+         },
+
+         "extra_data": {},
+
+         "id": "102027",
+
+         "modified": "2014-06-11T08:07:38",
+
+         "modified_by": "/v1/users/42/",
+
+         "parent": null,
+
+         "pk": "102027",
+
+         "resource": "/v1/recipes/107856/",
+
+         "resource_uri": "/v1/comments/102027/",
+
+         "state": "private",
+
+         "tags": [],
+
+         "text": "Trop génial"
+
+      }

@@ -1,0 +1,61 @@
+{
+
+         "created": "2012-09-05T19:11:17",
+
+         "created_by": {
+
+            "id": 42,
+
+            "resource_uri": "/v1/users/42/",
+
+            "username": "admin"
+
+         },
+
+         "domain_medias": [],
+
+         "enabled": true,
+
+         "id": 1730,
+
+         "medias": [
+
+            "/v1/medias/41840/"
+
+         ],
+
+         "modified": "2014-07-22T11:16:34.736018",
+
+         "modified_by": "/v1/users/114226/",
+
+         "name_bg": "",
+
+         "name_de": "",
+
+         "name_en": "Desserts",
+
+         "name_es": "",
+
+         "name_fr": "Desserts",
+
+         "name_it": "",
+
+         "name_ja": "",
+
+         "name_nl": "",
+
+         "name_pt": "",
+
+         "name_ro": "",
+
+         "name_ru": "",
+
+         "name_uk": "",
+
+         "order": 3,
+
+         "resource_uri": "/v1/terms/1730/",
+
+         "taxonomy": "/v1/taxonomies/100002/"
+
+      }

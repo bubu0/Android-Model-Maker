@@ -1,0 +1,16 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "display", 
+			"type": "Integer", 
+		}, 
+		{ 
+			"name": "title_home", 
+			"type": "String", 
+		}, 
+		{ 
+			"name": "body_home", 
+			"type": "String", 
+		} 
+	], 
+} 

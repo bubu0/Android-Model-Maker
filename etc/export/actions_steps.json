@@ -1,0 +1,28 @@
+{ 
+	"fields": [ 
+		{ 
+			"name": "actions_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "actions",
+				"onDelete": "CASCADE",
+			}, 
+		}, 
+		{ 
+			"name": "steps_id", 
+			"type": "Integer", 
+			"nullable": "false",
+			"foreignKey": {
+				"table": "steps",
+				"onDelete": "CASCADE",
+			}, 
+		} 
+	], 
+	"constraints": [ 
+		{ 
+			"name": "unique_name", 
+			"definition": "unique (actions_id, steps_id) on conflict replace" 
+		}, 
+	], 
+} 
