@@ -63,14 +63,13 @@ public class Utils {
 	public static String javaTypeResolver(Object o) {
 		System.out.println("javaTypeResolver input : " + o.toString());
 		String result = null;
-		if (o instanceof Integer) {
+		if (o instanceof Integer || o instanceof Long || o instanceof Double) {
 			result = patternTypes[2];
 		} else if (o instanceof Date) {
 			result = patternTypes[1];
 		} else if (o instanceof String) {
 			String s = (String) o;
-
-			if (isKindOf(patternDigits, s)) {
+			if(isKindOf(patternDigit, s)) {
 				result = patternTypes[2];
 				return result;
 			}
@@ -131,6 +130,8 @@ public class Utils {
 		}
 		return str;
 	}
+
+	public static Pattern patternDigit = Pattern.compile("\\d+");
 
 	public static String extractFromQuote(String str) {
 		String s = str;

@@ -1,7 +1,13 @@
 package be.qaz.amm;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,14 +21,10 @@ import be.qaz.amm.model.Table;
 
 public class Main {
 
-	final static String inputDirectoryPath = "inputs";
-	final static String outputDirectoryPath = "export/";
+	final static String inputDirectoryPath = "etc/input";
+	final static String outputDirectoryPath = "etc/export/";
 
 	public static ArrayList<Field> currentTableFields;
-
-	// used to create the method that will call simple parsers one by one to
-	// sync the entire file
-	public static ArrayList<String> syncMethod = new ArrayList<String>();
 
 	public static void main(String[] args) {
 		System.out.println("START");
@@ -36,7 +38,6 @@ public class Main {
 		for (File f : loadFiles(file)) {
 			System.out.println("######## " + f.getName() + " FOUND ########");
 			System.out.println("NEW PARSING");
-			syncMethod.clear();
 			expParserFile(f);
 		}
 		
@@ -76,7 +77,8 @@ public class Main {
 				generated = JsonGenerator.generateJsonSchema(t);
 				if (generated != null) {
 					if (generated.size() > 0) {
-						String[] data = generated.toArray(new String[generated.size()]);
+						String[] data = generated.toArray(new String[generated
+								.size()]);
 						writeFile(t.getOriginalName() + ".json", data);
 						generated.clear();
 					}
@@ -97,7 +99,8 @@ public class Main {
 					}
 				}
 				if (generated != null && generated.size() > 0) {
-					String[] data = generated.toArray(new String[generated.size()]);
+					String[] data = generated.toArray(new String[generated
+							.size()]);
 					writeFile(t.getName() + ".class", data);
 					generated.clear();
 				}
@@ -108,42 +111,36 @@ public class Main {
 	public static void writeFile(String name, String[] lines) {
 		BufferedWriter writer = null;
 		try {
-			// create a temporary file
-			// String timeLog = new
-			// SimpleDateFormat("ddMMyyyy_HHmmss").format(Calendar.getInstance().getTime());
-			// File logFile = new File("export/" + name + "_" + timeLog);
 			new File(outputDirectoryPath).mkdirs();
-			File logFile = new File(outputDirectoryPath + name);
+			final File outFile = new File(outputDirectoryPath + name);
 
-			// This will output the full path where the file will be written
-			// to...
-			System.out.println(logFile.getCanonicalPath());
-			writer = new BufferedWriter(new FileWriter(logFile));
+			System.out.println(outFile.getCanonicalPath());
+			writer = new BufferedWriter(new FileWriter(outFile));
 
 			String line;
-			for (int i = 0; i < lines.length; i++) {
-				line = String.format("%s \n", lines[i]);
+			for (final String line2 : lines) {
+				line = String.format("%s \n", line2);
 				writer.write(line);
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				// Close the writer regardless of what happens...
 				writer.flush();
 				writer.close();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 		}
 	}
 
 	// Load files into prog
 	public static File[] loadFiles(File directoryPath) {
-		File[] entityFiles = directoryPath.listFiles(new FileFilter() {
+		final File[] entityFiles = directoryPath.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
-				return !pathname.getName().startsWith("_") && pathname.getName().endsWith(".json");
+				return !pathname.getName().startsWith("_")
+						&& pathname.getName().endsWith(".json");
 			}
 		});
 		return entityFiles;
@@ -153,13 +150,13 @@ public class Main {
 		if (file == null) {
 			return;
 		}
-		JSONParser parser = new JSONParser();
+		final JSONParser parser = new JSONParser();
 		try {
-			Object obj = parser.parse(new FileReader(file));
+			final Object obj = parser.parse(new FileReader(file));
 			JSONObject jsonObject = null;
 			boolean isInArray = false;
 			if (obj instanceof JSONArray) {
-				JSONArray jsonArray = (JSONArray) obj;
+				final JSONArray jsonArray = (JSONArray) obj;
 				jsonObject = (JSONObject) jsonArray.get(0);
 				isInArray = true;
 			} else if (obj instanceof JSONObject) {
@@ -172,7 +169,7 @@ public class Main {
 			// parseJsonObject(jsonObject, rootObject, null, isInArray);
 			parseJsonObject(jsonObject, rootObject, null, true);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -249,65 +246,73 @@ public class Main {
 	 *            String : field's table
 	 * @return created field
 	 */
-	public static Field createField(String fieldName, String table, String type, String constraint, Object value) {
+	public static Field createField(String fieldName, String table,
+			String type, String constraint, Object value) {
 		Field field = null;
 		Table t = Utils.findTableWithName(constraint);
 
-		if (fieldName == null || table == null) {
+		if ((fieldName == null) || (table == null)) {
 			return null;
 		}
+		String javaFieldName = Utils.getNamePascalCase(fieldName);
 
-		if ((type.equalsIgnoreCase(Constants.URI) || type.equalsIgnoreCase(Constants.JUNCTION))
+		// if (type == null) {
+		// type = Constants.INT;
+		// }
+
+		if (type.equalsIgnoreCase(Constants.JUNCTION)
 				&& Utils.isTagAllowed(fieldName)) {
 			if (constraint == null) {
 				constraint = Utils.extractTableFromUri((String) value);
 			}
-			Table junc = createJunctionTable(table, constraint);
+			final Table junc = createJunctionTable(table, constraint);
 			if (junc != null) {
 				Constants.tables.add(junc);
 				Constants.junctionTables.add(junc);
 			}
 
-			if (type.equalsIgnoreCase(Constants.JUNCTION)) {
-				if (t != null) {
-					if (t.getFields() != null) {
-						field = new Field(table + "FkId", table + "FkId", Constants.CALLER, table);
-						if (!Utils.fieldAlreadyExistsInTable(field, t)) {
-							System.out.println("CALLER added + " + table + "FkId");
-							t.getFields().add(field);
-						}
-					} else {
-						field = new Field(table + "FkId", table + "FkId", Constants.CALLER, table);
-						if (!Utils.fieldAlreadyExistsInTable(field, t)) {
-							ArrayList<Field> af = new ArrayList<Field>();
-							af.add(field);
-							t.setFields(af);
-						}
+			if (t != null) {
+				if (t.getFields() != null) {
+					field = new Field(table + "FkId", table + "FkId",
+							Constants.CALLER, table);
+					if (!Utils.fieldAlreadyExistsInTable(field, t)) {
+						System.out.println("CALLER added + " + table + "FkId");
+						t.getFields().add(field);
+					}
+				} else {
+					field = new Field(table + "FkId", table + "FkId",
+							Constants.CALLER, table);
+					if (!Utils.fieldAlreadyExistsInTable(field, t)) {
+						final ArrayList<Field> af = new ArrayList<Field>();
+						af.add(field);
+						t.setFields(af);
 					}
 				}
 			}
-		}
-
-		if (type.equalsIgnoreCase(Constants.ARRAY)) {
-			String arrayType = Utils.javaTypeResolver(value);
+		} else if (type.equalsIgnoreCase(Constants.ARRAY)) {
+			final String arrayType = Utils.javaTypeResolver(value);
 			if (arrayType.equalsIgnoreCase(Constants.URI)) {
 				if (constraint == null) {
 					constraint = Utils.extractTableFromUri((String) value);
 				}
-				Table junc = createJunctionTable(table, constraint);
+				final Table junc = createJunctionTable(table, constraint);
 				if (junc != null) {
 					Constants.tables.add(junc);
 					Constants.junctionTables.add(junc);
 				}
 			} else {
-				Table arrayTb = createArrayTable(table, fieldName, arrayType);
+				final Table arrayTb = createArrayTable(table, fieldName,
+						arrayType);
 				if (arrayTb != null) {
 					Constants.tables.add(arrayTb);
 				}
 			}
+		} else if (type.equalsIgnoreCase(Constants.URI)) {
+			javaFieldName += "Fk";
+			constraint = Utils.extractTableFromUri((String) value);
 		}
 
-		field = new Field(fieldName, Utils.getNamePascalCase(fieldName), type, constraint);
+		field = new Field(fieldName, javaFieldName, type, constraint);
 
 		t = Utils.findTableWithName(table);
 		if (t != null) {
@@ -320,7 +325,6 @@ public class Main {
 				t.setFields(fs);
 			}
 		}
-
 		return field;
 	}
 
@@ -335,28 +339,40 @@ public class Main {
 	 *            String : type of the array
 	 * @return created table
 	 */
-	public static Table createArrayTable(String foreign, String table, String type) {
+	public static Table createArrayTable(String foreign, String table,
+			String type) {
 		if (!Utils.tableAlreadyExists(table)) {
-			ArrayList<Field> fs = new ArrayList<Field>();
-			Field f1 = new Field(foreign + "_id", Utils.getNamePascalCase(foreign) + "Id", Constants.INT, foreign);
-			Field f2 = new Field(table, Utils.getNamePascalCase(table), type, null);
+			final ArrayList<Field> fs = new ArrayList<Field>();
+			final Field f1 = new Field(foreign + "_id",
+					Utils.getNamePascalCase(foreign) + "Id", Constants.INT,
+					foreign);
+			final Field f2 = new Field(table, Utils.getNamePascalCase(table),
+					type, null);
 			fs.add(f1);
 			fs.add(f2);
-			Table arrayTable = new Table(table, Utils.getNameCamelCase(table), Constants.JUNCTION_TABLE, fs, false);
+			final Table arrayTable = new Table(table,
+					Utils.getNameCamelCase(table), Constants.JUNCTION_TABLE,
+					fs, false);
 			return arrayTable;
 		}
 		return null;
 	}
 
 	public static Table createJunctionTable(String refTable, String extTable) {
-		String tName = Utils.createJunctionTableName(refTable, extTable);
+		final String tName = Utils.createJunctionTableName(refTable, extTable);
 		if (!Utils.tableAlreadyExists(tName)) {
-			ArrayList<Field> fs = new ArrayList<Field>();
-			Field f1 = new Field(refTable + "_id", Utils.getNamePascalCase(refTable) + "Id", Constants.INT, tName);
-			Field f2 = new Field(extTable + "_id", Utils.getNamePascalCase(extTable) + "Id", Constants.INT, tName);
+			final ArrayList<Field> fs = new ArrayList<Field>();
+			final Field f1 = new Field(refTable + "_id",
+					Utils.getNamePascalCase(refTable) + "Id", Constants.INT,
+					tName);
+			final Field f2 = new Field(extTable + "_id",
+					Utils.getNamePascalCase(extTable) + "Id", Constants.INT,
+					tName);
 			fs.add(f1);
 			fs.add(f2);
-			Table juncTable = new Table(tName, Utils.getNameCamelCase(tName), Constants.JUNCTION_TABLE, fs, false);
+			final Table juncTable = new Table(tName,
+					Utils.getNameCamelCase(tName), Constants.JUNCTION_TABLE,
+					fs, false);
 			return juncTable;
 		}
 		return null;

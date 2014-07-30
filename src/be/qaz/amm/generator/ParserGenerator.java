@@ -81,35 +81,6 @@ public class ParserGenerator {
 							+ "(Utils.convertToDate(joInside.getString(\"" + f.getOrignalName()
 							+ "\"), Utils.formats[7]));";
 					// In case of an URI, we are linked to another table
-				} else if (type.equalsIgnoreCase(Constants.URI) && f.getConstraint() != null) {
-
-					// Filling junction tables;
-					String jTableName = Utils.createJunctionTableName(table.getName(), f.getConstraint());
-					final String jValName = Utils.getNamePascalCase(f.getConstraint()) + "Cv" + externalRefCtr;
-					externalRefCtr++;
-					Table t = Utils.findTableWithName(jTableName);
-					if (t != null) {
-						jTableName = Utils.getNameCamelCase(jTableName);
-						line = Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
-								+ "\") == false) {\n";
-						line += "\n" + Utils.tabGen(nbOfTab + 1) + "int " + f.getName() + "Id = "
-								+ "Utils.extractIdFromUri(joInside.getString(\"" + f.getOrignalName() + "\"));";
-						line += "\n" + Utils.tabGen(nbOfTab + 1) + "val.put" + fieldName + "(" + f.getName() + "Id"
-								+ ");";
-						line += "\n" + Utils.tabGen(nbOfTab + 1) + jTableName + "ContentValues " + jValName + " = new "
-								+ jTableName + "ContentValues();";
-						// line += "\n		" + jValName + ".putIdDbNull();";
-						line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
-								+ Utils.getNameCamelCase(t.getFields().get(0).getName()) + "(id);";
-						line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
-								+ Utils.getNameCamelCase(t.getFields().get(1).getName()) + "(" + f.getName() + "Id"
-								+ ");";
-						line += "\n" + Utils.tabGen(nbOfTab + 1) + "ctxt.getContentResolver().insert(" + jTableName
-								+ "Columns.CONTENT_URI, " + jValName + ".values());\n";
-						line += Utils.tabGen(nbOfTab) + "}\n";
-						javaOutput.add(line);
-						line = null;
-					}
 
 				} else if (type.equalsIgnoreCase(Constants.URI) && f.getConstraint() == null) {
 
