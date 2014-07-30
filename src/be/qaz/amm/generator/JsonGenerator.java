@@ -43,8 +43,21 @@ public class JsonGenerator {
 				usableFieldName = Utils.checkForbiddenName(f.getOrignalName());
 				line = Utils.tabGen(3) + "\"name\": \"" + usableFieldName + "\",";
 				javaOutput.add(line);
-				line = Utils.tabGen(3) + "\"type\": \"" + type + "\"";
+				line = Utils.tabGen(3) + "\"type\": \"" + type + "\",";
 				javaOutput.add(line);
+				if (f.getType().equalsIgnoreCase(Constants.URI)
+						|| (table.getConstraint() != null && table.getConstraint().equalsIgnoreCase(Constants.JUNCTION_TABLE))) {
+					Table t = Utils.findTableWithName(f.getConstraint());
+					if (t != null) {
+						line = Utils.tabGen(3) + "\"nullable\": \"false\",\n";
+						line += Utils.tabGen(3) + "\"foreignKey\": {\n";
+						line += Utils.tabGen(4) + "\"table\": \"" + t.getOriginalName() + "\",\n";
+						line += Utils.tabGen(4) + "\"onDelete\": \"CASCADE\",\n";
+						line += Utils.tabGen(3) + "},";
+						javaOutput.add(line);
+					}
+				}
+
 				if (fields.indexOf(f) != fields.size() - 1) {
 					line += ",";
 					javaOutput.add(Utils.tabGen(2) + "},");

@@ -82,7 +82,7 @@ public class ParserGenerator {
 							+ "\"), Utils.formats[7]));";
 					// In case of an URI, we are linked to another table
 
-				} else if (type.equalsIgnoreCase(Constants.URI) && f.getConstraint() == null) {
+				} else if (type.equalsIgnoreCase(Constants.URI)) {
 
 					line = Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName() + "\") == false)\n";
 					line += Utils.tabGen(nbOfTab + 1) + "val.put" + fieldName
@@ -125,10 +125,7 @@ public class ParserGenerator {
 
 						boolean isURI = false;
 						if (f.getConstraint() != null) {
-							line += Utils.tabGen(nbOfTab) + "int v = 0;\n";
-							line += Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName()
-									+ "\") == false)\n";
-							line += Utils.tabGen(nbOfTab + 1) + "v = Utils.extractIdFromUri(jArray.getString(j));";
+							line += Utils.tabGen(nbOfTab + 1) + "final int v = Utils.extractIdFromUri(jArray.getString(j));";
 							isURI = true;
 						} else {
 
@@ -150,7 +147,7 @@ public class ParserGenerator {
 
 							final String fName1 = juncTable.getFields().get(0).getName();
 							final String fName2 = juncTable.getFields().get(1).getName();
-							if (fName1.compareTo(fName2) < 0) {
+							if (juncTable.getFields().get(0).getConstraint().equalsIgnoreCase(table.getOriginalName())) {
 								line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
 										+ Utils.getNameCamelCase(fName1) + "(id);";
 								line += "\n" + Utils.tabGen(nbOfTab + 1) + jValName + ".put"
@@ -203,7 +200,7 @@ public class ParserGenerator {
 						// line += "\n		" + jValName + ".putIdDbNull();";
 						final String fName1 = t.getFields().get(0).getName();
 						final String fName2 = t.getFields().get(1).getName();
-						if (fName1.compareTo(fName2) < 0) {
+						if (t.getFields().get(0).getConstraint().equalsIgnoreCase(table.getOriginalName())) {
 							line += "\n" + Utils.tabGen(nbOfTab) + juncValName + ".put"
 									+ Utils.getNameCamelCase(fName1) + "(id);";
 							line += "\n" + Utils.tabGen(nbOfTab) + juncValName + ".put"
@@ -245,7 +242,7 @@ public class ParserGenerator {
 					}
 				} else if (f.getConstraint() != null) {
 					line = Utils.tabGen(nbOfTab) + "if( joInside.isNull(\"" + f.getOrignalName() + "\") == false)\n";
-					line += Utils.tabGen(nbOfTab + 1) + "val.put" + fieldName + "(insideObj.get" + type + "(\""
+					line += Utils.tabGen(nbOfTab + 1) + "val.put" + fieldName + "(joInside.get" + type + "(\""
 							+ f.getOrignalName() + "\"));";
 				} else {
 					if (type.equalsIgnoreCase(Constants.BOOL)) {

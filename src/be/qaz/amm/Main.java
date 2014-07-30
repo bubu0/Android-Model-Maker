@@ -38,12 +38,12 @@ public class Main {
 		for (File f : loadFiles(file)) {
 			System.out.println("######## " + f.getName() + " FOUND ########");
 			System.out.println("NEW PARSING");
-			expParserFile(f);
+			fileParser(f);
 		}
-		
+
 		generateParsers(Constants.tables);
-//		generateJavaBeans(Constants.tables);
-//		generateJsonScheme(Constants.tables);
+		// generateJavaBeans(Constants.tables);
+		generateJsonScheme(Constants.tables);
 
 		System.out.println("######## END ######## ");
 		System.out.println("######## TABLES DETAILS ########");
@@ -77,8 +77,7 @@ public class Main {
 				generated = JsonGenerator.generateJsonSchema(t);
 				if (generated != null) {
 					if (generated.size() > 0) {
-						String[] data = generated.toArray(new String[generated
-								.size()]);
+						String[] data = generated.toArray(new String[generated.size()]);
 						writeFile(t.getOriginalName() + ".json", data);
 						generated.clear();
 					}
@@ -99,8 +98,7 @@ public class Main {
 					}
 				}
 				if (generated != null && generated.size() > 0) {
-					String[] data = generated.toArray(new String[generated
-							.size()]);
+					String[] data = generated.toArray(new String[generated.size()]);
 					writeFile(t.getName() + ".class", data);
 					generated.clear();
 				}
@@ -139,14 +137,13 @@ public class Main {
 		final File[] entityFiles = directoryPath.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
-				return !pathname.getName().startsWith("_")
-						&& pathname.getName().endsWith(".json");
+				return !pathname.getName().startsWith("_") && pathname.getName().endsWith(".json");
 			}
 		});
 		return entityFiles;
 	}
 
-	public static void expParserFile(File file) {
+	public static void fileParser(File file) {
 		if (file == null) {
 			return;
 		}
@@ -246,8 +243,7 @@ public class Main {
 	 *            String : field's table
 	 * @return created field
 	 */
-	public static Field createField(String fieldName, String table,
-			String type, String constraint, Object value) {
+	public static Field createField(String fieldName, String table, String type, String constraint, Object value) {
 		Field field = null;
 		Table t = Utils.findTableWithName(constraint);
 
@@ -260,8 +256,7 @@ public class Main {
 		// type = Constants.INT;
 		// }
 
-		if (type.equalsIgnoreCase(Constants.JUNCTION)
-				&& Utils.isTagAllowed(fieldName)) {
+		if (type.equalsIgnoreCase(Constants.JUNCTION) && Utils.isTagAllowed(fieldName)) {
 			if (constraint == null) {
 				constraint = Utils.extractTableFromUri((String) value);
 			}
@@ -273,15 +268,13 @@ public class Main {
 
 			if (t != null) {
 				if (t.getFields() != null) {
-					field = new Field(table + "FkId", table + "FkId",
-							Constants.CALLER, table);
+					field = new Field(table + "FkId", table + "FkId", Constants.CALLER, table);
 					if (!Utils.fieldAlreadyExistsInTable(field, t)) {
 						System.out.println("CALLER added + " + table + "FkId");
 						t.getFields().add(field);
 					}
 				} else {
-					field = new Field(table + "FkId", table + "FkId",
-							Constants.CALLER, table);
+					field = new Field(table + "FkId", table + "FkId", Constants.CALLER, table);
 					if (!Utils.fieldAlreadyExistsInTable(field, t)) {
 						final ArrayList<Field> af = new ArrayList<Field>();
 						af.add(field);
@@ -301,14 +294,13 @@ public class Main {
 					Constants.junctionTables.add(junc);
 				}
 			} else {
-				final Table arrayTb = createArrayTable(table, fieldName,
-						arrayType);
+				final Table arrayTb = createArrayTable(table, fieldName, arrayType);
 				if (arrayTb != null) {
 					Constants.tables.add(arrayTb);
 				}
 			}
 		} else if (type.equalsIgnoreCase(Constants.URI)) {
-			javaFieldName += "Fk";
+			// javaFieldName += "Fk";
 			constraint = Utils.extractTableFromUri((String) value);
 		}
 
@@ -339,20 +331,15 @@ public class Main {
 	 *            String : type of the array
 	 * @return created table
 	 */
-	public static Table createArrayTable(String foreign, String table,
-			String type) {
+	public static Table createArrayTable(String foreign, String table, String type) {
 		if (!Utils.tableAlreadyExists(table)) {
 			final ArrayList<Field> fs = new ArrayList<Field>();
-			final Field f1 = new Field(foreign + "_id",
-					Utils.getNamePascalCase(foreign) + "Id", Constants.INT,
-					foreign);
-			final Field f2 = new Field(table, Utils.getNamePascalCase(table),
-					type, null);
+			final Field f1 = new Field(foreign + "_id", Utils.getNamePascalCase(foreign) + "Id", Constants.INT, foreign);
+			final Field f2 = new Field(table, Utils.getNamePascalCase(table), type, null);
 			fs.add(f1);
 			fs.add(f2);
-			final Table arrayTable = new Table(table,
-					Utils.getNameCamelCase(table), Constants.JUNCTION_TABLE,
-					fs, false);
+			final Table arrayTable = new Table(table, Utils.getNameCamelCase(table), Constants.JUNCTION_TABLE, fs,
+					false);
 			return arrayTable;
 		}
 		return null;
@@ -362,20 +349,13 @@ public class Main {
 		final String tName = Utils.createJunctionTableName(refTable, extTable);
 		if (!Utils.tableAlreadyExists(tName)) {
 			final ArrayList<Field> fs = new ArrayList<Field>();
-			final Field f1 = new Field(refTable + "_id",
-					Utils.getNamePascalCase(refTable) + "Id", Constants.INT,
-					tName);
-			final Field f2 = new Field(extTable + "_id",
-					Utils.getNamePascalCase(extTable) + "Id", Constants.INT,
-					tName);
+			final Field f1 = new Field(refTable + "_id", Utils.getNamePascalCase(refTable) + "Id", Constants.INT, refTable);
+			final Field f2 = new Field(extTable + "_id", Utils.getNamePascalCase(extTable) + "Id", Constants.INT, extTable);
 			fs.add(f1);
 			fs.add(f2);
-			final Table juncTable = new Table(tName,
-					Utils.getNameCamelCase(tName), Constants.JUNCTION_TABLE,
-					fs, false);
+			final Table juncTable = new Table(tName, Utils.getNameCamelCase(tName), Constants.JUNCTION_TABLE, fs, false);
 			return juncTable;
 		}
 		return null;
 	}
-
 }

@@ -61,7 +61,6 @@ public class Utils {
 	}
 
 	public static String javaTypeResolver(Object o) {
-		System.out.println("javaTypeResolver input : " + o.toString());
 		String result = null;
 		if (o instanceof Integer || o instanceof Long || o instanceof Double) {
 			result = patternTypes[2];
