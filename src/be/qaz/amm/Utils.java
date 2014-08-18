@@ -16,22 +16,37 @@ public class Utils {
 	public final static Pattern patternDate = Pattern
 			.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.*");
 
-	public final static Pattern patternQuoteTagValue = Pattern.compile("\"(.+?)\":.*");
-	public final static Pattern patternQuoteTagValue2 = Pattern.compile("([a-zA-Z0-9_]+?):.*");
-	public final static Pattern patternQuoteFieldName = Pattern.compile("\"[a-zA-Z0-9_]+?\"");
-	public final static Pattern patternQuoteInsideQuote = Pattern.compile("\"(.+?)\"?");
-	public final static Pattern patternQuoteNumber = Pattern.compile("[0-9]+.?[0-9]*");
+	public final static Pattern patternDigits = Pattern.compile("\\d+");
+	public final static Pattern patternDecimals = Pattern
+			.compile("^[0-9]+\\.[0-9]+");
+	public final static Pattern patternQuoteTagValue = Pattern
+			.compile("\"(.+?)\":.*");
+	public final static Pattern patternQuoteTagValue2 = Pattern
+			.compile("([a-zA-Z0-9_]+?):.*");
+	public final static Pattern patternQuoteFieldName = Pattern
+			.compile("\"[a-zA-Z0-9_]+?\"");
+	public final static Pattern patternQuoteInsideQuote = Pattern
+			.compile("\"(.+?)\"?");
+	public final static Pattern patternQuoteNumber = Pattern
+			.compile("[0-9]+.?[0-9]*");
 	public final static Pattern patternQuoteUri = Pattern.compile("^/*");
 	public final static Pattern patternQuoteDate = Pattern
 			.compile("\"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.*");// Pattern.compile("\"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]*)?(\")?");
-	public final static Pattern patternQuoteBool = Pattern.compile("[tT]rue|[fF]alse");
+	public final static Pattern patternQuoteBool = Pattern
+			.compile("[tT]rue|[fF]alse");
+	public final static Pattern patternJavaVariable = Pattern
+			.compile("^[a-z][a-zA-Z0-9_]*?$");
 
-	public final static Pattern[] quotedPatterns = { patternQuoteInsideQuote, patternQuoteDate, patternQuoteNumber,
-			patternQuoteUri, patternQuoteBool };
-	public final static String[] patternTypes = { Constants.STRING, Constants.DATE, Constants.INT, Constants.URI,
-			Constants.BOOL };
+	public final static Pattern[] quotedPatterns = { patternQuoteInsideQuote,
+			patternQuoteDate, patternQuoteNumber, patternQuoteUri,
+			patternQuoteBool };
+	
+	public final static String[] patternTypes = { Constants.STRING,
+			Constants.DATE, Constants.INT, Constants.URI, Constants.BOOL,
+			Constants.DOUBLE };
 
-	public final static String[] forbiddenSqlNames = { "public", "private", "order", "id", "group", "count" };
+	public final static String[] forbiddenSqlNames = { "public", "private",
+			"order", "id", "group", "count" };
 	// will prevent those keys from identified as a foreign key
 	public final static String[] exceptionKeys = { "resource_uri" }; // ,
 																		// "created_by",
@@ -42,7 +57,8 @@ public class Utils {
 			return null;
 		}
 		if (name.contains("_"))
-			return WordUtils.capitalizeFully(name, new char[] { '_' }).replaceAll("_", "");
+			return WordUtils.capitalizeFully(name, new char[] { '_' })
+					.replaceAll("_", "");
 		else
 			return name.substring(0, 1).toUpperCase() + name.substring(1);
 	}
@@ -51,87 +67,37 @@ public class Utils {
 		if (name == null) {
 			return null;
 		}
-		String s = WordUtils.capitalize(name, new char[] { '_' }).replaceAll("_", "");
+		String s = WordUtils.capitalize(name, new char[] { '_' }).replaceAll(
+				"_", "");
 		return s.substring(0, 1).toLowerCase() + s.substring(1);
-	}
-
-	public static String StripNameFromExtension(String name) {
-		// remove .json ext from name
-		name = name.substring(0, name.length() - 5);
-
-		if (name.charAt(name.length() - 1) == 's')
-			name = name.substring(0, name.length() - 1);
-
-		if (!name.contains("_"))
-			return WordUtils.capitalize(name);
-		else
-			return WordUtils.capitalizeFully(name, new char[] { '_' }).replaceAll("_", "");
-	}
-
-	public static String extractFieldName(Pattern pat, String s, int rank) {
-		Matcher matcher = pat.matcher(s);
-		matcher.find();
-		return matcher.group(rank);
 	}
 
 	public static boolean isKindOf(Pattern pat, String str) {
 		return str.matches(pat.pattern());
 	}
 
-	public static String convertSqlTypeToJava(String type) {
-		if (type.equalsIgnoreCase("TEXT")) {
-			type = "String";
-		} else if (type.startsWith("VARCHAR")) {
-			type = "String";
-		} else if (type.startsWith("INTEGER")) {
-			type = "Integer";
-			// } else if (type.startsWith("INTEGER")) {
-			// type = "Long";
-		} else if (type.startsWith("FLOAT")) {
-			type = "Float";
-		} else if (type.startsWith("REAL")) {
-			type = "Float";
-			// } else if (type.startsWith("REAL")) {
-			// type = "Double";
-		} else if (type.startsWith("BOOL")) {
-			type = "Boolean";
-		} else if (type.startsWith("DATE")) {
-			type = "Date";
-		} else if (type.startsWith("BLOB")) {
-			type = "byte[]";
-			// } else if (type.startsWith("INTEGER")) {
-			// type = "enum";
-		} else if (type.startsWith("TIMESTAMP")) {
-			type = "Date";
-		}
-
-		return type;
-	}
-
-	public static String stringTypeResolver(String s) {
-		System.out.println("stringTypeResolver = " + s);
-		String result = null;
-		for (int i = 0; i < quotedPatterns.length; i++) {
-			if (isKindOf(quotedPatterns[i], s)) {
-				result = patternTypes[i];
-			}
-		}
-		return result;
-	}
-
 	public static String javaTypeResolver(Object o) {
-		String result = null;
-		if (o instanceof Integer || o instanceof Long || o instanceof Double) {
-			result = patternTypes[2];
+		// String by default
+		String result = patternTypes[0];
+		;
+
+		if (o instanceof Number) {
+			result = Constants.NUMBER;
 		} else if (o instanceof Date) {
-			result = patternTypes[1];
+			// TODO why GSON is such a pain in the ass with Date like
+			// 2014-07-17T02:02:15.997290
+			// result = patternTypes[1];
+			result = patternTypes[0];
+
 		} else if (o instanceof String) {
 			String s = (String) o;
-			
-			if(isKindOf(patternDigit, s)) {
-				result = patternTypes[2];
-				return result;
-			}
+//			if (isKindOf(patternDigit, s)) {
+//				result = Constants.NUMBER;
+//				return result;
+//			} else if (isKindOf(patternDecimals, s)) {
+//				result = Constants.NUMBER;
+//				return result;
+//			}
 
 			if (s.startsWith("[\"")) {
 				s = s.substring(2, s.length() - 3);
@@ -141,7 +107,10 @@ public class Utils {
 
 			result = patternTypes[0];
 			if (isKindOf(patternDate, s)) {
-				result = patternTypes[1];
+				// TODO why GSON is such a pain in the ass with Date like
+				// 2014-07-17T02:02:15.997290
+				// result = patternTypes[1];
+				result = patternTypes[0];
 			} else if (isKindOf(patternUri, s)) {
 				result = patternTypes[3];
 			} else if (s.equals(Constants.JUNCTION)) {
@@ -177,13 +146,24 @@ public class Utils {
 		String s = str.substring(pos + 1);
 		return s;
 	}
+	
 
-	public static String checkForbiddenName(String str) {
+
+	public static String checkSqlForbiddenName(String str) {
 		for (int i = 0; i < forbiddenSqlNames.length; i++) {
 			if (str.equalsIgnoreCase(forbiddenSqlNames[i])) {
 				str += "_db";
 			}
 		}
+		return str;
+	}
+	
+	public static String checkJavaForbiddenName(String str) {
+		str = checkSqlForbiddenName(str);
+		if (!isKindOf(patternJavaVariable, str)) {
+			  str = "n" + str;
+		}
+		str = getNamePascalCase(str);
 		return str;
 	}
 
@@ -203,7 +183,7 @@ public class Utils {
 
 	public static int extractIdFromUri(String uri) {
 		uri = extractFromQuote(uri);
-		Matcher m = patternDigit.matcher(uri);
+		Matcher m = patternDigits.matcher(uri);
 
 		if (m.find()) {
 			System.out.println(m.group(0));
@@ -271,7 +251,8 @@ public class Utils {
 		return s;
 	}
 
-	public static boolean fieldAlreadyExists(Field field, ArrayList<Field> fields) {
+	public static boolean fieldAlreadyExists(Field field,
+			ArrayList<Field> fields) {
 		for (Field f : fields) {
 			if (f.getOrignalName().equalsIgnoreCase(field.getOrignalName())) {
 				return true;
@@ -282,8 +263,40 @@ public class Utils {
 
 	public static boolean fieldAlreadyExistsInTable(Field field, Table table) {
 		if (table.getFields() != null) {
+			return fieldAlreadyExists(field, table.getFields());
+		}
+		return false;
+	}
+
+	public static Field findFieldInTable(Field field, Table table) {
+		if (table.getFields() != null) {
 			for (Field f : table.getFields()) {
 				if (f.getOrignalName().equalsIgnoreCase(field.getOrignalName())) {
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public static int findIndexOfFieldInTable(Field field, Table table) {
+		if (table.getFields() != null) {
+			for (int i = 0; i < table.getFields().size(); i++) {
+				Field f = table.getFields().get(i);
+				if (f.getOrignalName().equalsIgnoreCase(field.getOrignalName())) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+
+	public static boolean tableAlreadyExists(String tableName,
+			ArrayList<Table> tables) {
+		if (tables.size() > 0 && tableName != null) {
+			for (Table t : tables) {
+				if (t.getName().equalsIgnoreCase(tableName)
+						|| t.getOriginalName().equalsIgnoreCase(tableName)) {
 					return true;
 				}
 			}
@@ -291,21 +304,12 @@ public class Utils {
 		return false;
 	}
 
-	public static boolean tableAlreadyExists(String tableName) {
-		if (Constants.tables.size() > 0 && tableName != null) {
-			for (Table t : Constants.tables) {
-				if (t.getName().equalsIgnoreCase(tableName) || t.getOriginalName().equalsIgnoreCase(tableName)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static Table findTableWithName(String tableName) {
-		if (Constants.tables.size() > 0 && tableName != null) {
-			for (Table t : Constants.tables) {
-				if (t.getName().equalsIgnoreCase(tableName) || t.getOriginalName().equalsIgnoreCase(tableName)) {
+	public static Table findTableWithName(String tableName,
+			ArrayList<Table> tables) {
+		if (tables.size() > 0 && tableName != null) {
+			for (Table t : tables) {
+				if (t.getName().equalsIgnoreCase(tableName)
+						|| t.getOriginalName().equalsIgnoreCase(tableName)) {
 					return t;
 				}
 			}

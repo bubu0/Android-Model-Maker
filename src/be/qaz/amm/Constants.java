@@ -1,18 +1,11 @@
 package be.qaz.amm;
 
-import java.util.ArrayList;
-
-import be.qaz.amm.model.Field;
-import be.qaz.amm.model.Table;
-
 public class Constants {
-	
-	public static ArrayList<Table> junctionTables;
-	public static ArrayList<Table> tables;
-	public static ArrayList<Field> primaryKeys;
 	
 	public final static String STRING = "String";
 	public final static String INT = "int";
+	public final static String DOUBLE = "double";
+	public final static String NUMBER = "Number";
 	public final static String DB_INT = "Integer";
 	public final static String URI = "Uri";
 	public final static String BOOL = "boolean";
@@ -20,6 +13,7 @@ public class Constants {
 	public final static String DATE = "Date";
 	public final static String ARRAY = "Array";
 	public final static String OBJECT = "Object";
+	public final static String FOREIGN_KEY = "Foreign Key";
 	public final static String JUNCTION = "#Junction#"; //used to create field linking tables implicitly
 	public final static String CALLER = "#Caller#"; //used to create a method call to the next parser
 

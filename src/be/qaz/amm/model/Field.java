@@ -1,5 +1,7 @@
 package be.qaz.amm.model;
 
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -11,28 +13,38 @@ package be.qaz.amm.model;
 public class Field {
 	private String name;
 	private String orignalName;
+	//see Constant
 	private String type;
+	//like primary key, NOT NULL see Constant
 	private String constraint;
+	//Field's table name
+	private String parent;
+	private ArrayList<String> annotations = new ArrayList<String>();
 	private boolean isArray = false;
 
 	public Field() {
 		super();
 	}
 
-	public Field(String orignalName, String name, String type, String constraint) {
+	public Field(String orignalName, String name, String type, String constraint, String parent) {
 		super();
 		this.name = name;
 		this.orignalName = orignalName;
 		this.type = type;
 		this.constraint = constraint;
+		this.parent = parent;
 	}
 
-	public Field(String name, String orignalName, String type, String constraint, boolean isArray) {
+	public Field(String orignalName, String name, String type,
+			String constraint, String parent, ArrayList<String> annotations,
+			boolean isArray) {
 		super();
 		this.name = name;
 		this.orignalName = orignalName;
 		this.type = type;
 		this.constraint = constraint;
+		this.parent = parent;
+		this.annotations = annotations;
 		this.isArray = isArray;
 	}
 
@@ -72,14 +84,34 @@ public class Field {
 		return isArray;
 	}
 
-	public void setArray(boolean isArray) {
+	public void setIsArray(boolean isArray) {
 		this.isArray = isArray;
+	}
+	
+	public ArrayList<String> getAnnotations() {
+		return annotations;
+	}
+
+	public void setAnnotations(ArrayList<String> annotations) {
+		this.annotations = annotations;
+	}
+	
+	public void addAnnotation(String annotation) {
+		this.annotations.add(annotation);
+	}
+	
+	public String getParent() {
+		return parent;
+	}
+
+	public void setParent(String parent) {
+		this.parent = parent;
 	}
 
 	@Override
 	public String toString() {
 		return "Field orginal name = " + orignalName + " & name = " + name + " & type = " + type + " & constrain = "
-				+ constraint + " & isArray = " + isArray;
+				+ constraint + " & isArray = " + isArray  + " & parent = " + parent;
 	}
 
 }
