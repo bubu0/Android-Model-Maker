@@ -40,7 +40,7 @@ public class Utils {
 	public final static Pattern[] quotedPatterns = { patternQuoteInsideQuote,
 			patternQuoteDate, patternQuoteNumber, patternQuoteUri,
 			patternQuoteBool };
-	
+
 	public final static String[] patternTypes = { Constants.STRING,
 			Constants.DATE, Constants.INT, Constants.URI, Constants.BOOL,
 			Constants.DOUBLE };
@@ -56,11 +56,12 @@ public class Utils {
 		if (name == null) {
 			return null;
 		}
-		if (name.contains("_"))
+		if (name.contains("_")) {
 			return WordUtils.capitalizeFully(name, new char[] { '_' })
 					.replaceAll("_", "");
-		else
+		} else {
 			return name.substring(0, 1).toUpperCase() + name.substring(1);
+		}
 	}
 
 	public static String getNamePascalCase(String name) {
@@ -78,50 +79,28 @@ public class Utils {
 
 	public static String javaTypeResolver(Object o) {
 		// String by default
-		String result = patternTypes[0];
-		;
+		String result = Constants.STRING;
 
-		if (o instanceof Number) {
-			result = Constants.NUMBER;
+//		if (o instanceof Number) {
+//			result = Constants.NUMBER;
+//		} else 
+		if (o instanceof Integer) {
+			result = Constants.INT;
+		} else if (o instanceof Double) {
+			result = Constants.DOUBLE;
+		} else if (o instanceof Long) {
+			result = Constants.LONG;
 		} else if (o instanceof Date) {
-			// TODO why GSON is such a pain in the ass with Date like
-			// 2014-07-17T02:02:15.997290
-			// result = patternTypes[1];
-			result = patternTypes[0];
-
+			result = Constants.DATE;
 		} else if (o instanceof String) {
 			String s = (String) o;
-//			if (isKindOf(patternDigit, s)) {
-//				result = Constants.NUMBER;
-//				return result;
-//			} else if (isKindOf(patternDecimals, s)) {
-//				result = Constants.NUMBER;
-//				return result;
-//			}
-
-			if (s.startsWith("[\"")) {
-				s = s.substring(2, s.length() - 3);
-			} else if (s.startsWith("[")) {
-				s = s.substring(1, s.length() - 2);
-			}
-
-			result = patternTypes[0];
 			if (isKindOf(patternDate, s)) {
-				// TODO why GSON is such a pain in the ass with Date like
-				// 2014-07-17T02:02:15.997290
-				// result = patternTypes[1];
-				result = patternTypes[0];
+				result = Constants.DATE;
 			} else if (isKindOf(patternUri, s)) {
-				result = patternTypes[3];
-			} else if (s.equals(Constants.JUNCTION)) {
-				result = Constants.JUNCTION;
-			} else if (s.equals(Constants.CALLER)) {
-				result = Constants.CALLER;
+				result = Constants.URI;
 			}
 		} else if (o instanceof Boolean) {
-			result = patternTypes[4];
-		} else if (o instanceof Object[]) {
-			result = patternTypes[3];
+			result = Constants.BOOL;
 		}
 		return result;
 	}
@@ -146,8 +125,6 @@ public class Utils {
 		String s = str.substring(pos + 1);
 		return s;
 	}
-	
-
 
 	public static String checkSqlForbiddenName(String str) {
 		for (int i = 0; i < forbiddenSqlNames.length; i++) {
@@ -157,11 +134,11 @@ public class Utils {
 		}
 		return str;
 	}
-	
+
 	public static String checkJavaForbiddenName(String str) {
 		str = checkSqlForbiddenName(str);
 		if (!isKindOf(patternJavaVariable, str)) {
-			  str = "n" + str;
+			str = "n" + str;
 		}
 		str = getNamePascalCase(str);
 		return str;
@@ -278,7 +255,7 @@ public class Utils {
 		}
 		return null;
 	}
-	
+
 	public static int findIndexOfFieldInTable(Field field, Table table) {
 		if (table.getFields() != null) {
 			for (int i = 0; i < table.getFields().size(); i++) {

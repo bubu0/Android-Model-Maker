@@ -9,13 +9,13 @@ import be.qaz.amm.model.Table;
 
 public class BeanGenerator {
 
-	private static final String DEFAULT_PACKAGE = "com.example.kylewbanksblog.json";
 	private static final String DEFAULT_IMPORT = "import java.sql.Date;\nimport java.util.ArrayList;";
 	private static final String EXTRA_IMPORT_JACKSON = "\nimport com.fasterxml.jackson.annotation.JsonProperty;";
 	private static final String EXTRA_IMPORT_AA = "import com.activeandroid.Model;\nimport com.activeandroid.annotation.Column;\nimport com.activeandroid.annotation.Table;";
+	private static final String EXTRA_IMPORT_ORMLITE = "import com.j256.ormlite.field.DataType;\nimport com.j256.ormlite.field.DatabaseField;\nimport com.j256.ormlite.field.ForeignCollectionField;\nimport com.j256.ormlite.table.DatabaseTable;";
 
 	/**
-	 * Generate Java beans with getters & setters as well as a json parser
+	 * Generate Java beans with getters & setters
 	 * 
 	 * @param table
 	 * @return
@@ -32,10 +32,10 @@ public class BeanGenerator {
 		String fieldType;
 		String line;
 
-		attributStringsOutput.add("package " + DEFAULT_PACKAGE + ";");
+		attributStringsOutput.add("package " + Constants.DEFAULT_PACKAGE + ";");
 		attributStringsOutput.add(DEFAULT_IMPORT);
 		attributStringsOutput.add(EXTRA_IMPORT_JACKSON);
-		// attributStringsOutput.add(EXTRA_IMPORT_AA);
+		attributStringsOutput.add(EXTRA_IMPORT_ORMLITE);
 
 		if (table.getAnnotations() != null && table.getAnnotations().size() > 0) {
 			for (String anotation : table.getAnnotations()) {
@@ -59,6 +59,7 @@ public class BeanGenerator {
 					if (!f.getType().equalsIgnoreCase(Constants.OBJECT)) {
 						if (fieldType.equalsIgnoreCase(Constants.URI)) {
 							fieldType = Constants.STRING;
+							f.addAnnotation("//URI to " + f.getConstraint());
 						}
 
 						if (fieldType.equalsIgnoreCase(Constants.ARRAY)) {
@@ -123,7 +124,6 @@ public class BeanGenerator {
 				line += "\n" + Utils.tabGen(1) + anotation;
 			}
 		}
-
 		line += "\n" + Utils.tabGen(1) + "public " + type + " " + name + ";";
 		return line;
 	}

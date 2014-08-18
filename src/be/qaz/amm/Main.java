@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import be.qaz.amm.generator.BeanGenerator;
+import be.qaz.amm.generator.DbHelperGenerator;
 import be.qaz.amm.generator.JsonGenerator;
 import be.qaz.amm.generator.ParserGenerator;
 import be.qaz.amm.model.Field;
@@ -56,19 +57,21 @@ public class Main {
 			});
 		}
 
-		// generateParsers(tables);
-		generateJavaBeans(tables);
-		// generateJsonScheme(tables);
+		// generateParsers(tables, false);
+		generateJavaBeans(tables, false);
+		// generateJsonScheme(tables, false);
+//		generateDbHelper(tables, false);
 
 		System.out.println("######## END ######## ");
 		System.out.println("######## TABLES DETAILS ########");
 		System.out.println("TOTAL tables = " + tables.size());
-//		for (Table t : tables) {
-//			System.out.println(t.toString());
-//		}
+		for (Table t : tables) {
+			System.out.println(t.toString());
+		}
 	}
 
-	public static void generateParsers(ArrayList<Table> tables) {
+	public static void generateParsers(ArrayList<Table> tables,
+			boolean consoleOutput) {
 		System.out.println("######## GENERATED PARSER ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		for (Table t : tables) {
@@ -76,49 +79,75 @@ public class Main {
 				generated.addAll(ParserGenerator.generateJavaParser(t, tables));
 			}
 		}
-
-		if (generated.size() > 0) {
+		if (generated != null && generated.size() > 0) {
+			if (consoleOutput) {
+				for (String string : generated) {
+					System.out.println(string);
+				}
+			}
 			String[] data = generated.toArray(new String[generated.size()]);
 			writeFile("JsonParsers.java", data);
 			generated.clear();
 		}
 	}
 
-	public static void generateJsonScheme(ArrayList<Table> tables) {
+	public static void generateJsonScheme(ArrayList<Table> tables,
+			boolean consoleOutput) {
 		System.out.println("######## GENERATED JSON SCHEME ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		for (Table t : tables) {
 			if (t != null) {
 				generated = JsonGenerator.generateJsonSchema(t, tables);
-				if (generated != null) {
-					if (generated.size() > 0) {
-						String[] data = generated.toArray(new String[generated
-								.size()]);
-						writeFile(t.getOriginalName() + ".json", data);
-						generated.clear();
+				if (generated != null && generated.size() > 0) {
+					if (consoleOutput) {
+						for (String string : generated) {
+							System.out.println(string);
+						}
 					}
+					String[] data = generated.toArray(new String[generated
+							.size()]);
+					writeFile(t.getOriginalName() + ".json", data);
+					generated.clear();
 				}
 			}
 		}
 	}
 
-	public static void generateJavaBeans(ArrayList<Table> tables) {
+	public static void generateJavaBeans(ArrayList<Table> tables,
+			boolean consoleOutput) {
 		System.out.println("######## GENERATED JAVA BEANS ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		for (Table t : tables) {
 			if (t != null) {
 				generated = BeanGenerator.generateJavaBean(t);
-				/*
-				 * if (generated != null) { for (String string : generated) {
-				 * System.out.println(string); } }
-				 */
 				if (generated != null && generated.size() > 0) {
+					if (consoleOutput) {
+						for (String string : generated) {
+							System.out.println(string);
+						}
+					}
 					String[] data = generated.toArray(new String[generated
 							.size()]);
 					writeFile(t.getName() + ".java", data);
 					generated.clear();
 				}
 			}
+		}
+	}
+
+	public static void generateDbHelper(ArrayList<Table> tables,
+			boolean consoleOutput) {
+		System.out.println("######## GENERATED DBHELPER ########");
+		ArrayList<String> generated = new ArrayList<String>();
+		if (generated != null && generated.size() > 0) {
+			if (consoleOutput) {
+				for (String string : generated) {
+					System.out.println(string);
+				}
+			}
+			String[] data = generated.toArray(new String[generated.size()]);
+			writeFile("DatabaseHelper.java", data);
+			generated.clear();
 		}
 	}
 
@@ -213,8 +242,9 @@ public class Main {
 				currentObjName = parentObjName.substring(5);
 			}
 
-			Table currentTable = createTable(currentObjName, isInArray, parentObjName);
-			if(currentTable != null) {
+			Table currentTable = createTable(currentObjName, isInArray,
+					parentObjName);
+			if (currentTable != null) {
 				tables.add(currentTable);
 			}
 
@@ -230,7 +260,9 @@ public class Main {
 				System.out.println("IN " + currentObjName + " # OBJ : " + key);
 
 				parseJsonObject((JSONObject) aObj, key, currentObjName, false);
-				createField(key, currentObjName, Constants.OBJECT, key, aObj);
+				createField(key, currentObjName, Constants.OBJECT, key, aObj,
+						"@JsonProperty(\"" + key + "\")"
+								+ "\n@DatabaseField(canBeNull = true)");
 
 			} else if (aObj instanceof JSONArray) {
 
@@ -243,7 +275,8 @@ public class Main {
 							parseJsonObject((JSONObject) bObj, key,
 									currentObjName, true);
 							createField(key, currentObjName, Constants.ARRAY,
-									key, bObj);
+									key, bObj, "@JsonProperty(\"" + key + "\")"
+											+ "\n@ForeignCollectionField");
 						} else {
 							String objt = aObj.toString();
 							if (objt.length() > 30) {
@@ -258,8 +291,16 @@ public class Main {
 											+ objt
 											+ " currentObjName "
 											+ currentObjName);
-							createField(key, currentObjName, Constants.ARRAY,
-									null, bObj);
+							createField(
+									key,
+									currentObjName,
+									Constants.ARRAY,
+									null,
+									bObj,
+									"@JsonProperty(\""
+											+ key
+											+ "\")"
+											+ "\n@DatabaseField(dataType = DataType.SERIALIZABLE)");
 						}
 					}
 				}
@@ -268,7 +309,9 @@ public class Main {
 				final String type = Utils.javaTypeResolver(aObj);
 				System.out.println("IN " + currentObjName + " # " + type
 						+ " : " + key);
-				createField(key, currentObjName, type, null, aObj);
+				createField(key, currentObjName, type, null, aObj,
+						"@JsonProperty(\"" + key + "\")"
+								+ "\n@DatabaseField(canBeNull = true)");
 			}
 		}
 	}
@@ -280,20 +323,17 @@ public class Main {
 			if (!Utils.tableAlreadyExists(tableName, tables)) {
 				table = new Table(tableName, Utils.getNameCamelCase(tableName),
 						null, null, isInArray, parent);
-				// AndroidActive Annotation
-//				table.addAnnotations("@Table(name = \"" + table.getName()
-//						+ "\")");
+				// ORMLite Annotation
+				table.addAnnotations("@DatabaseTable(tableName = \""
+						+ table.getName() + "\")");
 			} else {
-				boolean isNewParent = false;
 				table = Utils.findTableWithName(tableName, tables);
 				for (String existingParent : table.getParent()) {
-					if(!parent.equalsIgnoreCase(existingParent)) {
-						isNewParent = true;
+					if (parent.equalsIgnoreCase(existingParent)) {
+						return null;
 					}
 				}
-				if(isNewParent) {
-					table.addParent(parent);
-				}
+				table.addParent(parent);
 				return null;
 			}
 		}
@@ -301,7 +341,7 @@ public class Main {
 	}
 
 	/**
-	 * createField 
+	 * createField
 	 * 
 	 * @param fieldName
 	 *            String : field name
@@ -312,8 +352,8 @@ public class Main {
 	 * @return created field
 	 */
 	public static Field createField(String fieldName, String tableName,
-			String type, String constraint, Object value) {
-		//TODO bad design this shouldn't add the field to the table
+			String type, String constraint, Object value, String annotation) {
+		// TODO bad design this shouldn't add the field to the table
 		Field field = null;
 		Table constraintTable = Utils.findTableWithName(constraint, tables);
 
@@ -323,7 +363,8 @@ public class Main {
 		String javaFieldName = Utils.getNamePascalCase(fieldName);
 
 		if (type.equalsIgnoreCase(Constants.ARRAY)) {
-			String arrayType = Utils.javaTypeResolver(value);
+			//TODO create specific type for array
+			String arrayType = Utils.getNameCamelCase(Utils.javaTypeResolver(value));
 			if (arrayType.equalsIgnoreCase(Constants.URI)) {
 				if (constraint == null) {
 					constraint = Utils.extractTableFromUri((String) value);
@@ -335,27 +376,19 @@ public class Main {
 
 			type += ";" + arrayType;
 		} else if (type.equalsIgnoreCase(Constants.URI)) {
-			// javaFieldName += "Fk";
 			constraint = Utils.extractTableFromUri((String) value);
 		} else if (type.equalsIgnoreCase(Constants.OBJECT)) {
 			type = constraintTable.getName();
 		}
 
 		field = new Field(fieldName, javaFieldName, type, constraint, tableName);
-		// GSON annotations
-		// field.addAnnotation("@SerializedName(\"" + fieldName + "\")");
-		// Jackson annotations
-		field.addAnnotation("@JsonProperty(\"" + fieldName + "\")");
-		// ActiveAndroid annotations
-		// @Column(name = "Polygon", onDelete = ForeignKeyAction.CASCADE,
-		// notNull = true)
-		// field.addAnnotation("@Column(name = \"" +
-		// Utils.checkSqlForbiddenName(fieldName) + "\")");
+		if (annotation != null && !annotation.isEmpty()) {
+			field.addAnnotation(annotation);
+		}
 
 		// if the same field is found with another type it's overridden with
 		// the default & more "do it all" String or ArrayList type also means
-		// your json
-		// sucks
+		// your json sucks
 		Table table = Utils.findTableWithName(tableName, tables);
 		if (table != null) {
 			ArrayList<Field> fs = table.getFields();
@@ -441,13 +474,20 @@ public class Main {
 	}
 
 	public static Table addForeignKeyField(Table table) {
-		if (table.getParent() != null && table.getParent().size() == 1) {
-			final String parent = table.getParent().get(0);
-			createField(parent, table.getName(),
-					Utils.getNameCamelCase(parent),
-					Constants.FOREIGN_KEY, null);
+		if (table.getParent() != null && table.getParent().size() > 0) {
+			for (String parent : table.getParent()) {
+				createField(
+						parent,
+						table.getName(),
+						Utils.getNameCamelCase(parent),
+						Constants.FOREIGN_KEY,
+						null,
+						"//Foreign Key, child of "
+								+ "\n@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = \""
+								+ parent + "_fk\")");
+			}
 		} else {
-			// if more than one parent then its a many to many relationship
+			// if more than one parent then ???
 			// create junction table
 		}
 		return table;
