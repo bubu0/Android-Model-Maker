@@ -46,7 +46,7 @@ public class Utils {
 			Constants.DOUBLE };
 
 	public final static String[] forbiddenSqlNames = { "public", "private",
-			"order", "id", "group", "count" };
+			"order", "id", "group", "count", "limit" };
 	// will prevent those keys from identified as a foreign key
 	public final static String[] exceptionKeys = { "resource_uri" }; // ,
 																		// "created_by",

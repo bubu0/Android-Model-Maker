@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,10 +15,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import be.qaz.amm.generator.BeanGenerator;
-import be.qaz.amm.generator.DbHelperGenerator;
 import be.qaz.amm.generator.JsonGenerator;
 import be.qaz.amm.generator.ParserGenerator;
+import be.qaz.amm.generator.beans.AndroidActiveBeanGenerator;
+import be.qaz.amm.generator.beans.JacksonBeanGenerator;
 import be.qaz.amm.model.Field;
 import be.qaz.amm.model.Table;
 
@@ -60,7 +61,7 @@ public class Main {
 		// generateParsers(tables, false);
 		generateJavaBeans(tables, false);
 		// generateJsonScheme(tables, false);
-//		generateDbHelper(tables, false);
+		// generateDbHelper(tables, false);
 
 		System.out.println("######## END ######## ");
 		System.out.println("######## TABLES DETAILS ########");
@@ -70,8 +71,7 @@ public class Main {
 		}
 	}
 
-	public static void generateParsers(ArrayList<Table> tables,
-			boolean consoleOutput) {
+	public static void generateParsers(ArrayList<Table> tables, boolean consoleOutput) {
 		System.out.println("######## GENERATED PARSER ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		for (Table t : tables) {
@@ -86,13 +86,12 @@ public class Main {
 				}
 			}
 			String[] data = generated.toArray(new String[generated.size()]);
-			writeFile("JsonParsers.java", data);
+			writeFile(outputDirectoryPath, "JsonParsers.java", data);
 			generated.clear();
 		}
 	}
 
-	public static void generateJsonScheme(ArrayList<Table> tables,
-			boolean consoleOutput) {
+	public static void generateJsonScheme(ArrayList<Table> tables, boolean consoleOutput) {
 		System.out.println("######## GENERATED JSON SCHEME ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		for (Table t : tables) {
@@ -104,39 +103,46 @@ public class Main {
 							System.out.println(string);
 						}
 					}
-					String[] data = generated.toArray(new String[generated
-							.size()]);
-					writeFile(t.getOriginalName() + ".json", data);
+					String[] data = generated.toArray(new String[generated.size()]);
+					writeFile(outputDirectoryPath, t.getOriginalName() + ".json", data);
 					generated.clear();
 				}
 			}
 		}
 	}
 
-	public static void generateJavaBeans(ArrayList<Table> tables,
-			boolean consoleOutput) {
+	public static void generateJavaBeans(ArrayList<Table> tables, boolean consoleOutput) {
 		System.out.println("######## GENERATED JAVA BEANS ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		for (Table t : tables) {
 			if (t != null) {
-				generated = BeanGenerator.generateJavaBean(t);
+				generated = JacksonBeanGenerator.generateJavaBean(t);
 				if (generated != null && generated.size() > 0) {
 					if (consoleOutput) {
 						for (String string : generated) {
 							System.out.println(string);
 						}
 					}
-					String[] data = generated.toArray(new String[generated
-							.size()]);
-					writeFile(t.getName() + ".java", data);
+					String[] data = generated.toArray(new String[generated.size()]);
+					writeFile(outputDirectoryPath + "/json/", t.getName() + "Json.java", data);
+					generated.clear();
+				}
+				generated = AndroidActiveBeanGenerator.generateJavaBean(t);
+				if (generated != null && generated.size() > 0) {
+					if (consoleOutput) {
+						for (String string : generated) {
+							System.out.println(string);
+						}
+					}
+					String[] data = generated.toArray(new String[generated.size()]);
+					writeFile(outputDirectoryPath + "/model/", t.getName() + ".java", data);
 					generated.clear();
 				}
 			}
 		}
 	}
 
-	public static void generateDbHelper(ArrayList<Table> tables,
-			boolean consoleOutput) {
+	public static void generateDbHelper(ArrayList<Table> tables, boolean consoleOutput) {
 		System.out.println("######## GENERATED DBHELPER ########");
 		ArrayList<String> generated = new ArrayList<String>();
 		if (generated != null && generated.size() > 0) {
@@ -146,16 +152,16 @@ public class Main {
 				}
 			}
 			String[] data = generated.toArray(new String[generated.size()]);
-			writeFile("DatabaseHelper.java", data);
+			writeFile(outputDirectoryPath, "DatabaseHelper.java", data);
 			generated.clear();
 		}
 	}
 
-	public static void writeFile(String name, String[] lines) {
+	public static void writeFile(String path, String name, String[] lines) {
 		BufferedWriter writer = null;
 		try {
-			new File(outputDirectoryPath).mkdirs();
-			final File outFile = new File(outputDirectoryPath + name);
+			new File(path).mkdirs();
+			final File outFile = new File(path + name);
 
 			System.out.println(outFile.getCanonicalPath());
 			writer = new BufferedWriter(new FileWriter(outFile));
@@ -182,8 +188,7 @@ public class Main {
 		final File[] entityFiles = directoryPath.listFiles(new FileFilter() {
 			@Override
 			public boolean accept(File pathname) {
-				return !pathname.getName().startsWith("_")
-						&& pathname.getName().endsWith(".json");
+				return !pathname.getName().startsWith("_") && pathname.getName().endsWith(".json");
 			}
 		});
 		return entityFiles;
@@ -228,22 +233,20 @@ public class Main {
 	 *            String : the name of the object containing obj, ex : "recipes"
 	 *            contains "variants"
 	 */
-	public static void parseJsonObject(JSONObject jsonObj,
-			String currentObjName, String parentObjName, boolean isInArray) {
+	public static void parseJsonObject(JSONObject jsonObj, String currentObjName, String parentObjName,
+			boolean isInArray) {
 
 		String key;
 		Object aObj;
 
 		if (currentObjName != null && !currentObjName.isEmpty()) {
 			// My jsons use a generic "objects" name regardless of the entity
-			// you're
-			// querying
+			// you're querying
 			if (currentObjName.equalsIgnoreCase("objects")) {
 				currentObjName = parentObjName.substring(5);
 			}
 
-			Table currentTable = createTable(currentObjName, isInArray,
-					parentObjName);
+			Table currentTable = createTable(currentObjName, isInArray, parentObjName);
 			if (currentTable != null) {
 				tables.add(currentTable);
 			}
@@ -260,23 +263,17 @@ public class Main {
 				System.out.println("IN " + currentObjName + " # OBJ : " + key);
 
 				parseJsonObject((JSONObject) aObj, key, currentObjName, false);
-				createField(key, currentObjName, Constants.OBJECT, key, aObj,
-						"@JsonProperty(\"" + key + "\")"
-								+ "\n@DatabaseField(canBeNull = true)");
+				createField(key, currentObjName, Constants.OBJECT, key, aObj);
 
 			} else if (aObj instanceof JSONArray) {
 
 				JSONArray array = (JSONArray) aObj;
-				System.out
-						.println("IN " + currentObjName + " # ARRAY : " + key);
+				System.out.println("IN " + currentObjName + " # ARRAY : " + key);
 				if (array.size() > 0) {
 					for (Object bObj : array) {
 						if (bObj instanceof JSONObject) {
-							parseJsonObject((JSONObject) bObj, key,
-									currentObjName, true);
-							createField(key, currentObjName, Constants.ARRAY,
-									key, bObj, "@JsonProperty(\"" + key + "\")"
-											+ "\n@ForeignCollectionField");
+							parseJsonObject((JSONObject) bObj, key, currentObjName, true);
+							createField(key, currentObjName, Constants.ARRAY, key, bObj);
 						} else {
 							String objt = aObj.toString();
 							if (objt.length() > 30) {
@@ -284,48 +281,27 @@ public class Main {
 								objt += "...";
 							}
 
-							System.out
-									.println("++++ parseJsonObject/ARRAY key = "
-											+ key
-											+ " aObj = "
-											+ objt
-											+ " currentObjName "
-											+ currentObjName);
-							createField(
-									key,
-									currentObjName,
-									Constants.ARRAY,
-									null,
-									bObj,
-									"@JsonProperty(\""
-											+ key
-											+ "\")"
-											+ "\n@DatabaseField(dataType = DataType.SERIALIZABLE)");
+							System.out.println("++++ parseJsonObject/ARRAY key = " + key + " aObj = " + objt
+									+ " currentObjName " + currentObjName);
+
+							createField(key, currentObjName, Constants.ARRAY, key, bObj);
 						}
 					}
 				}
 
 			} else {
 				final String type = Utils.javaTypeResolver(aObj);
-				System.out.println("IN " + currentObjName + " # " + type
-						+ " : " + key);
-				createField(key, currentObjName, type, null, aObj,
-						"@JsonProperty(\"" + key + "\")"
-								+ "\n@DatabaseField(canBeNull = true)");
+				System.out.println("IN " + currentObjName + " # " + type + " : " + key);
+				createField(key, currentObjName, type, null, aObj);
 			}
 		}
 	}
 
-	public static Table createTable(String tableName, boolean isInArray,
-			String parent) {
+	public static Table createTable(String tableName, boolean isInArray, String parent) {
 		Table table = null;
 		if (tableName != null && !tableName.isEmpty()) {
 			if (!Utils.tableAlreadyExists(tableName, tables)) {
-				table = new Table(tableName, Utils.getNameCamelCase(tableName),
-						null, null, isInArray, parent);
-				// ORMLite Annotation
-				table.addAnnotations("@DatabaseTable(tableName = \""
-						+ table.getName() + "\")");
+				table = new Table(tableName, Utils.getNameCamelCase(tableName), null, null, isInArray, parent);
 			} else {
 				table = Utils.findTableWithName(tableName, tables);
 				for (String existingParent : table.getParent()) {
@@ -349,10 +325,11 @@ public class Main {
 	 *            Object : content value used to determined its type
 	 * @param tableName
 	 *            String : field's table
+	 * @param constraint 
+	 * 			  String : foreign table name
 	 * @return created field
 	 */
-	public static Field createField(String fieldName, String tableName,
-			String type, String constraint, Object value, String annotation) {
+	public static Field createField(String fieldName, String tableName, String type, String constraint, Object value) {
 		// TODO bad design this shouldn't add the field to the table
 		Field field = null;
 		Table constraintTable = Utils.findTableWithName(constraint, tables);
@@ -363,18 +340,23 @@ public class Main {
 		String javaFieldName = Utils.getNamePascalCase(fieldName);
 
 		if (type.equalsIgnoreCase(Constants.ARRAY)) {
-			//TODO create specific type for array
+			// TODO create specific type for array
 			String arrayType = Utils.getNameCamelCase(Utils.javaTypeResolver(value));
+			// One URI = two fieds, one for Jackson in String and one foreign
+			// object collection
 			if (arrayType.equalsIgnoreCase(Constants.URI)) {
 				if (constraint == null) {
 					constraint = Utils.extractTableFromUri((String) value);
-					arrayType = Constants.STRING;
 				}
-			} else if (constraintTable != null) {
+			} else if (constraintTable != null && !arrayType.equalsIgnoreCase(Constants.URI)) {
 				arrayType = constraintTable.getName();
+			} else if (!arrayType.equalsIgnoreCase(Constants.URI)) {
+				tables.add(createArrayTable(fieldName, fieldName, arrayType, tableName));
+				arrayType = fieldName;
 			}
 
-			type += ";" + arrayType;
+			type += ";" + Utils.getNameCamelCase(arrayType);
+			// Uri are nothing but foreign key declaration
 		} else if (type.equalsIgnoreCase(Constants.URI)) {
 			constraint = Utils.extractTableFromUri((String) value);
 		} else if (type.equalsIgnoreCase(Constants.OBJECT)) {
@@ -382,9 +364,6 @@ public class Main {
 		}
 
 		field = new Field(fieldName, javaFieldName, type, constraint, tableName);
-		if (annotation != null && !annotation.isEmpty()) {
-			field.addAnnotation(annotation);
-		}
 
 		// if the same field is found with another type it's overridden with
 		// the default & more "do it all" String or ArrayList type also means
@@ -395,8 +374,7 @@ public class Main {
 			if (fs == null) {
 				fs = new ArrayList<Field>();
 			}
-			final int existingFieldIndex = Utils.findIndexOfFieldInTable(field,
-					table);
+			final int existingFieldIndex = Utils.findIndexOfFieldInTable(field, table);
 			if (existingFieldIndex >= 0) {
 				Field existingField = table.getFields().get(existingFieldIndex);
 				if (!existingField.getType().equalsIgnoreCase(field.getType())) {
@@ -408,8 +386,7 @@ public class Main {
 					}
 					table.getFields().set(existingFieldIndex, field);
 
-					System.out.println("FIELD TYPE CHANGED " + fieldName
-							+ " TO STRING FROM TABLE " + tableName);
+					System.out.println("FIELD TYPE CHANGED " + fieldName + " TO STRING FROM TABLE " + tableName);
 				}
 			} else {
 				fs.add(field);
@@ -417,8 +394,7 @@ public class Main {
 			}
 
 		} else {
-			System.out.println("TABLE NOT FOUND " + tableName + " FOR FIELD "
-					+ fieldName);
+			System.out.println("TABLE NOT FOUND " + tableName + " FOR FIELD " + fieldName);
 		}
 		return field;
 	}
@@ -426,28 +402,22 @@ public class Main {
 	/**
 	 * Create table containing array of primitive value.
 	 * 
-	 * @param foreign
+	 * @param foreignTableName
 	 *            String : linked table name
-	 * @param table
+	 * @param tableName
 	 *            String : table name
 	 * @param type
 	 *            String : type of the array
 	 * @return created table
 	 */
-	public static Table createArrayTable(String foreign, String table,
-			String type) {
-		if (!Utils.tableAlreadyExists(table, tables)) {
-			final ArrayList<Field> fs = new ArrayList<Field>();
-			final Field f1 = new Field(foreign + "_id",
-					Utils.getNamePascalCase(foreign) + "Id", Constants.INT,
-					foreign, table);
-			final Field f2 = new Field(table, Utils.getNamePascalCase(table),
-					type, null, table);
-			fs.add(f1);
-			fs.add(f2);
-			final Table arrayTable = new Table(table,
-					Utils.getNameCamelCase(table), Constants.JUNCTION_TABLE,
-					fs, false, table);
+	public static Table createArrayTable(String foreignTableName, String tableName, String type, String parent) {
+		if (!Utils.tableAlreadyExists(tableName, tables)) {
+			Field f1 = new Field(foreignTableName + "_id", Utils.getNamePascalCase(foreignTableName) + "Id",
+					Constants.INT, foreignTableName, tableName);
+			Field f2 = new Field(tableName, Utils.getNamePascalCase(tableName), type, null, tableName);
+			Table arrayTable = createTable(tableName, false, null);
+//			arrayTable.addFields(f1); TODO replace with related class
+			arrayTable.addFields(f2);
 			return arrayTable;
 		}
 		return null;
@@ -457,17 +427,14 @@ public class Main {
 		final String tName = Utils.createJunctionTableName(refTable, extTable);
 		if (!Utils.tableAlreadyExists(tName, tables)) {
 			final ArrayList<Field> fs = new ArrayList<Field>();
-			final Field f1 = new Field(refTable + "_id",
-					Utils.getNamePascalCase(refTable) + "Id", Constants.INT,
+			final Field f1 = new Field(refTable + "_id", Utils.getNamePascalCase(refTable) + "Id", Constants.INT,
 					refTable, refTable);
-			final Field f2 = new Field(extTable + "_id",
-					Utils.getNamePascalCase(extTable) + "Id", Constants.INT,
+			final Field f2 = new Field(extTable + "_id", Utils.getNamePascalCase(extTable) + "Id", Constants.INT,
 					extTable, refTable);
 			fs.add(f1);
 			fs.add(f2);
-			final Table juncTable = new Table(tName,
-					Utils.getNameCamelCase(tName), Constants.JUNCTION_TABLE,
-					fs, false, refTable);
+			final Table juncTable = new Table(tName, Utils.getNameCamelCase(tName), Constants.JUNCTION_TABLE, fs,
+					false, refTable);
 			return juncTable;
 		}
 		return null;
@@ -476,15 +443,9 @@ public class Main {
 	public static Table addForeignKeyField(Table table) {
 		if (table.getParent() != null && table.getParent().size() > 0) {
 			for (String parent : table.getParent()) {
-				createField(
-						parent,
-						table.getName(),
-						Utils.getNameCamelCase(parent),
-						Constants.FOREIGN_KEY,
-						null,
-						"//Foreign Key, child of "
-								+ "\n@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = \""
-								+ parent + "_fk\")");
+				if (!parent.contains("root")) {
+					createField(parent, table.getName(), Utils.getNameCamelCase(parent), Constants.FOREIGN_KEY, null);
+				}
 			}
 		} else {
 			// if more than one parent then ???

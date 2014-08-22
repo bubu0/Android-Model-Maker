@@ -1,5 +1,10 @@
 package be.qaz.amm;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 public class Constants {
 	
 	public static final String DEFAULT_PACKAGE = "be.qaz.jacksonorm.pojo";
@@ -8,6 +13,7 @@ public class Constants {
 	public static final String INT = "int";
 	public static final String DOUBLE = "double";
 	public static final String LONG = "long";
+	public static final String LONG_ARRAY = "Long";
 	public static final String NUMBER = "Number";
 	public static final String DB_INT = "Integer";
 	public static final String URI = "Uri";
@@ -19,6 +25,8 @@ public class Constants {
 	public static final String FOREIGN_KEY = "Foreign Key";
 	public static final String JUNCTION = "#Junction#"; //used to create field linking tables implicitly
 	public static final String CALLER = "#Caller#"; //used to create a method call to the next parser
+	
+	public static final List<String> PRIMITIVE_TYPES = Arrays.asList(new String[]{STRING, INT, DOUBLE, LONG, LONG_ARRAY, NUMBER, URI, BOOL, DATE});
 
 	public static final String PARSER_STYLE_START_ARRAY =
 			Utils.tabGen(1) + "public static ArrayList<xaxContentValues> parseJsonxax(JSONObject jo, Context ctxt) { \n"
