@@ -7,17 +7,17 @@ import be.qaz.amm.model.Table;
 
 import java.util.ArrayList;
 
-public class JacksonBeanGenerator extends JavaBeanGenerator {
+public class RealmIOBeanGenerator {
 
-    private static final String DEFAULT_SUFFIX = "Json";
-    private static final String EXTRA_IMPORT_JACKSON = "\nimport com.fasterxml.jackson.annotation.JsonProperty;";
+    protected static final String DEFAULT_IMPORT = "import java.sql.Date;\nimport java.util.ArrayList;\nimport java.util.Collection;\nimport io.realm.RealmObject;";
+    private static final String DEFAULT_SUFFIX = "";
 
     public static String getClassName(Table table) {
         return table.getName() + DEFAULT_SUFFIX;
     }
 
     /**
-     * Generate Java beans with getters & setters
+     * Generate Realm IO beans with getters & setters
      *
      * @param table
      * @return
@@ -35,16 +35,15 @@ public class JacksonBeanGenerator extends JavaBeanGenerator {
         String fieldType;
         String line;
 
-        attributStringsOutput.add("package " + Constants.DEFAULT_PACKAGE + ".json;");
+        attributStringsOutput.add("package " + Constants.DEFAULT_PACKAGE + ";");
         attributStringsOutput.add(DEFAULT_IMPORT);
-        attributStringsOutput.add(EXTRA_IMPORT_JACKSON);
 
         if (table.getAnnotations() != null && table.getAnnotations().size() > 0) {
             for (String anotation : table.getAnnotations()) {
                 attributStringsOutput.add("\n" + anotation);
             }
         }
-        attributStringsOutput.add("public class " + className + " {");
+        attributStringsOutput.add("public class " + className + " extends RealmObject {");
 
         String constructorParamLine = "\n" + Utils.tabGen(1) + "public " + className + "(";
         String constructorBodyLine = Utils.tabGen(2) + "super();";
@@ -54,9 +53,9 @@ public class JacksonBeanGenerator extends JavaBeanGenerator {
         for (Field f : fields) {
             if (f != null) {
                 // attributes
-                fieldName = Utils.checkJavaForbiddenName(f.getName());
-                fieldType = giveRightType(f);
-                f.addAnnotation("@JsonProperty(\"" + f.getOrignalName() + "\")");
+                fieldName = Utils.checkJavaForbiddenName(f.getName() + DEFAULT_SUFFIX);
+                fieldType = findType(f);
+
                 line = createAttributes(fieldName, fieldType, f.getAnnotations());
                 attributStringsOutput.add(line);
 
@@ -73,22 +72,20 @@ public class JacksonBeanGenerator extends JavaBeanGenerator {
                 line = createGetter(fieldType, fieldName);
                 line += createSetter(fieldType, fieldName);
                 methodStringsOutput.add(line);
-                f.setAnnotations(new ArrayList<String>());
             }
         }
-
-        // full param constructor
-        constructorParamLine += ") {";
-        constructorStringsOutput.add(constructorParamLine);
-        constructorBodyLine += "\n" + Utils.tabGen(1) + "}";
-        constructorStringsOutput.add(constructorBodyLine);
-
         // parameterless constructor
         constructorBodyLine = "\n" + Utils.tabGen(1) + "public " + className + "() {";
         constructorBodyLine += "\n" + Utils.tabGen(2) + "super();\n" + Utils.tabGen(1) + "}";
         constructorStringsOutput.add(constructorBodyLine);
 
-        methodStringsOutput.add(createToStringMethod(table));
+        // full param constructor
+        /*constructorParamLine += ") {";
+        constructorStringsOutput.add(constructorParamLine);
+        constructorBodyLine += "\n" + Utils.tabGen(1) + "}";
+        constructorStringsOutput.add(constructorBodyLine);*/
+
+        //methodStringsOutput.add(createToStringMethod(table));
 
         // reconstructing the class
         attributStringsOutput.addAll(constructorStringsOutput);
@@ -97,15 +94,53 @@ public class JacksonBeanGenerator extends JavaBeanGenerator {
         return attributStringsOutput;
     }
 
-    protected static String giveRightType(Field f) {
+    protected static String createAttributes(String name, String type, ArrayList<String> annotations) {
+        String line = "";
+
+        if (annotations != null && annotations.size() > 0) {
+            for (String anotation : annotations) {
+                line += "\n" + Utils.tabGen(1) + anotation;
+            }
+        }
+        line += "\n" + Utils.tabGen(1) + "private " + type + " " + name + ";";
+        return line;
+    }
+
+    protected static String createGetter(String type, String name) {
+        String line = Utils.tabGen(1) + "public " + type + " get" + Utils.getNameCamelCase(name) + "() {\n";
+        line += Utils.tabGen(2) + "return this." + name + ";\n	}\n";
+        return line;
+    }
+
+    protected static String createSetter(String type, String name) {
+        String line = "\n" + Utils.tabGen(1) + "public void set" + Utils.getNameCamelCase(name) + "(" + type + " "
+                + name + ") {\n";
+        line += Utils.tabGen(2) + "this." + name + " = " + name + ";\n" + Utils.tabGen(1) + "}\n";
+        return line;
+    }
+
+    protected static String createToStringMethod(Table table) {
+        final String className = getClassName(table);
+        String line = Utils.tabGen(1) + "@Override\n";
+        line += Utils.tabGen(1) + "public String toString() {\n";
+        line += Utils.tabGen(2) + "final String s = \"Object : " + className + " : \"";
+        if (table.getFields() != null) {
+            for (Field f : table.getFields()) {
+                line += "\n" + Utils.tabGen(2) + "+ \" " + Utils.checkJavaForbiddenName(f.getName()) + " = \" + "
+                        + Utils.checkJavaForbiddenName(f.getName());
+            }
+        }
+        line += ";";
+        line += "\n" + Utils.tabGen(2) + "return s;";
+        line += "\n" + Utils.tabGen(1) + "}";
+        return line;
+    }
+
+    protected static String findType(Field f) {
         String type = f.getType().split(";")[0];
         if (type.equalsIgnoreCase(Constants.URI)) {
             type = Constants.STRING;
             f.addAnnotation("//URI to " + f.getConstraint());
-        }
-
-        if (!Constants.PRIMITIVE_TYPES.contains(type) && !type.equals(Constants.ARRAY)) {
-            type += DEFAULT_SUFFIX;
         }
 
         if (type.equalsIgnoreCase(Constants.ARRAY)) {
@@ -114,10 +149,6 @@ public class JacksonBeanGenerator extends JavaBeanGenerator {
                 if (arrayType.equalsIgnoreCase(Constants.URI)) {
                     arrayType = Constants.STRING;
                     f.addAnnotation("//URIs to " + f.getConstraint());
-                } else {
-                    if (!Constants.PRIMITIVE_TYPES.contains(arrayType)) {
-                        arrayType += DEFAULT_SUFFIX;
-                    }
                 }
                 type = "ArrayList<" + arrayType + ">";
             } else {
