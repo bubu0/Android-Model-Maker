@@ -1,12 +1,17 @@
 package be.qaz.amm.generator.beans;
 
+import java.util.ArrayList;
+
 import be.qaz.amm.Constants;
 import be.qaz.amm.Utils;
 import be.qaz.amm.model.Field;
 import be.qaz.amm.model.Table;
 
-import java.util.ArrayList;
+//TODO use StringBuilder
 
+/**
+ * Generate simple JAVA beans including default constructor & getter/setter, toString as well
+ */
 public class JavaBeanGenerator {
 
     protected static final String DEFAULT_IMPORT = "import java.sql.Date;\nimport java.util.ArrayList;\nimport java.util.Collection;";
@@ -28,27 +33,31 @@ public class JavaBeanGenerator {
 
         final String className = getClassName(table);
 
-        ArrayList<String> attributStringsOutput = new ArrayList<String>();
+        ArrayList<String> attributeStringsOutput = new ArrayList<String>();
         ArrayList<String> constructorStringsOutput = new ArrayList<String>();
         ArrayList<String> methodStringsOutput = new ArrayList<String>();
         String fieldName;
         String fieldType;
         String line;
 
-        attributStringsOutput.add("package " + Constants.DEFAULT_PACKAGE + ";");
-        attributStringsOutput.add(DEFAULT_IMPORT);
+        attributeStringsOutput.add("package " + Constants.DEFAULT_PACKAGE + ";");
+        attributeStringsOutput.add("\n" + DEFAULT_IMPORT);
 
         if (table.getAnnotations() != null && table.getAnnotations().size() > 0) {
-            for (String anotation : table.getAnnotations()) {
-                attributStringsOutput.add("\n" + anotation);
+            for (String annotation : table.getAnnotations()) {
+                attributeStringsOutput.add("\n" + annotation);
             }
         }
-        attributStringsOutput.add("public class " + className + " {");
+        attributeStringsOutput.add("\npublic class " + className + " {\n");
 
         String constructorParamLine = "\n" + Utils.tabGen(1) + "public " + className + "(";
         String constructorBodyLine = Utils.tabGen(2) + "super();";
 
         ArrayList<Field> fields = table.getFields();
+
+        methodStringsOutput.add("\n" + Utils.tabGen(1) + "#####################");
+        methodStringsOutput.add(Utils.tabGen(1) + " GETTERS & SETTERS");
+        methodStringsOutput.add(Utils.tabGen(1) + "#####################\n");
 
         for (Field f : fields) {
             if (f != null) {
@@ -56,8 +65,8 @@ public class JavaBeanGenerator {
                 fieldName = Utils.checkJavaForbiddenName(f.getName() + DEFAULT_SUFFIX);
                 fieldType = findType(f);
 
-                line = createAttributes(fieldName, fieldType, f.getAnnotations());
-                attributStringsOutput.add(line);
+                line = createAttribute(fieldName, fieldType, f.getAnnotations());
+                attributeStringsOutput.add(line);
 
                 // Aggregating constructor parameters
                 constructorParamLine += fieldType + " " + fieldName;
@@ -88,21 +97,21 @@ public class JavaBeanGenerator {
         methodStringsOutput.add(createToStringMethod(table));
 
         // reconstructing the class
-        attributStringsOutput.addAll(constructorStringsOutput);
-        attributStringsOutput.addAll(methodStringsOutput);
-        attributStringsOutput.add("}");
-        return attributStringsOutput;
+        attributeStringsOutput.addAll(constructorStringsOutput);
+        attributeStringsOutput.addAll(methodStringsOutput);
+        attributeStringsOutput.add("}");
+        return attributeStringsOutput;
     }
 
-    protected static String createAttributes(String name, String type, ArrayList<String> annotations) {
+    protected static String createAttribute(String name, String type, ArrayList<String> annotations) {
         String line = "";
 
-        if (annotations != null && annotations.size() > 0) {
-            for (String anotation : annotations) {
-                line += "\n" + Utils.tabGen(1) + anotation;
+        if (annotations != null && !annotations.isEmpty()) {
+            for (String annotation : annotations) {
+                line += Utils.tabGen(1) + annotation + "\n";
             }
         }
-        line += "\n" + Utils.tabGen(1) + "private " + type + " " + name + ";";
+        line += Utils.tabGen(1) + "private " + type + " " + name + ";";
         return line;
     }
 

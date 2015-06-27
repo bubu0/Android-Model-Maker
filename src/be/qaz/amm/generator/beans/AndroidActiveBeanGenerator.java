@@ -1,11 +1,11 @@
 package be.qaz.amm.generator.beans;
 
+import java.util.ArrayList;
+
 import be.qaz.amm.Constants;
 import be.qaz.amm.Utils;
 import be.qaz.amm.model.Field;
 import be.qaz.amm.model.Table;
-
-import java.util.ArrayList;
 
 public class AndroidActiveBeanGenerator extends JavaBeanGenerator {
 
@@ -55,7 +55,7 @@ public class AndroidActiveBeanGenerator extends JavaBeanGenerator {
                 if (!f.getType().equalsIgnoreCase(Constants.OBJECT)) {
 
                     f.addAnnotation("@Column(name = \"" + Utils.checkJavaForbiddenName(f.getOrignalName()) + "\")");
-                    line = createAttributes(fieldName, fieldType, f.getAnnotations());
+                    line = createAttribute(fieldName, fieldType, f.getAnnotations());
                     attributStringsOutput.add(line);
 
                     // Aggregating constructor parameters

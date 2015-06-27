@@ -1,22 +1,42 @@
 package be.qaz.amm;
 
-import be.qaz.amm.generator.JsonGenerator;
-import be.qaz.amm.generator.ParserGenerator;
-import be.qaz.amm.generator.beans.JacksonBeanGenerator;
-import be.qaz.amm.generator.beans.RealmIOBeanGenerator;
-import be.qaz.amm.model.Field;
-import be.qaz.amm.model.Table;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Map;
 
+import be.qaz.amm.generator.JsonGenerator;
+import be.qaz.amm.generator.ParserGenerator;
+import be.qaz.amm.generator.beans.JacksonBeanGenerator;
+import be.qaz.amm.generator.beans.JavaBeanGenerator;
+import be.qaz.amm.model.Field;
+import be.qaz.amm.model.Table;
+
+/**
+ * @author Quentin AMOUDRUZ 2014-2015
+ *         <p/>
+ *         Convert json files to JAVA beans or other, can take multiple files as inputs, will link similar objects together
+ *         It doesn't care how many object there is in the input files, it'll find them all.
+ *         <p/>
+ *         1 - Put json files in /etc/input
+ *         2 - Run to generate
+ *         3 - Let the magic (& horrible CPU usage) do the trick
+ *         4 - Retrieve results in /etc/output
+ */
 public class Main {
 
     final static String inputDirectoryPath = "etc/input";
-    final static String outputDirectoryPath = "etc/export/";
+    final static String outputDirectoryPath = "etc/output/";
 
     public static ArrayList<Table> junctionTables;
     public static ArrayList<Table> tables;
@@ -36,21 +56,22 @@ public class Main {
         for (File f : loadFiles(file)) {
             System.out.println("######## " + f.getName() + " FOUND ########");
             System.out.println("NEW PARSING");
-            fileParser(f, false);
+            parseFile(f);
         }
 
         // Sorting fields alphabetically && adding foreign key field.
         for (Table table : tables) {
             table = addForeignKeyField(table);
+            //TODO alpha sorting is dumb, type sorting would be better
             Collections.sort(table.getFields(), new Comparator<Field>() {
                 public int compare(Field f1, Field f2) {
-                    return f1.getName().compareTo(f2.getName());
+                    return f1.getType().compareTo(f2.getType());
                 }
             });
         }
 
         // generateParsers(tables, false);
-        generateJavaBeans(tables, false);
+        generateJavaBeans(tables, true);
         // generateJsonScheme(tables, false);
         // generateDbHelper(tables, false);
 
@@ -104,9 +125,10 @@ public class Main {
 
     public static void generateJavaBeans(ArrayList<Table> tables, boolean consoleOutput) {
         System.out.println("######## GENERATED JAVA BEANS ########");
-        ArrayList<String> generated = new ArrayList<String>();
+        ArrayList<String> generated;
         for (Table t : tables) {
             if (t != null) {
+                //Here, switch or add between the desired generator
                 generated = JacksonBeanGenerator.generateJavaBean(t);
                 if (generated != null && generated.size() > 0) {
                     if (consoleOutput) {
@@ -118,7 +140,8 @@ public class Main {
                     writeFile(outputDirectoryPath + "/json/", t.getName() + "Json.java", data);
                     generated.clear();
                 }
-                generated = RealmIOBeanGenerator.generateJavaBean(t);
+                //Here, switch or add between the desired generator
+                generated = JavaBeanGenerator.generateJavaBean(t);
                 if (generated != null && generated.size() > 0) {
                     if (consoleOutput) {
                         for (String string : generated) {
@@ -133,6 +156,12 @@ public class Main {
         }
     }
 
+    /**
+     * Designed for ORMLite not really used anymore
+     *
+     * @param tables
+     * @param consoleOutput
+     */
     public static void generateDbHelper(ArrayList<Table> tables, boolean consoleOutput) {
         System.out.println("######## GENERATED DBHELPER ########");
         ArrayList<String> generated = new ArrayList<String>();
@@ -174,7 +203,9 @@ public class Main {
         }
     }
 
-    // Load files into prog
+    /**
+     * Load files into software
+     */
     public static File[] loadFiles(File directoryPath) {
         final File[] entityFiles = directoryPath.listFiles(new FileFilter() {
             @Override
@@ -185,7 +216,12 @@ public class Main {
         return entityFiles;
     }
 
-    public static void fileParser(File file, boolean isPrimitiveArraySupported) {
+    /**
+     * Loaded file is converted to a JSONObject here
+     *
+     * @param file
+     */
+    public static void parseFile(File file) {
         if (file == null) {
             return;
         }
@@ -206,7 +242,7 @@ public class Main {
 
             final String rootObject = file.getName().replace(".json", "");
             // parseJsonObject(jsonObject, rootObject, null, isInArray);
-            parseJsonObject(jsonObject, rootObject, null, true, isPrimitiveArraySupported);
+            parseJsonObject(jsonObject, rootObject, null, true);
 
         } catch (final Exception e) {
             e.printStackTrace();
@@ -218,10 +254,9 @@ public class Main {
      *  @param jsonObj        JSONObject : you're about to parse
      * @param currentObjName String : the name of obj
      * @param parentObjName  String : the name of the object containing obj, ex : "recipes"
-     * @param isPrimitiveArraySupported boolean : will create an array new object instead of an array of primitives
      */
     public static void parseJsonObject(JSONObject jsonObj, String currentObjName, String parentObjName,
-                                       boolean isInArray, boolean isPrimitiveArraySupported) {
+                                       boolean isInArray) {
 
         String key;
         Object aObj;
@@ -249,7 +284,7 @@ public class Main {
             if (aObj instanceof JSONObject) {
                 System.out.println("IN " + currentObjName + " # OBJ : " + key);
 
-                parseJsonObject((JSONObject) aObj, key, currentObjName, false, isPrimitiveArraySupported);
+                parseJsonObject((JSONObject) aObj, key, currentObjName, false);
                 createField(key, currentObjName, Constants.OBJECT, key, aObj);
 
             } else if (aObj instanceof JSONArray) {
@@ -259,11 +294,12 @@ public class Main {
                 if (array.size() > 0) {
                     for (Object bObj : array) {
                         if (bObj instanceof JSONObject) {
-                            parseJsonObject((JSONObject) bObj, key, currentObjName, true, isPrimitiveArraySupported);
+                            parseJsonObject((JSONObject) bObj, key, currentObjName, true);
                             createField(key, currentObjName, Constants.ARRAY, key, bObj);
                         } else {
                             //In this case instead of creating an array of primitive, we create a new object containing the primitive value
-                            if(isPrimitiveArraySupported) {
+                            //TODO NOT working but only useful for Realm.io lib
+                            if(true) {
                                 String objt = aObj.toString();
                                 if (objt.length() > 30) {
                                     objt = objt.substring(0, 30);
@@ -275,14 +311,15 @@ public class Main {
 
                                 createField(key, currentObjName, Constants.ARRAY, key, bObj);
                             } else {
-                                //createField(key, currentObjName, Constants.ARRAY, key, bObj);
-                                Table currentTable = createTable(key, true, currentObjName);
-                                if (currentTable != null) {
-                                    tables.add(currentTable);
+                                createField(key, currentObjName, Constants.ARRAY, key, bObj);
+                                Table currentTable2 = createTable(key, true, currentObjName);
+                                if (currentTable2 != null) {
+                                    tables.add(currentTable2);
                                 }
+
                                 final String type = Utils.javaTypeResolver(bObj);
+                                currentTable2.addFields(new Field(key, key, type, currentObjName, currentTable2.getName()));
                                 System.out.println("IN " + currentObjName + " # " + type + " : " + key);
-                                createField(key, currentObjName, type, null, bObj);
                             }
                         }
                     }

@@ -1,11 +1,11 @@
 package be.qaz.amm.generator.beans;
 
+import java.util.ArrayList;
+
 import be.qaz.amm.Constants;
 import be.qaz.amm.Utils;
 import be.qaz.amm.model.Field;
 import be.qaz.amm.model.Table;
-
-import java.util.ArrayList;
 
 public class JacksonBeanGenerator extends JavaBeanGenerator {
 
@@ -57,7 +57,7 @@ public class JacksonBeanGenerator extends JavaBeanGenerator {
                 fieldName = Utils.checkJavaForbiddenName(f.getName());
                 fieldType = giveRightType(f);
                 f.addAnnotation("@JsonProperty(\"" + f.getOrignalName() + "\")");
-                line = createAttributes(fieldName, fieldType, f.getAnnotations());
+                line = createAttribute(fieldName, fieldType, f.getAnnotations());
                 attributStringsOutput.add(line);
 
                 // Aggregating constructor parameters
