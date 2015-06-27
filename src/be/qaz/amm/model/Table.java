@@ -3,7 +3,7 @@ package be.qaz.amm.model;
 import java.util.ArrayList;
 
 /**
- * @author quentin
+ * @author Quentin AMOUDRUZ
  */
 public class Table {
 

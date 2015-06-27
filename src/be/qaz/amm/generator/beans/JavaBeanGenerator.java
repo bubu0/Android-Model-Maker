@@ -14,7 +14,8 @@ import be.qaz.amm.model.Table;
  */
 public class JavaBeanGenerator {
 
-    protected static final String DEFAULT_IMPORT = "import java.sql.Date;\nimport java.util.ArrayList;\nimport java.util.Collection;";
+    //TODO imports should be smarter
+    protected static final String DEFAULT_IMPORT = "import java.sql.Date;\nimport java.util.ArrayList;";
     private static final String DEFAULT_SUFFIX = "";
 
     public static String getClassName(Table table) {
@@ -150,6 +151,10 @@ public class JavaBeanGenerator {
         if (type.equalsIgnoreCase(Constants.URI)) {
             type = Constants.STRING;
             f.addAnnotation("//URI to " + f.getConstraint());
+        }
+
+        if (f.getConstraint() != null && f.getConstraint().equals(Constants.FOREIGN_KEY)) {
+            f.addAnnotation("//Foreign key to " + f.getConstraint());
         }
 
         if (type.equalsIgnoreCase(Constants.ARRAY)) {

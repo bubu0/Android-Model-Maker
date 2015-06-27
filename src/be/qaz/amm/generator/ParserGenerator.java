@@ -1,11 +1,11 @@
 package be.qaz.amm.generator;
 
+import java.util.ArrayList;
+
 import be.qaz.amm.Constants;
 import be.qaz.amm.Utils;
 import be.qaz.amm.model.Field;
 import be.qaz.amm.model.Table;
-
-import java.util.ArrayList;
 
 
 public class ParserGenerator {
@@ -179,7 +179,7 @@ public class ParserGenerator {
 
                 } else if (type.equalsIgnoreCase(Constants.JUNCTION)) {
 
-                    // Filling junction tables with param from method and NOT
+                    // Filling junction mTables with param from method and NOT
                     // from json;
                     String juncTableName = Utils.createJunctionTableName(table.getOriginalName(), f.getConstraint());
                     final String juncValName = Utils.getNamePascalCase(f.getConstraint()) + "Cv" + externalRefCtr;

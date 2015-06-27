@@ -35,24 +35,26 @@ import be.qaz.amm.model.Table;
  */
 public class Main {
 
-    final static String inputDirectoryPath = "etc/input";
-    final static String outputDirectoryPath = "etc/output/";
+    final static String INPUT_DIRECTORY_PATH = "etc/input";
+    final static String OUTPUT_DIRECTORY_PATH = "etc/output/";
 
-    public static ArrayList<Table> junctionTables;
-    public static ArrayList<Table> tables;
-    public static ArrayList<Field> primaryKeys;
+    final static boolean ENABLE_FOREIGN_KEYS = false;
 
-    public static ArrayList<Field> currentTableFields;
+    public static ArrayList<Table> mJunctionTables;
+    public static ArrayList<Table> mTables;
+    public static ArrayList<Field> mPrimaryKeys;
+
+    public static ArrayList<Field> mCurrentTableFields;
 
     public static void main(String[] args) {
         System.out.println("START");
-        primaryKeys = new ArrayList<Field>();
-        tables = new ArrayList<Table>();
-        junctionTables = new ArrayList<Table>();
+        mPrimaryKeys = new ArrayList<Field>();
+        mTables = new ArrayList<Table>();
+        mJunctionTables = new ArrayList<Table>();
 
-        tables = new ArrayList<Table>();
-        currentTableFields = new ArrayList<Field>();
-        File file = new File(inputDirectoryPath);
+        mTables = new ArrayList<Table>();
+        mCurrentTableFields = new ArrayList<Field>();
+        File file = new File(INPUT_DIRECTORY_PATH);
         for (File f : loadFiles(file)) {
             System.out.println("######## " + f.getName() + " FOUND ########");
             System.out.println("NEW PARSING");
@@ -60,9 +62,10 @@ public class Main {
         }
 
         // Sorting fields alphabetically && adding foreign key field.
-        for (Table table : tables) {
-            table = addForeignKeyField(table);
-            //TODO alpha sorting is dumb, type sorting would be better
+        for (Table table : mTables) {
+            if (ENABLE_FOREIGN_KEYS) {
+                table = addForeignKeyField(table);
+            }
             Collections.sort(table.getFields(), new Comparator<Field>() {
                 public int compare(Field f1, Field f2) {
                     return f1.getType().compareTo(f2.getType());
@@ -70,15 +73,15 @@ public class Main {
             });
         }
 
-        // generateParsers(tables, false);
-        generateJavaBeans(tables, true);
-        // generateJsonScheme(tables, false);
-        // generateDbHelper(tables, false);
+        // generateParsers(mTables, false);
+        generateJavaBeans(mTables, true);
+        // generateJsonScheme(mTables, false);
+        // generateDbHelper(mTables, false);
 
         System.out.println("######## END ######## ");
         System.out.println("######## TABLES DETAILS ########");
-        System.out.println("TOTAL tables = " + tables.size());
-        for (Table t : tables) {
+        System.out.println("TOTAL tables = " + mTables.size());
+        for (Table t : mTables) {
             System.out.println(t.toString());
         }
     }
@@ -98,7 +101,7 @@ public class Main {
                 }
             }
             String[] data = generated.toArray(new String[generated.size()]);
-            writeFile(outputDirectoryPath, "JsonParsers.java", data);
+            writeFile(OUTPUT_DIRECTORY_PATH, "JsonParsers.java", data);
             generated.clear();
         }
     }
@@ -116,7 +119,7 @@ public class Main {
                         }
                     }
                     String[] data = generated.toArray(new String[generated.size()]);
-                    writeFile(outputDirectoryPath, t.getOriginalName() + ".json", data);
+                    writeFile(OUTPUT_DIRECTORY_PATH, t.getOriginalName() + ".json", data);
                     generated.clear();
                 }
             }
@@ -137,7 +140,7 @@ public class Main {
                         }
                     }
                     String[] data = generated.toArray(new String[generated.size()]);
-                    writeFile(outputDirectoryPath + "/json/", t.getName() + "Json.java", data);
+                    writeFile(OUTPUT_DIRECTORY_PATH + "/json/", t.getName() + "Json.java", data);
                     generated.clear();
                 }
                 //Here, switch or add between the desired generator
@@ -149,7 +152,7 @@ public class Main {
                         }
                     }
                     String[] data = generated.toArray(new String[generated.size()]);
-                    writeFile(outputDirectoryPath + "/model/", t.getName() + ".java", data);
+                    writeFile(OUTPUT_DIRECTORY_PATH + "/model/", t.getName() + ".java", data);
                     generated.clear();
                 }
             }
@@ -172,7 +175,7 @@ public class Main {
                 }
             }
             String[] data = generated.toArray(new String[generated.size()]);
-            writeFile(outputDirectoryPath, "DatabaseHelper.java", data);
+            writeFile(OUTPUT_DIRECTORY_PATH, "DatabaseHelper.java", data);
             generated.clear();
         }
     }
@@ -250,7 +253,7 @@ public class Main {
     }
 
     /**
-     * Parse your JSONObject and fill the tables array.
+     * Parse your JSONObject and fill the mTables array.
      *  @param jsonObj        JSONObject : you're about to parse
      * @param currentObjName String : the name of obj
      * @param parentObjName  String : the name of the object containing obj, ex : "recipes"
@@ -270,7 +273,7 @@ public class Main {
 
             Table currentTable = createTable(currentObjName, isInArray, parentObjName);
             if (currentTable != null) {
-                tables.add(currentTable);
+                mTables.add(currentTable);
             }
 
         }
@@ -314,7 +317,7 @@ public class Main {
                                 createField(key, currentObjName, Constants.ARRAY, key, bObj);
                                 Table currentTable2 = createTable(key, true, currentObjName);
                                 if (currentTable2 != null) {
-                                    tables.add(currentTable2);
+                                    mTables.add(currentTable2);
                                 }
 
                                 final String type = Utils.javaTypeResolver(bObj);
@@ -336,10 +339,10 @@ public class Main {
     public static Table createTable(String tableName, boolean isInArray, String parent) {
         Table table = null;
         if (tableName != null && !tableName.isEmpty()) {
-            if (!Utils.tableAlreadyExists(tableName, tables)) {
+            if (!Utils.tableAlreadyExists(tableName, mTables)) {
                 table = new Table(tableName, Utils.getNameCamelCase(tableName), null, null, isInArray, parent);
             } else {
-                table = Utils.findTableWithName(tableName, tables);
+                table = Utils.findTableWithName(tableName, mTables);
                 for (String existingParent : table.getParent()) {
                     if (parent.equalsIgnoreCase(existingParent)) {
                         return null;
@@ -364,7 +367,7 @@ public class Main {
     public static Field createField(String fieldName, String tableName, String type, String constraint, Object value) {
         // TODO bad design this shouldn't add the field to the table
         Field field = null;
-        Table constraintTable = Utils.findTableWithName(constraint, tables);
+        Table constraintTable = Utils.findTableWithName(constraint, mTables);
 
         if ((fieldName == null) || (tableName == null)) {
             return null;
@@ -383,7 +386,7 @@ public class Main {
             } else if (constraintTable != null && !arrayType.equalsIgnoreCase(Constants.URI)) {
                 arrayType = constraintTable.getName();
             } else if (!arrayType.equalsIgnoreCase(Constants.URI)) {
-                tables.add(createArrayTable(fieldName, fieldName, arrayType, tableName));
+                mTables.add(createArrayTable(fieldName, fieldName, arrayType, tableName));
                 arrayType = fieldName;
             }
 
@@ -400,7 +403,7 @@ public class Main {
         // if the same field is found with another type it's overridden with
         // the default & more "do it all" String or ArrayList type also means
         // your json sucks
-        Table table = Utils.findTableWithName(tableName, tables);
+        Table table = Utils.findTableWithName(tableName, mTables);
         if (table != null) {
             ArrayList<Field> fs = table.getFields();
             if (fs == null) {
@@ -440,7 +443,7 @@ public class Main {
      * @return created table
      */
     public static Table createArrayTable(String foreignTableName, String tableName, String type, String parent) {
-        if (!Utils.tableAlreadyExists(tableName, tables)) {
+        if (!Utils.tableAlreadyExists(tableName, mTables)) {
             Field f1 = new Field(foreignTableName + "_id", Utils.getNamePascalCase(foreignTableName) + "Id",
                     Constants.INT, foreignTableName, tableName);
             Field f2 = new Field(tableName, Utils.getNamePascalCase(tableName), type, null, tableName);
@@ -454,7 +457,7 @@ public class Main {
 
     public static Table createJunctionTable(String refTable, String extTable) {
         final String tName = Utils.createJunctionTableName(refTable, extTable);
-        if (!Utils.tableAlreadyExists(tName, tables)) {
+        if (!Utils.tableAlreadyExists(tName, mTables)) {
             final ArrayList<Field> fs = new ArrayList<Field>();
             final Field f1 = new Field(refTable + "_id", Utils.getNamePascalCase(refTable) + "Id", Constants.INT,
                     refTable, refTable);
