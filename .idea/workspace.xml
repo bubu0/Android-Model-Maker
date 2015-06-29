@@ -51,12 +51,7 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/output/json/ThumbsJson.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/output/model/Variants.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/output/json/VariantsJson.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/input/bkp/root_recipes.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/qaz/amm/Constants.java" afterPath="$PROJECT_DIR$/src/be/qaz/amm/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/qaz/amm/generator/beans/JavaBeanGenerator.java" afterPath="$PROJECT_DIR$/src/be/qaz/amm/generator/beans/JavaBeanGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/qaz/amm/Main.java" afterPath="$PROJECT_DIR$/src/be/qaz/amm/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/qaz/amm/generator/ParserGenerator.java" afterPath="$PROJECT_DIR$/src/be/qaz/amm/generator/ParserGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/be/qaz/amm/model/Table.java" afterPath="$PROJECT_DIR$/src/be/qaz/amm/model/Table.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Android Model Maker S.iws" />
@@ -85,13 +80,13 @@
             <state vertical-scroll-proportion="-8.815789">
               <caret line="478" column="89" selection-start-line="478" selection-start-column="89" selection-end-line="478" selection-end-column="89" />
               <folding>
-                <element signature="e#2381#2560#0" expanded="true" />
-                <element signature="e#2559#2560#0" expanded="true" />
-                <element signature="e#3238#3246#0" expanded="true" />
-                <element signature="e#4101#4109#0" expanded="true" />
-                <element signature="e#6690#6698#0" expanded="true" />
-                <element signature="e#8059#8274#0" expanded="true" />
-                <element signature="e#8273#8274#0" expanded="true" />
+                <element signature="e#2382#2561#0" expanded="true" />
+                <element signature="e#2560#2561#0" expanded="true" />
+                <element signature="e#3239#3247#0" expanded="true" />
+                <element signature="e#4102#4110#0" expanded="true" />
+                <element signature="e#6691#6699#0" expanded="true" />
+                <element signature="e#8060#8275#0" expanded="true" />
+                <element signature="e#8274#8275#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,8 +135,8 @@
       <file leaf-file-name="JavaBeanGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/be/qaz/amm/generator/beans/JavaBeanGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17883211">
-              <caret line="144" column="45" selection-start-line="144" selection-start-column="45" selection-end-line="144" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.49817517">
+              <caret line="158" column="0" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -529,7 +524,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435398344322</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- Foreign key fields are now disabled by default&#10;- Foreign key fields &#10;- Added a more recent (&amp; complicated) json file&#10;- Small refactoring&#10;">
+      <created>1435400269057</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1435400269057</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -550,7 +551,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19790676" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19790676" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3360927" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -576,7 +577,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="- Attributes are now sorted by types instead of name&#10;- line spacing has been improved" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Attributes are now sorted by types instead of name&#10;- line spacing has been improved" />
+    <MESSAGE value="- Foreign key fields are now disabled by default&#10;- Foreign key fields &#10;- Added a more recent (&amp; complicated) json file&#10;- Small refactoring&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Foreign key fields are now disabled by default&#10;- Foreign key fields &#10;- Added a more recent (&amp; complicated) json file&#10;- Small refactoring&#10;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -597,13 +599,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2381#2560#0" expanded="true" />
-            <element signature="e#2559#2560#0" expanded="true" />
-            <element signature="e#3238#3246#0" expanded="true" />
-            <element signature="e#4101#4109#0" expanded="true" />
-            <element signature="e#6690#6698#0" expanded="true" />
-            <element signature="e#8059#8274#0" expanded="true" />
-            <element signature="e#8273#8274#0" expanded="true" />
+            <element signature="e#2382#2561#0" expanded="true" />
+            <element signature="e#2560#2561#0" expanded="true" />
+            <element signature="e#3239#3247#0" expanded="true" />
+            <element signature="e#4102#4110#0" expanded="true" />
+            <element signature="e#6691#6699#0" expanded="true" />
+            <element signature="e#8060#8275#0" expanded="true" />
+            <element signature="e#8274#8275#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -647,13 +649,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2381#2560#0" expanded="true" />
-            <element signature="e#2559#2560#0" expanded="true" />
-            <element signature="e#3238#3246#0" expanded="true" />
-            <element signature="e#4101#4109#0" expanded="true" />
-            <element signature="e#6690#6698#0" expanded="true" />
-            <element signature="e#8059#8274#0" expanded="true" />
-            <element signature="e#8273#8274#0" expanded="true" />
+            <element signature="e#2382#2561#0" expanded="true" />
+            <element signature="e#2560#2561#0" expanded="true" />
+            <element signature="e#3239#3247#0" expanded="true" />
+            <element signature="e#4102#4110#0" expanded="true" />
+            <element signature="e#6691#6699#0" expanded="true" />
+            <element signature="e#8060#8275#0" expanded="true" />
+            <element signature="e#8274#8275#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -689,13 +691,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2381#2560#0" expanded="true" />
-            <element signature="e#2559#2560#0" expanded="true" />
-            <element signature="e#3238#3246#0" expanded="true" />
-            <element signature="e#4101#4109#0" expanded="true" />
-            <element signature="e#6690#6698#0" expanded="true" />
-            <element signature="e#8059#8274#0" expanded="true" />
-            <element signature="e#8273#8274#0" expanded="true" />
+            <element signature="e#2382#2561#0" expanded="true" />
+            <element signature="e#2560#2561#0" expanded="true" />
+            <element signature="e#3239#3247#0" expanded="true" />
+            <element signature="e#4102#4110#0" expanded="true" />
+            <element signature="e#6691#6699#0" expanded="true" />
+            <element signature="e#8060#8275#0" expanded="true" />
+            <element signature="e#8274#8275#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -778,13 +780,13 @@
         <state vertical-scroll-proportion="-8.815789">
           <caret line="478" column="89" selection-start-line="478" selection-start-column="89" selection-end-line="478" selection-end-column="89" />
           <folding>
-            <element signature="e#2381#2560#0" expanded="true" />
-            <element signature="e#2559#2560#0" expanded="true" />
-            <element signature="e#3238#3246#0" expanded="true" />
-            <element signature="e#4101#4109#0" expanded="true" />
-            <element signature="e#6690#6698#0" expanded="true" />
-            <element signature="e#8059#8274#0" expanded="true" />
-            <element signature="e#8273#8274#0" expanded="true" />
+            <element signature="e#2382#2561#0" expanded="true" />
+            <element signature="e#2560#2561#0" expanded="true" />
+            <element signature="e#3239#3247#0" expanded="true" />
+            <element signature="e#4102#4110#0" expanded="true" />
+            <element signature="e#6691#6699#0" expanded="true" />
+            <element signature="e#8060#8275#0" expanded="true" />
+            <element signature="e#8274#8275#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -799,8 +801,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/be/qaz/amm/generator/beans/JavaBeanGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17883211">
-          <caret line="144" column="45" selection-start-line="144" selection-start-column="45" selection-end-line="144" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.49817517">
+          <caret line="158" column="0" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
